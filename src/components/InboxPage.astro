@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import { dict, type Locale } from "../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const i = t.inbox;
+---
+<Base locale={locale} path="/inbox/" title={i.heading} description={t.meta.inbox.description} noindex>
+  <section class="section inbox">
+    <div class="container">
+      <div class="section-head">
+        <h1 class="h2">{i.heading}</h1>
+        <p class="sub">{i.sub}</p>
+      </div>
+      <div class="tools">
+        <span class="count num" data-count data-template={i.count}></span>
+        <span class="spacer"></span>
+        <button class="btn sm" type="button" data-export-json>{i.export}</button>
+        <button class="btn sm" type="button" data-export-csv>{i.exportCsv}</button>
+        <button class="btn sm danger" type="button" data-clear data-confirm={i.confirmClear}>{i.clear}</button>
+      </div>
+      <p class="empty tag" data-empty hidden>{i.empty}</p>
+      <div class="tag no-tie wrap" data-table-wrap hidden>
+        <table class="list">
+          <thead><tr><th>{i.cols.ref}</th><th>{i.cols.when}</th><th>{i.cols.name}</th><th>{i.cols.company}</th><th>{i.cols.email}</th><th>{i.cols.interest}</th><th>{i.cols.message}</th></tr></thead>
+          <tbody data-rows></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .tools { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .spacer { flex: 1; }
+  .count { color: var(--muted); }
+  .danger { color: var(--err); }
+  .wrap { padding: 0.25rem; overflow-x: auto; }
+  .list { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .list th { text-align: start; font-weight: 500; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line-strong); }
+  .list td { padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; max-width: 32ch; }
+  .list td.msg { white-space: pre-wrap; }
+</style>
+<script>
+  import { listInquiries, clearInquiries, toCSV } from "../scripts/submissions";
+  const root = document.querySelector(".inbox")!;
+  const rows = root.querySelector<HTMLElement>("[data-rows]")!;
+  const empty = root.querySelector<HTMLElement>("[data-empty]")!;
+  const wrap = root.querySelector<HTMLElement>("[data-table-wrap]")!;
+  const count = root.querySelector<HTMLElement>("[data-count]")!;
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]!));
+  const dl = (name: string, body: string, type: string) => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([body], { type })); a.download = name; a.click(); URL.revokeObjectURL(a.href); };
+  const render = async () => {
+    const all = await listInquiries();
+    count.textContent = (count.dataset.template || "{n}").replace("{n}", String(all.length));
+    empty.hidden = all.length > 0; wrap.hidden = all.length === 0;
+    rows.innerHTML = all.map((r) => `<tr><td dir="ltr">${esc(r.ref)}</td><td dir="ltr">${esc(new Date(r.at).toLocaleString())}</td><td>${esc(r.name)}</td><td>${esc(r.company)}</td><td dir="ltr">${esc(r.email)}<br><span class="muted">${esc(r.phone)}</span></td><td>${esc(r.interest)}<br><span class="muted">${esc(r.source)} · ${esc(r.locale)}</span></td><td class="msg">${esc(r.message)}</td></tr>`).join("");
+  };
+  root.querySelector("[data-export-json]")?.addEventListener("click", async () => dl("qsai-inquiries.json", JSON.stringify(await listInquiries(), null, 2), "application/json"));
+  root.querySelector("[data-export-csv]")?.addEventListener("click", async () => dl("qsai-inquiries.csv", "﻿" + toCSV(await listInquiries()), "text/csv"));
+  root.querySelector<HTMLElement>("[data-clear]")?.addEventListener("click", async (e) => { if (confirm((e.currentTarget as HTMLElement).dataset.confirm || "?")) { await clearInquiries(); render(); } });
+  render();
+</script>

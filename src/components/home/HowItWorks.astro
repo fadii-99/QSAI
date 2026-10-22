@@ -1,0 +1,177 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const steps = t.how.steps;
+---
+<section class="section how band-white" id="how">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{t.how.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{t.how.sub}</p>
+    </div>
+
+    <div class="flow" id="flow" data-reveal style="--i:2">
+      <div class="line" aria-hidden="true">
+        <div class="line-steel"></div>
+        <div class="line-fill" data-fill></div>
+      </div>
+      <ol class="stations" role="tablist" aria-label={t.how.heading}>
+        {steps.map((s, i) => (
+          <li class="station" data-step={i}>
+            <button class="st-btn" type="button" role="tab" aria-selected={i === 0 ? "true" : "false"} aria-controls={`how-panel-${i}`} id={`how-tab-${i}`}>
+              <span class="st-dot" aria-hidden="true"></span>
+              <span class="st-fig" aria-hidden="true">
+                {i === 0 && <svg viewBox="0 0 64 64" class="fig"><rect x="14" y="10" width="36" height="46" rx="3"/><path d="M22 22h20M22 30h20M22 38h12"/><path class="up" d="M46 48v-14M40 40l6-6 6 6"/><rect class="sheet2" x="10" y="16" width="36" height="46" rx="3"/></svg>}
+                {i === 1 && <svg viewBox="0 0 64 64" class="fig"><rect x="12" y="8" width="40" height="48" rx="3"/><path d="M20 20h24M20 28h24M20 36h16M20 44h20" class="rows"/><line class="scan" x1="12" y1="18" x2="52" y2="18"/></svg>}
+                {i === 2 && <svg viewBox="0 0 64 64" class="fig"><path d="M10 14h32a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H26l-9 8v-8h-7a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z"/><path d="M24 28.5v-1c0-2.5 4-2.5 4-5a2 2 0 0 0-4 0M26 33h.01" class="q"/><path d="M52 40l-9 9-4-4" class="ok"/><circle cx="47" cy="45" r="10" class="ok-ring"/></svg>}
+                {i === 3 && <svg viewBox="0 0 64 64" class="fig"><path class="shape" d="M12 44V24a6 6 0 0 1 6-6h28a6 6 0 0 1 6 6v20"/><path class="dim" d="M12 50h40M12 47v6M52 47v6"/><path class="dim" d="M8 24v20M5 24h6M5 44h6"/><path class="hook" d="M12 44a4 4 0 0 0 8 0M52 44a4 4 0 0 1-8 0"/></svg>}
+                {i === 4 && <svg viewBox="0 0 64 64" class="fig"><path d="M18 8h20l10 10v38a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z"/><path d="M38 8v10h10"/><path class="rows" d="M22 30h20M22 38h20M22 46h12"/><rect class="badge" x="8" y="40" width="22" height="12" rx="2"/></svg>}
+              </span>
+              <span class="st-name mark">{s.name}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+      <div class="panels">
+        {steps.map((s, i) => (
+          <div class="panel tag" id={`how-panel-${i}`} role="tabpanel" aria-labelledby={`how-tab-${i}`} hidden={i !== 0}>
+            <div class="panel-grid">
+              <div>
+                <h3 class="h3">{s.title}</h3>
+                <p>{s.text}</p>
+              </div>
+              <span class="detail chip calculated">{s.detail}</span>
+            </div>
+          </div>
+        ))}
+        <div class="auto">
+          <button class="btn ghost sm" type="button" data-auto aria-pressed="true">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path class="p-pause" d="M8 5v14M16 5v14"/><path class="p-play" d="M7 5l12 7-12 7z"/></svg>
+            <span data-auto-label>{t.how.pause}</span>
+          </button>
+          <div class="progress" aria-hidden="true"><i data-progress></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .flow { position: relative; }
+  .line { position: relative; height: 10px; margin: 0 7% 0; border-radius: 5px; overflow: hidden; }
+  .line-steel { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, var(--steel) 0 7px, var(--steel-hi) 7px 9px); }
+  .line-fill { position: absolute; inset: 0; width: 0%; background: linear-gradient(180deg, var(--green-3), var(--green)); transition: width .9s var(--ease-out); }
+  [dir="rtl"] .line-fill { right: 0; left: auto; }
+  .stations { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: -40px; }
+  .station { display: flex; justify-content: center; }
+  .st-btn { background: none; border: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.4rem 0.2rem 0.6rem; width: 100%; color: var(--ink-2); }
+  .st-dot { width: 22px; height: 22px; border-radius: 50%; background: var(--white); border: 3px solid var(--steel-hi); margin-top: 29px; transition: border-color .3s, transform .3s var(--ease-out), box-shadow .3s; }
+  .st-fig { width: 72px; height: 72px; display: grid; place-items: center; border-radius: 50%; background: var(--ground); border: 1px solid var(--line); transition: background .3s, border-color .3s, transform .4s var(--ease-out); }
+  .fig { width: 46px; height: 46px; fill: none; stroke: var(--steel); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
+  .st-name { font-size: 1rem; }
+  .st-btn:hover .st-fig { transform: translateY(-2px); }
+  .station.active .st-dot { border-color: var(--green); transform: scale(1.15); box-shadow: 0 0 0 4px var(--green-soft); }
+  .station.active .st-fig { background: var(--white); border-color: var(--green-line); transform: translateY(-4px); box-shadow: var(--shadow-tag); }
+  .station.active .fig { stroke: var(--green); }
+  .station.active .st-name { color: var(--ink); }
+  .station.done .st-dot { border-color: var(--green); background: var(--green); }
+  .station.done .fig { stroke: var(--green-2); }
+  /* figure motion only on the active station */
+  .fig .sheet2 { opacity: 0; }
+  .station.active .fig .up { animation: up 1.4s var(--ease-in-out) infinite; }
+  @keyframes up { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .fig .scan { stroke: var(--gold); stroke-width: 2.5; opacity: 0; }
+  .station.active .fig .scan { opacity: 1; animation: scan 1.8s var(--ease-in-out) infinite; }
+  @keyframes scan { 0% { transform: translateY(0); } 100% { transform: translateY(34px); } }
+  .fig .ok, .fig .ok-ring { stroke: var(--gold); opacity: 0; }
+  .station.active .fig .ok, .station.active .fig .ok-ring { animation: pop .6s var(--ease-out) .5s forwards; }
+  @keyframes pop { from { opacity: 0; transform: scale(.7); transform-origin: 47px 45px; } to { opacity: 1; transform: scale(1); } }
+  .fig .shape { stroke-dasharray: 120; stroke-dashoffset: 0; }
+  .station.active .fig .shape { animation: draw 1.6s var(--ease-out) forwards; }
+  @keyframes draw { from { stroke-dashoffset: 120; } to { stroke-dashoffset: 0; } }
+  .fig .dim { stroke: var(--gold); stroke-width: 1.5; }
+  .fig .badge { fill: var(--gold); stroke: none; opacity: 0; }
+  .station.active .fig .badge { animation: pop2 .5s var(--ease-out) .4s forwards; }
+  @keyframes pop2 { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fig * { animation: none !important; } .fig .scan, .fig .ok, .fig .ok-ring, .fig .badge { opacity: 1; } }
+
+  .panels { margin-top: 1.5rem; position: relative; }
+  .panel { max-width: 860px; margin-inline: auto; }
+  .panel-grid { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: start; }
+  .panel p { margin: 0.5rem 0 0; color: var(--ink-2); max-width: 60ch; }
+  .detail { margin-top: 0.3rem; white-space: normal; text-align: center; }
+  .auto { display: flex; align-items: center; gap: 1rem; max-width: 860px; margin: 1rem auto 0; }
+  .auto .btn { flex: none; }
+  .auto .p-play { display: none; }
+  .auto .btn[aria-pressed="false"] .p-play { display: block; }
+  .auto .btn[aria-pressed="false"] .p-pause { display: none; }
+  .progress { flex: 1; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .progress i { display: block; height: 100%; width: 0; background: var(--gold); }
+  .progress i.run { animation: prog var(--dur, 4200ms) linear forwards; }
+  [dir="rtl"] .progress i { margin-inline-start: auto; }
+  @keyframes prog { from { width: 0; } to { width: 100%; } }
+
+  @media (max-width: 760px) {
+    .line { display: none; }
+    .stations { grid-template-columns: 1fr; margin-top: 0; gap: 0.25rem; position: relative; }
+    .stations::before { content: ""; position: absolute; top: 12px; bottom: 12px; inset-inline-start: 23px; width: 6px; border-radius: 3px; background: repeating-linear-gradient(180deg, var(--steel) 0 7px, var(--steel-hi) 7px 9px); }
+    .st-btn { flex-direction: row; gap: 0.9rem; padding: 0.4rem 0; text-align: start; }
+    .st-dot { margin-top: 0; flex: none; margin-inline-start: 15px; }
+    .st-fig { width: 52px; height: 52px; flex: none; }
+    .fig { width: 32px; height: 32px; }
+    .panel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script>
+  import { onVisible, reducedMotion } from "../../scripts/motion";
+  const flow = document.getElementById("flow");
+  if (flow) {
+    const stations = Array.from(flow.querySelectorAll<HTMLElement>(".station"));
+    const btns = stations.map((s) => s.querySelector<HTMLButtonElement>(".st-btn")!);
+    const panels = Array.from(flow.querySelectorAll<HTMLElement>(".panel"));
+    const fill = flow.querySelector<HTMLElement>("[data-fill]")!;
+    const autoBtn = flow.querySelector<HTMLButtonElement>("[data-auto]")!;
+    const autoLabel = flow.querySelector<HTMLElement>("[data-auto-label]")!;
+    const prog = flow.querySelector<HTMLElement>("[data-progress]")!;
+    const labels = { play: autoBtn.dataset.play || "", pause: autoLabel.textContent || "" };
+    const DUR = 4200;
+    let idx = 0, timer = 0, auto = !reducedMotion(), visible = false;
+    const n = stations.length;
+    const select = (i: number, focus = false) => {
+      idx = (i + n) % n;
+      stations.forEach((s, k) => { s.classList.toggle("active", k === idx); s.classList.toggle("done", k < idx); });
+      btns.forEach((b, k) => { b.setAttribute("aria-selected", String(k === idx)); b.tabIndex = k === idx ? 0 : -1; });
+      panels.forEach((p, k) => { p.hidden = k !== idx; });
+      fill.style.width = `${(idx / (n - 1)) * 86 + 7}%`;
+      if (focus) btns[idx].focus();
+      restartProgress();
+    };
+    const restartProgress = () => {
+      clearTimeout(timer);
+      prog.classList.remove("run"); void prog.offsetWidth;
+      if (auto && visible) { prog.style.setProperty("--dur", `${DUR}ms`); prog.classList.add("run"); timer = window.setTimeout(() => select(idx + 1), DUR); }
+    };
+    btns.forEach((b, i) => {
+      b.addEventListener("click", () => select(i));
+      b.addEventListener("keydown", (e) => {
+        const rtl = document.documentElement.dir === "rtl";
+        if (e.key === "ArrowRight") select(idx + (rtl ? -1 : 1), true);
+        if (e.key === "ArrowLeft") select(idx + (rtl ? 1 : -1), true);
+        if (e.key === "Home") select(0, true);
+        if (e.key === "End") select(n - 1, true);
+      });
+    });
+    autoBtn.addEventListener("click", () => {
+      auto = !auto;
+      autoBtn.setAttribute("aria-pressed", String(auto));
+      autoLabel.textContent = auto ? labels.pause : (autoBtn.getAttribute("data-play-label") || "▶");
+      restartProgress();
+    });
+    autoBtn.setAttribute("data-play-label", (document.documentElement.lang === "ar") ? "تشغيل تلقائي" : "Auto-play");
+    flow.addEventListener("pointerenter", () => { clearTimeout(timer); prog.style.animationPlayState = "paused"; });
+    flow.addEventListener("pointerleave", () => { if (auto) { prog.style.animationPlayState = ""; restartProgress(); } });
+    onVisible(flow, (v) => { visible = v; restartProgress(); }, 0.3);
+    select(0);
+  }
+</script>

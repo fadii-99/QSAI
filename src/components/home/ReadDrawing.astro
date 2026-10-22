@@ -1,0 +1,211 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const r = t.read;
+---
+<section class="section read" id="read">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{r.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{r.sub}</p>
+    </div>
+    <div class="split" id="read-fig" data-reveal style="--i:2">
+      <figure class="sheet">
+        <figcaption class="sheet-head">
+          <span class="mark small">{r.sheet}</span>
+          <span class="scanning small" data-scanning><i></i>{r.scanning}</span>
+        </figcaption>
+        <svg class="plan" viewBox="0 0 640 400" role="img" aria-label={r.sheet}>
+          <defs>
+            <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#9aa39e" stroke-width="1"/></pattern>
+          </defs>
+          <!-- sheet grid -->
+          <g class="grid" stroke="#e3e2da" stroke-width="1">
+            {Array.from({ length: 17 }, (_, i) => <line x1={i * 40} y1="0" x2={i * 40} y2="400" />)}
+            {Array.from({ length: 11 }, (_, i) => <line x1="0" y1={i * 40} x2="640" y2={i * 40} />)}
+          </g>
+          <!-- grid lines + bubbles -->
+          <g class="gridlines" stroke="#8d9791" stroke-dasharray="10 6" stroke-width="1.2">
+            <line x1="120" y1="40" x2="120" y2="360"/><line x1="340" y1="40" x2="340" y2="360"/><line x1="560" y1="40" x2="560" y2="360"/>
+            <line x1="60" y1="110" x2="620" y2="110"/><line x1="60" y1="300" x2="620" y2="300"/>
+          </g>
+          <g class="bubbles" font-family="Big Shoulders Display, sans-serif" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="central">
+            {[["A",120],["B",340],["C",560]].map(([l,x]) => <><circle cx={x} cy="40" r="16" fill="#fff" stroke="#14261b" stroke-width="1.5"/><text x={x} y="40" fill="#14261b">{l}</text></>)}
+            {[["1",110],["2",300]].map(([l,y]) => <><circle cx="60" cy={y} r="16" fill="#fff" stroke="#14261b" stroke-width="1.5"/><text x="60" y={y} fill="#14261b">{l}</text></>)}
+          </g>
+          <!-- beams (double line) -->
+          <g class="beams" stroke="#2e3733" stroke-width="2" fill="none">
+            <g data-el="B1"><line x1="132" y1="104" x2="328" y2="104"/><line x1="132" y1="116" x2="328" y2="116"/><rect x="132" y="104" width="196" height="12" class="hit"/></g>
+            <g data-el="B2"><line x1="352" y1="104" x2="548" y2="104"/><line x1="352" y1="116" x2="548" y2="116"/><rect x="352" y="104" width="196" height="12" class="hit"/></g>
+            <g><line x1="132" y1="294" x2="548" y2="294"/><line x1="132" y1="294" x2="548" y2="294"/><line x1="132" y1="306" x2="548" y2="306"/></g>
+            <g><line x1="114" y1="122" x2="114" y2="288"/><line x1="126" y1="122" x2="126" y2="288"/><line x1="334" y1="122" x2="334" y2="288"/><line x1="346" y1="122" x2="346" y2="288"/><line x1="554" y1="122" x2="554" y2="288"/><line x1="566" y1="122" x2="566" y2="288"/></g>
+          </g>
+          <!-- columns -->
+          <g class="cols" fill="url(#hatch)" stroke="#2e3733" stroke-width="2">
+            <g data-el="C1"><rect x="108" y="98" width="24" height="24"/><rect class="hit" x="104" y="94" width="32" height="32"/></g>
+            <rect x="328" y="98" width="24" height="24"/><rect x="548" y="98" width="24" height="24"/>
+            <rect x="108" y="288" width="24" height="24"/><rect x="328" y="288" width="24" height="24"/><rect x="548" y="288" width="24" height="24"/>
+          </g>
+          <!-- callouts -->
+          <g class="callouts" font-family="Readex Pro, sans-serif" font-size="13">
+            <g class="co" data-el="B1" tabindex="0" role="button" aria-label="B1 300x450 3Ø16 B 2Ø16 T Ø10@150">
+              <path d="M230 116 L250 160 L354 160" fill="none" stroke="#14261b" stroke-width="1.2"/>
+              <rect x="250" y="146" width="104" height="34" rx="2" class="co-box"/>
+              <text x="256" y="159" class="co-t"><tspan font-weight="600">B1</tspan> 300×450</text>
+              <text x="256" y="175" class="co-t">3Ø16 B · 2Ø16 T</text>
+            </g>
+            <g class="co" data-el="B2" tabindex="0" role="button" aria-label="B2 300x? 3Ø16 B 2Ø16 T">
+              <path d="M450 116 L470 200 L574 200" fill="none" stroke="#14261b" stroke-width="1.2"/>
+              <rect x="470" y="186" width="104" height="34" rx="2" class="co-box"/>
+              <text x="476" y="199" class="co-t"><tspan font-weight="600">B2</tspan> 300×<tspan class="unknown" data-b2-depth>?</tspan></text>
+              <text x="476" y="215" class="co-t">3Ø16 B · 2Ø16 T</text>
+            </g>
+            <g class="co" data-el="C1" tabindex="0" role="button" aria-label="C1 300x300 4Ø16 Ø8@150">
+              <path d="M120 122 L140 220 L244 220" fill="none" stroke="#14261b" stroke-width="1.2"/>
+              <rect x="140" y="206" width="104" height="34" rx="2" class="co-box"/>
+              <text x="146" y="219" class="co-t"><tspan font-weight="600">C1</tspan> 300×300</text>
+              <text x="146" y="235" class="co-t">4Ø16 · Ø8@150</text>
+            </g>
+            <g class="co stirrup" data-el="B1"><text x="160" y="140" class="co-t muted">Ø10 @ 150</text></g>
+          </g>
+          <!-- scan line -->
+          <line class="scanline" data-scanline x1="0" y1="0" x2="0" y2="400" stroke="#c9a227" stroke-width="2"/>
+          <!-- title block strip -->
+          <g font-family="Readex Pro, sans-serif" font-size="10" fill="#65776c">
+            <rect x="0" y="372" width="640" height="28" fill="#f4f3ee" stroke="#e3e2da"/>
+            <text x="12" y="389">PROJECT: VILLA 12</text><text x="200" y="389">SHEET: S-03</text><text x="330" y="389">SCALE 1:100</text><text x="440" y="389">REV: 02</text><text x="520" y="389">DEMO DATA</text>
+          </g>
+        </svg>
+      </figure>
+
+      <div class="schedule tag">
+        <h3 class="h3 sch-title">{r.scheduleTitle}</h3>
+        <div class="sch-wrap"><table class="sch num">
+          <thead><tr><th>{r.cols.mark}</th><th>{r.cols.size}</th><th>{r.cols.bottom}</th><th>{r.cols.top}</th><th>{r.cols.links}</th><th>{r.cols.status}</th></tr></thead>
+          <tbody>
+            {r.rows.map((row) => (
+              <tr data-row={row.mark} tabindex="0" class:list={[row.status === "ask" && "ask"]}>
+                <td class="mk">{row.mark}</td>
+                <td dir="ltr"><span data-size={row.mark}>{row.size}</span></td>
+                <td dir="ltr">{row.bottom}</td><td dir="ltr">{row.top}</td><td dir="ltr">{row.links}</td>
+                <td><span class:list={["chip", row.status === "ask" ? "pending" : "measured"]} data-status={row.mark}>{row.status === "ask" ? r.statusAsk : r.statusRead}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table></div>
+        <div class="ask-box" data-ask>
+          <div class="bubble">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 1 0 18H7l-4 3v-6a9 9 0 0 1 9-15z"/></svg>
+            <p>{r.question}</p>
+          </div>
+          <div class="answers">
+            <button class="btn primary sm" type="button" data-answer="450">{r.yes}</button>
+            <button class="btn ghost sm" type="button" data-answer="500">{r.other}</button>
+          </div>
+          <p class="remembered small" data-remembered hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span></span></p>
+        </div>
+        <p class="tip x-small muted">{r.tip}</p>
+      </div>
+    </div>
+    <ul class="legend" data-reveal>
+      {r.legend.map((l, i) => (<li><span class:list={["chip", ["measured","calculated"][i]]}>{l.k}</span><span class="small muted">{l.v}</span></li>))}
+    </ul>
+  </div>
+</section>
+<style>
+  .split { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: start; }
+  .sheet { margin: 0; min-width: 0; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-tag); overflow: hidden; }
+  .sheet-head { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 1rem; border-bottom: 1px solid var(--line); gap: 1rem; flex-wrap: wrap; }
+  .scanning { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-3); opacity: 0; transition: opacity .3s; }
+  .scanning.on { opacity: 1; }
+  .scanning i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: blink 1s infinite; }
+  @keyframes blink { 50% { opacity: .2; } }
+  .plan { width: 100%; height: auto; direction: ltr; }
+  .plan .hit { fill: transparent; stroke: none; cursor: pointer; }
+  .co { cursor: pointer; outline: none; }
+  .co-box { fill: #fff; stroke: #14261b; stroke-width: 1.2; transition: stroke .2s, fill .2s; }
+  .co-t { fill: #14261b; }
+  .co-t.muted { fill: #65776c; font-size: 12px; }
+  .co.hl .co-box, .co:focus-visible .co-box { stroke: var(--green); stroke-width: 2; fill: #eef7f1; }
+  .co.hl path { stroke: var(--green); stroke-width: 2; }
+  .beams g.hl line, .cols g.hl rect:not(.hit) { stroke: var(--green); stroke-width: 3; }
+  .unknown { fill: var(--err); font-weight: 700; }
+  .unknown.ok { fill: var(--green); }
+  .scanline { opacity: 0; }
+  .scanline.run { animation: sweep 2.6s var(--ease-in-out) forwards; }
+  @keyframes sweep { 0% { opacity: 1; transform: translateX(0); } 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(640px); } }
+  .callouts .co { opacity: 0; transition: opacity .5s var(--ease-out); }
+  .callouts.ready .co { opacity: 1; }
+  .callouts.ready .co:nth-child(1) { transition-delay: .5s; } .callouts.ready .co:nth-child(3) { transition-delay: .9s; } .callouts.ready .co:nth-child(2) { transition-delay: 1.4s; } .callouts.ready .co:nth-child(4) { transition-delay: .7s; }
+  @media (prefers-reduced-motion: reduce) { .callouts .co { opacity: 1; transition: none; } .scanline.run { animation: none; } }
+
+  .schedule { padding: 1.2rem 1.25rem; min-width: 0; }
+  .sch-wrap { overflow-x: auto; margin-inline: -0.25rem; padding-inline: 0.25rem; }
+  .sch-title { font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .sch { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .sch th { text-align: start; font-weight: 500; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.4rem 0.4rem; border-bottom: 1px solid var(--line-strong); }
+  html[lang="ar"] .sch th { text-transform: none; letter-spacing: 0; }
+  .sch td { padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .sch tr { cursor: pointer; transition: background .2s; outline: none; }
+  .sch tbody tr:hover, .sch tbody tr.hl, .sch tbody tr:focus-visible { background: var(--green-soft); }
+  .sch tr.ask td { background: rgba(201,162,39,.08); }
+  .mk { font-family: "Big Shoulders Display", var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: .03em; }
+  .ask-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line-strong); opacity: 0; transform: translateY(6px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+  .ask-box.show { opacity: 1; transform: none; }
+  .bubble { display: flex; gap: 0.6rem; align-items: flex-start; background: var(--ground); border-radius: var(--radius); padding: 0.8rem 0.9rem; }
+  .bubble .ico { flex: none; color: var(--green); margin-top: 2px; }
+  .bubble p { margin: 0; font-size: 0.95rem; }
+  .answers { display: flex; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap; }
+  .remembered { display: flex; gap: 0.4rem; align-items: center; color: var(--green-2); margin: 0.7rem 0 0; }
+  .remembered .ico { width: 18px; height: 18px; }
+  .tip { margin: 1rem 0 0; }
+  .legend { display: flex; gap: 1.5rem 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .legend li { display: flex; gap: 0.6rem; align-items: center; }
+  @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) { .sch { font-size: 0.82rem; } .sch td, .sch th { padding-inline: 0.3rem; } .sch .chip { font-size: 0.72rem; padding: 0.35em 0.5em; } .sch th:nth-child(4), .sch td:nth-child(4), .sch th:nth-child(5), .sch td:nth-child(5) { display: none; } }
+</style>
+<script>
+  import { onVisible, reducedMotion } from "../../scripts/motion";
+  const fig = document.getElementById("read-fig");
+  if (fig) {
+    const lang = document.documentElement.lang;
+    const callouts = fig.querySelector<SVGGElement>(".callouts")!;
+    const scan = fig.querySelector<SVGLineElement>("[data-scanline]")!;
+    const scanning = fig.querySelector<HTMLElement>("[data-scanning]")!;
+    const ask = fig.querySelector<HTMLElement>("[data-ask]")!;
+    const els = (id: string) => Array.from(fig.querySelectorAll<Element>(`[data-el="${id}"], [data-row="${id}"]`));
+    const highlight = (id: string) => {
+      fig.querySelectorAll(".hl").forEach((e) => e.classList.remove("hl"));
+      if (id) els(id).forEach((e) => e.classList.add("hl"));
+    };
+    fig.querySelectorAll<Element>("[data-el], [data-row]").forEach((e) => {
+      const id = (e as HTMLElement).dataset.el || (e as HTMLElement).dataset.row || "";
+      e.addEventListener("pointerenter", () => highlight(id));
+      e.addEventListener("pointerleave", () => highlight(""));
+      e.addEventListener("focus", () => highlight(id));
+      e.addEventListener("click", () => { highlight(id); if (id === "B2") ask.classList.add("show"); });
+      e.addEventListener("keydown", (ev) => { if ((ev as KeyboardEvent).key === "Enter") { highlight(id); if (id === "B2") ask.classList.add("show"); } });
+    });
+    const answered = { en: { "450": "Confirmed and remembered for this project: B2 depth 450 mm.", "500": "Confirmed and remembered for this project: B2 depth 500 mm." },
+                       ar: { "450": "تم التأكيد والحفظ لهذا المشروع: عمق B2 يساوي 450 مم.", "500": "تم التأكيد والحفظ لهذا المشروع: عمق B2 يساوي 500 مم." } } as const;
+    ask.querySelectorAll<HTMLButtonElement>("[data-answer]").forEach((b) => b.addEventListener("click", () => {
+      const v = b.dataset.answer as "450" | "500";
+      fig.querySelector<HTMLElement>("[data-b2-depth]")!.textContent = v; fig.querySelector("[data-b2-depth]")!.classList.add("ok");
+      fig.querySelector<HTMLElement>('[data-size="B2"]')!.textContent = `300 × ${v}`;
+      const st = fig.querySelector<HTMLElement>('[data-status="B2"]')!; st.className = "chip measured"; st.textContent = lang === "ar" ? "مؤكد" : "Confirmed";
+      fig.querySelector('[data-row="B2"]')!.classList.remove("ask");
+      const rem = fig.querySelector<HTMLElement>("[data-remembered]")!; rem.hidden = false; rem.querySelector("span")!.textContent = answered[lang === "ar" ? "ar" : "en"][v];
+      ask.querySelector<HTMLElement>(".answers")!.hidden = true;
+    }));
+    const start = () => {
+      if (reducedMotion()) { callouts.classList.add("ready"); ask.classList.add("show"); return; }
+      scanning.classList.add("on"); scan.classList.add("run");
+      setTimeout(() => callouts.classList.add("ready"), 400);
+      setTimeout(() => { scanning.classList.remove("on"); ask.classList.add("show"); }, 2800);
+    };
+    let started = false;
+    onVisible(fig, (v) => { if (v && !started) { started = true; start(); } }, 0.35);
+  }
+</script>

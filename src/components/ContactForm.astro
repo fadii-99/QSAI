@@ -1,0 +1,147 @@
+---
+import { dict, type Locale } from "../i18n";
+interface Props { locale: Locale; id?: string }
+const { locale, id = "contact-form" } = Astro.props;
+const t = dict[locale];
+const f = t.contact.form;
+---
+<form class="cform tag" id={id} novalidate data-contact-form>
+  <div class="row2">
+    <div class="field" data-field="name">
+      <label for={`${id}-name`}>{f.name}<span class="opt">{f.required}</span></label>
+      <input class="input" id={`${id}-name`} name="name" type="text" autocomplete="name" required />
+      <p class="error">{f.errors.name}</p>
+    </div>
+    <div class="field" data-field="company">
+      <label for={`${id}-company`}>{f.company}<span class="opt">{f.required}</span></label>
+      <input class="input" id={`${id}-company`} name="company" type="text" autocomplete="organization" required />
+      <p class="error">{f.errors.company}</p>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="field" data-field="email">
+      <label for={`${id}-email`}>{f.email}<span class="opt">{f.required}</span></label>
+      <input class="input" id={`${id}-email`} name="email" type="email" inputmode="email" autocomplete="email" required dir="ltr" />
+      <p class="error">{f.errors.email}</p>
+    </div>
+    <div class="field" data-field="phone">
+      <label for={`${id}-phone`}>{f.phone}<span class="opt">{f.required}</span></label>
+      <input class="input" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX" required dir="ltr" />
+      <p class="hint">{f.phoneHint}</p>
+      <p class="error">{f.errors.phone}</p>
+    </div>
+  </div>
+  <div class="row3">
+    <div class="field">
+      <label for={`${id}-role`}>{f.role}<span class="opt">{f.optional}</span></label>
+      <select class="select" id={`${id}-role`} name="role">
+        <option value="">{f.rolePlaceholder}</option>
+        {f.roles.map((r) => (<option value={r}>{r}</option>))}
+      </select>
+    </div>
+    <div class="field">
+      <label for={`${id}-city`}>{f.city}<span class="opt">{f.optional}</span></label>
+      <input class="input" id={`${id}-city`} name="city" type="text" autocomplete="address-level2" />
+    </div>
+    <div class="field">
+      <label for={`${id}-ptype`}>{f.projectType}<span class="opt">{f.optional}</span></label>
+      <select class="select" id={`${id}-ptype`} name="projectType">
+        <option value="">{f.projectTypePlaceholder}</option>
+        {f.projectTypes.map((r) => (<option value={r}>{r}</option>))}
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <span class="lbl">{f.interest}</span>
+    <div class="pills" role="group" aria-label={f.interest}>
+      {f.interests.map((it, i) => (
+        <label class="pill"><input type="radio" name="interest" value={it} checked={i === 0} /><span>{it}</span></label>
+      ))}
+    </div>
+  </div>
+  <div class="field" data-field="message">
+    <label for={`${id}-message`}>{f.message}<span class="opt">{f.required}</span></label>
+    <textarea class="textarea" id={`${id}-message`} name="message" rows="5" placeholder={f.messagePlaceholder} required></textarea>
+    <p class="error">{f.errors.message}</p>
+  </div>
+  <div class="field" data-field="consent">
+    <label class="check"><input type="checkbox" name="consent" required /><span>{f.consent}</span></label>
+    <p class="error">{f.errors.consent}</p>
+  </div>
+  <p class="error generic" role="alert" hidden>{f.errors.generic}</p>
+  <div class="actions">
+    <button class="btn primary" type="submit"><span data-label>{f.submit}</span><svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="success" data-success hidden role="status">
+    <svg class="ico big" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+    <h3 class="h3">{f.successTitle}</h3>
+    <p>{f.successText} <strong class="ref num" data-ref dir="ltr"></strong>.</p>
+    <p class="muted">{f.successNext}</p>
+    <button class="btn ghost sm" type="button" data-again>{f.another}</button>
+  </div>
+</form>
+<style>
+  .cform { display: grid; gap: 1.1rem; padding: clamp(1.25rem, 3vw, 2rem); position: relative; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  .lbl { font-weight: 500; font-size: 0.95rem; }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .pill { position: relative; }
+  .pill input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .pill span { display: inline-block; padding: 0.5em 0.9em; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--white); font-size: 0.9rem; color: var(--ink-2); transition: background .2s, border-color .2s, color .2s; }
+  .pill input:checked + span { background: var(--green); border-color: var(--green-2); color: #fff; }
+  .pill input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .pill:hover span { border-color: var(--green-line); }
+  .error.generic { color: var(--err); margin: 0; }
+  .actions { display: flex; justify-content: flex-end; }
+  .cform.sending .btn.primary { opacity: 0.7; pointer-events: none; }
+  .success { position: absolute; inset: 0; background: var(--white); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.6rem; padding: 2rem; animation: fadein .5s var(--ease-out); }
+  .success .big { width: 48px; height: 48px; color: var(--green); }
+  .success p { margin: 0; max-width: 46ch; }
+  .success .ref { color: var(--green-2); font-weight: 600; }
+  .success .btn { margin-top: 0.8rem; }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 680px) { .row2, .row3 { grid-template-columns: 1fr; } .actions .btn { width: 100%; } }
+</style>
+<script>
+  import { submitInquiry, isEmail, isPhone } from "../scripts/submissions";
+  document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form) => {
+    const field = (n: string) => form.querySelector<HTMLElement>(`[data-field="${n}"]`)!;
+    const val = (n: string) => (form.elements.namedItem(n) as HTMLInputElement | null)?.value?.trim() ?? "";
+    const rules: Record<string, () => boolean> = {
+      name: () => val("name").length >= 2,
+      company: () => val("company").length >= 2,
+      email: () => isEmail(val("email")),
+      phone: () => isPhone(val("phone")),
+      message: () => val("message").length >= 10,
+      consent: () => (form.elements.namedItem("consent") as HTMLInputElement).checked,
+    };
+    const check = (n: string) => { const ok = rules[n](); field(n).classList.toggle("invalid", !ok); return ok; };
+    Object.keys(rules).forEach((n) => {
+      const el = form.elements.namedItem(n) as HTMLElement | null;
+      el?.addEventListener("blur", () => check(n));
+      el?.addEventListener("input", () => { if (field(n).classList.contains("invalid")) check(n); });
+      el?.addEventListener("change", () => check(n));
+    });
+    const generic = form.querySelector<HTMLElement>(".error.generic")!;
+    const success = form.querySelector<HTMLElement>("[data-success]")!;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const results = Object.keys(rules).map(check);
+      if (results.includes(false)) { form.querySelector<HTMLElement>(".field.invalid .input, .field.invalid .textarea, .field.invalid input")?.focus(); return; }
+      form.classList.add("sending"); generic.hidden = true;
+      try {
+        const fd = new FormData(form);
+        const inquiry = await submitInquiry({
+          locale: document.documentElement.lang as "en" | "ar", source: "contact",
+          name: val("name"), company: val("company"), role: String(fd.get("role") || ""), email: val("email"), phone: val("phone"),
+          city: val("city"), interest: String(fd.get("interest") || ""), projectType: String(fd.get("projectType") || ""), message: val("message"), consent: true,
+        });
+        success.querySelector<HTMLElement>("[data-ref]")!.textContent = inquiry.ref;
+        success.hidden = false; success.querySelector<HTMLElement>(".h3")?.focus();
+      } catch { generic.hidden = false; }
+      finally { form.classList.remove("sending"); }
+    });
+    form.querySelector("[data-again]")?.addEventListener("click", () => { form.reset(); success.hidden = true; form.querySelectorAll(".invalid").forEach((f) => f.classList.remove("invalid")); });
+  });
+</script>

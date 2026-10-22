@@ -1,0 +1,18 @@
+---
+import Base from "../layouts/Base.astro";
+import AppHero from "./app/AppHero.astro";
+import AppDetails from "./app/AppDetails.astro";
+import { dict, type Locale } from "../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<Base locale={locale} path="/app/" title={t.meta.app.title} description={t.meta.app.description}>
+  <AppHero locale={locale} />
+  <AppDetails locale={locale} />
+</Base>
+<script>
+  import { onVisible } from "../scripts/motion";
+  const shell = document.querySelector<HTMLElement>(".shell");
+  if (shell) onVisible(shell, (v) => { if (v) shell.classList.add("in"); }, 0.25);
+</script>

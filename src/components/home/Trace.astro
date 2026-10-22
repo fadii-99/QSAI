@@ -1,0 +1,55 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const tr = t.trace;
+---
+<section class="section trace" id="trace">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{tr.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{tr.sub}</p>
+    </div>
+    <div class="sheet tag no-tie" id="trace-table" data-reveal style="--i:2">
+      <table class="boq">
+        <thead><tr><th class="c-item">{tr.cols.item}</th><th class="c-qty">{tr.cols.qty}</th><th class="c-unit">{tr.cols.unit}</th><th class="c-type">{tr.cols.type}</th><th class="c-basis">{tr.cols.basis}</th></tr></thead>
+        <tbody>
+          {tr.rows.map((row, i) => (
+            <tr class={row.type} data-type={row.type} style={`--i:${i}`}>
+              <td class="c-item"><span class="item">{row.item}</span><span class="basis-m small muted">{row.basis}</span></td>
+              <td class="c-qty num" dir="ltr">{row.qty}</td>
+              <td class="c-unit">{row.unit}</td>
+              <td class="c-type"><span class:list={["chip", row.type]}>{tr.types[row.type as keyof typeof tr.types]}</span></td>
+              <td class="c-basis small">{row.basis}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="demo-note">{t.common.demoNote}</p>
+    </div>
+    <p class="note" data-reveal>{tr.note}</p>
+  </div>
+</section>
+<style>
+  .sheet { padding: 0.5rem 0.5rem 1rem; overflow: hidden; }
+  .boq { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .boq th { text-align: start; font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding: 0.8rem 0.75rem; border-bottom: 1px solid var(--line-strong); }
+  html[lang="ar"] .boq th { text-transform: none; letter-spacing: 0; }
+  .boq td { padding: 0.85rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .boq tbody tr { transition: background .2s, opacity .4s var(--ease-out), transform .4s var(--ease-out); }
+  .boq tbody tr:hover { background: var(--green-soft); }
+  .c-qty { text-align: end; font-weight: 500; white-space: nowrap; }
+  .c-unit { white-space: nowrap; color: var(--ink-2); }
+  .c-basis { color: var(--ink-2); max-width: 36ch; }
+  .basis-m { display: none; }
+  .item { display: block; font-weight: 400; }
+  .demo-note { margin: 0.9rem 0.75rem 0; }
+  .note { margin-top: 1.25rem; color: var(--ink-2); max-width: 70ch; }
+  @media (max-width: 760px) {
+    .c-basis, .boq th.c-basis { display: none; }
+    .basis-m { display: block; margin-top: 0.35rem; }
+    .boq td, .boq th { padding: 0.7rem 0.5rem; }
+    .boq { font-size: 0.9rem; }
+  }
+</style>

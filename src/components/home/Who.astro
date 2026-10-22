@@ -1,0 +1,42 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<section class="section who band-white" id="who">
+  <div class="container">
+    <h2 class="h2 head" data-reveal>{t.who.heading}</h2>
+    <div class="rack" data-reveal style="--i:1">
+      <div class="bar" aria-hidden="true"></div>
+      <ul class="hang">
+        {t.who.roles.map((r, i) => (
+          <li class="hang-item" style={`--i:${i}`} data-reveal>
+            <span class="tie" aria-hidden="true"></span>
+            <div class="tag">
+              <h3 class="h3">{r.title}</h3>
+              <p>{r.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+<style>
+  .head { margin-bottom: 2rem; }
+  .rack .bar { --bar-h: 10px; }
+  .hang { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 0; }
+  .hang-item { display: flex; flex-direction: column; align-items: stretch; }
+  .tie { display: block; width: 2px; height: 28px; margin: 0 auto; background: linear-gradient(180deg, var(--gold-3), var(--gold-2)); }
+  .hang-item .tag { flex: 1; padding: 1.1rem 1.1rem 1.2rem; }
+  .hang-item .tag::after { display: none; }
+  .hang-item .tag::before { inset-inline-start: 50%; margin-inline-start: -4.5px; top: 8px; }
+  .hang-item .h3 { font-size: 1.2rem; margin-top: 0.4rem; }
+  html[lang="ar"] .hang-item .h3 { font-size: 1.1rem; }
+  .hang-item p { margin: 0.5rem 0 0; font-size: 0.92rem; color: var(--ink-2); }
+  .hang-item:hover .tag { transform: rotate(-0.6deg) translateY(2px); transition: transform .4s var(--ease-out); }
+  @media (max-width: 1000px) { .hang { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .hang { grid-template-columns: 1fr 1fr; gap: 0.75rem; } .tie { height: 18px; } }
+  @media (max-width: 420px) { .hang { grid-template-columns: 1fr; } }
+</style>

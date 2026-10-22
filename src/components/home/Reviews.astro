@@ -1,0 +1,74 @@
+---
+import { reviews } from "../../data/reviews";
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const hasSamples = reviews.some((r) => r.placeholder);
+---
+<section class="section reviews band-white" id="reviews">
+  <div class="container">
+    <div class="head-row">
+      <div class="section-head">
+        <h2 class="h2" data-reveal>{t.reviews.heading}</h2>
+        <p class="sub" data-reveal style="--i:1">{t.reviews.sub}</p>
+      </div>
+      <div class="arrows" data-reveal style="--i:2">
+        <button class="btn ghost sm" type="button" data-prev aria-label="previous"><svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="btn ghost sm" type="button" data-next aria-label="next"><svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="rail-wrap">
+    <ul class="rail" id="review-rail" data-reveal style="--i:2">
+      {reviews.map((r) => (
+        <li class="tag review" id={`review-${r.id}`}>
+          <div class="r-top">
+            <span class="stars" role="img" aria-label={`${t.reviews.ratingAria}: ${r.rating}/5`}>
+              {[1,2,3,4,5].map((n) => (<i class:list={[n <= r.rating && "on"]}></i>))}
+            </span>
+            <span class="chip calculated">{t.reviews.topics[r.topic]}</span>
+          </div>
+          <blockquote><p>{r.quote[locale]}</p></blockquote>
+          <footer>
+            <span class="name">{r.name[locale]}</span>
+            <span class="role small muted">{r.role[locale]} · {r.company[locale]}</span>
+            {r.placeholder && <span class="sample x-small">{t.reviews.sample}</span>}
+          </footer>
+        </li>
+      ))}
+    </ul>
+  </div>
+  {hasSamples && <div class="container"><p class="demo-note sample-note">{t.reviews.sampleNote}</p></div>}
+</section>
+<style>
+  .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; }
+  .head-row .section-head { margin-bottom: 1.5rem; }
+  .arrows { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .rail-wrap { overflow: hidden; }
+  .rail { display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.75rem var(--gutter) 1.5rem; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .review { flex: 0 0 min(420px, 85vw); scroll-snap-align: start; display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem 1.5rem 1.4rem 1.7rem; }
+  .r-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  .stars { display: inline-flex; gap: 4px; }
+  .stars i { width: 14px; height: 14px; border-radius: 3px; background: var(--ground-3); }
+  .stars i.on { background: var(--green); }
+  blockquote { margin: 0; }
+  blockquote p { margin: 0; font-size: 1.05rem; line-height: 1.6; color: var(--ink); }
+  html[lang="ar"] blockquote p { line-height: 1.9; }
+  footer { margin-top: auto; display: grid; gap: 0.15rem; padding-top: 0.9rem; border-top: 1px dashed var(--line-strong); }
+  .name { font-weight: 500; }
+  .sample { margin-top: 0.4rem; color: var(--gold-3); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+  html[lang="ar"] .sample { text-transform: none; letter-spacing: 0; }
+  .sample-note { margin-top: 0.25rem; }
+</style>
+<script>
+  const rail = document.getElementById("review-rail");
+  const sec = rail?.closest("section");
+  if (rail && sec) {
+    const step = () => (rail.querySelector<HTMLElement>(".review")?.offsetWidth ?? 400) + 18;
+    const rtl = document.documentElement.dir === "rtl";
+    sec.querySelector("[data-prev]")?.addEventListener("click", () => rail.scrollBy({ left: (rtl ? 1 : -1) * step(), behavior: "smooth" }));
+    sec.querySelector("[data-next]")?.addEventListener("click", () => rail.scrollBy({ left: (rtl ? -1 : 1) * step(), behavior: "smooth" }));
+  }
+</script>

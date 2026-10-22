@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "./home/Hero.astro";
+import Problem from "./home/Problem.astro";
+import HowItWorks from "./home/HowItWorks.astro";
+import ReadDrawing from "./home/ReadDrawing.astro";
+import Disciplines from "./home/Disciplines.astro";
+import Trace from "./home/Trace.astro";
+import Deliverables from "./home/Deliverables.astro";
+import Compare from "./home/Compare.astro";
+import Why from "./home/Why.astro";
+import Benefits from "./home/Benefits.astro";
+import Who from "./home/Who.astro";
+import UseCases from "./home/UseCases.astro";
+import Reviews from "./home/Reviews.astro";
+import Faq from "./home/Faq.astro";
+import ContactSection from "./home/ContactSection.astro";
+import { dict, type Locale } from "../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<Base locale={locale} path="/" title={t.meta.home.title} description={t.meta.home.description}>
+  <Hero locale={locale} />
+  <Problem locale={locale} />
+  <HowItWorks locale={locale} />
+  <ReadDrawing locale={locale} />
+  <Disciplines locale={locale} />
+  <Trace locale={locale} />
+  <Deliverables locale={locale} />
+  <Compare locale={locale} />
+  <Why locale={locale} />
+  <Benefits locale={locale} />
+  <Who locale={locale} />
+  <UseCases locale={locale} />
+  <Reviews locale={locale} />
+  <Faq locale={locale} />
+  <ContactSection locale={locale} />
+</Base>

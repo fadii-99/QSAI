@@ -1,0 +1,58 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const d = t.deliverables;
+const ext = (code: string) => code.split(".").pop()!.toUpperCase();
+---
+<section class="section deliv band-white" id="deliverables">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{d.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{d.sub}</p>
+    </div>
+    <ul class="pack" data-reveal style="--i:2">
+      {d.files.map((f, i) => (
+        <li class:list={["bundle", f.status]} style={`--i:${i}`}>
+          <div class="b-top">
+            <span class:list={["ext", ext(f.code).toLowerCase()]}>{ext(f.code)}</span>
+            <span class:list={["chip", f.status]}>{d.status[f.status as keyof typeof d.status]}</span>
+          </div>
+          <h3 class="b-name">{f.name}</h3>
+          <code class="b-code" dir="ltr">{f.code}</code>
+          <div class="map">
+            <span class="map-t x-small muted">{d.contents}</span>
+            <ol class="sheets">
+              {f.sheets.map((s, k) => (<li><i class="num">{k + 1}</i><span>{s}</span></li>))}
+            </ol>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="rate tag" data-reveal><span class="chip calculated">Rate · Amount</span>{d.rateNote}</p>
+  </div>
+</section>
+<style>
+  .pack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+  .bundle { background: var(--white); padding: 1.25rem 1.3rem 1.3rem; position: relative; transition: background .25s, transform .3s var(--ease-out), box-shadow .3s var(--ease-out); display: flex; flex-direction: column; gap: 0.5rem; }
+  .bundle:hover { background: #fbfbf8; z-index: 1; box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+  .bundle.superseded { background: var(--ground); }
+  .bundle.superseded .b-name, .bundle.superseded .b-code { color: var(--muted); }
+  .b-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  .ext { font-family: "Big Shoulders Display", var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: .06em; padding: 0.25em 0.5em; border-radius: 3px; color: #fff; background: var(--green); line-height: 1; }
+  .ext.pdf { background: var(--steel-2); }
+  .b-name { font-size: 1.15rem; font-weight: 500; line-height: 1.3; }
+  .b-code { font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-2); background: var(--ground); padding: 0.2em 0.5em; border-radius: 3px; align-self: flex-start; }
+  .map { margin-top: 0.4rem; padding-top: 0.7rem; border-top: 1px dashed var(--line-strong); }
+  .map-t { display: block; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 0.4rem; }
+  html[lang="ar"] .map-t { text-transform: none; letter-spacing: 0; }
+  .sheets { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 0.75rem; }
+  .sheets li { display: flex; gap: 0.45rem; align-items: baseline; font-size: 0.82rem; color: var(--ink-2); }
+  .sheets i { font-style: normal; flex: none; width: 18px; height: 18px; display: inline-grid; place-items: center; font-size: 0.68rem; font-weight: 600; border-radius: 3px; background: var(--green-soft); color: var(--green-2); line-height: 1; transform: translateY(2px); }
+  .bundle.superseded .sheets i { background: var(--ground-3); color: var(--muted); }
+  .rate { margin-top: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; color: var(--ink-2); max-width: 80ch; }
+  .rate .chip { flex: none; margin-top: 0.2rem; }
+  @media (max-width: 980px) { .pack { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .pack { grid-template-columns: 1fr; } .sheets { grid-template-columns: 1fr; } .rate { flex-direction: column; } }
+</style>

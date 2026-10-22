@@ -1,0 +1,115 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const tabs = t.disciplines.tabs;
+---
+<section class="section disc band-white" id="features">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{t.disciplines.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{t.disciplines.sub}</p>
+    </div>
+    <div class="tabs" id="disc-tabs" data-reveal style="--i:2">
+      <div class="tablist" role="tablist" aria-label={t.disciplines.heading}>
+        {tabs.map((tab, i) => (
+          <button class:list={["tab", tab.key]} role="tab" type="button" id={`disc-tab-${tab.key}`} aria-controls={`disc-panel-${tab.key}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>
+            <span class="end" aria-hidden="true"></span><span class="mark">{tab.name}</span>
+          </button>
+        ))}
+      </div>
+      {tabs.map((tab, i) => (
+        <div class="panel" role="tabpanel" id={`disc-panel-${tab.key}`} aria-labelledby={`disc-tab-${tab.key}`} hidden={i !== 0}>
+          <div class="panel-grid">
+            <figure class:list={["fig", tab.key]} aria-hidden="true">
+              {tab.key === "architecture" && <svg viewBox="0 0 320 240">
+                <defs><pattern id="hwall" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#8d9791" stroke-width="1"/></pattern></defs>
+                <g fill="url(#hwall)" stroke="#2e3733" stroke-width="2">
+                  <path class="wall w1" d="M40 40h240v12H40z"/><path class="wall w2" d="M40 40h12v160H40z"/><path class="wall w3" d="M268 40h12v160h-12z"/><path class="wall w4" d="M40 188h100v12H40zM200 188h80v12h-80z"/><path class="wall w5" d="M150 52h8v70h-8z"/>
+                </g>
+                <path class="door" d="M140 194a60 60 0 0 1 60-60" fill="none" stroke="#c9a227" stroke-width="2"/><line x1="200" y1="134" x2="200" y2="194" stroke="#c9a227" stroke-width="2"/>
+                <g class="dim" stroke="#006c35" stroke-width="1.5" fill="none"><path d="M40 222h240M40 216v12M280 216v12"/><path d="M24 40v160M18 40h12M18 200h12"/></g>
+                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#006c35"><text x="150" y="236" text-anchor="middle">12.00 m</text><text x="14" y="124" text-anchor="middle" transform="rotate(-90 14 124)">8.00 m</text></g>
+                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#65776c"><text x="100" y="124" text-anchor="middle">200 mm</text><text x="214" y="124" text-anchor="middle">D1 · 900×2100</text></g>
+                <rect class="plaster" x="52" y="52" width="216" height="136" fill="none" stroke="#c9a227" stroke-width="1" stroke-dasharray="4 4"/>
+              </svg>}
+              {tab.key === "mep" && <svg viewBox="0 0 320 240">
+                <g class="pipes" fill="none" stroke="#2e3733" stroke-width="5" stroke-linecap="round"><path class="p main" d="M30 120h260"/><path class="p" d="M90 120v-60h70"/><path class="p" d="M160 120v70"/><path class="p" d="M230 120v-50"/><path class="p" d="M230 120v60h40"/></g>
+                <g class="fit" fill="#c9a227" stroke="none"><circle cx="90" cy="120" r="7"/><circle cx="160" cy="120" r="7"/><circle cx="230" cy="120" r="7"/><circle cx="90" cy="60" r="6"/><circle cx="230" cy="180" r="6"/></g>
+                <g class="fx" fill="#fff" stroke="#006c35" stroke-width="2"><rect x="150" y="48" width="22" height="22" rx="3"/><rect x="149" y="186" width="22" height="22" rx="3"/><rect x="219" y="58" width="22" height="16" rx="3"/><circle cx="280" cy="180" r="10"/></g>
+                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#65776c"><text x="60" y="110">Ø50 PPR</text><text x="178" y="100">Ø25</text><text x="120" y="160">Ø32</text><text x="100" y="50">tee</text><text x="240" y="200">elbow</text></g>
+              </svg>}
+              {tab.key === "structural" && <svg viewBox="0 0 320 240">
+                <rect x="80" y="30" width="160" height="180" rx="6" fill="#f4f3ee" stroke="#2e3733" stroke-width="2"/>
+                <rect class="stir" x="98" y="48" width="124" height="144" rx="10" fill="none" stroke="#c9a227" stroke-width="3"/>
+                <g class="bars" fill="#006c35"><circle cx="108" cy="58" r="7"/><circle cx="212" cy="58" r="7"/><circle cx="108" cy="182" r="7"/><circle cx="160" cy="182" r="7"/><circle cx="212" cy="182" r="7"/></g>
+                <g class="dim" stroke="#006c35" stroke-width="1.5" fill="none"><path d="M80 226h160M80 220v12M240 220v12"/><path d="M262 30v180M256 30h12M256 210h12"/></g>
+                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#006c35"><text x="160" y="239" text-anchor="middle">300</text><text x="276" y="124">450</text></g>
+                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#65776c"><text x="20" y="62">2Ø16 T</text><text x="20" y="186">3Ø16 B</text><text x="20" y="124">Ø10@150</text></g>
+              </svg>}
+            </figure>
+            <div class="content">
+              <p class="intro">{tab.intro}</p>
+              <ul class="items">
+                {tab.items.map((it) => (<li><span class="dot" aria-hidden="true"></span>{it}</li>))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .tablist { display: flex; gap: 0.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 0.75rem; margin-bottom: 1.5rem; }
+  .tab { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--ground); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.7em 1.1em; cursor: pointer; color: var(--ink-2); transition: background .2s, border-color .2s, color .2s, transform .25s var(--ease-out); }
+  .tab .mark { font-size: 1.05rem; }
+  .tab .end { width: 28px; height: 8px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--steel) 0 5px, var(--steel-hi) 5px 6px); position: relative; }
+  .tab .end::before { content: ""; position: absolute; inset-inline-start: 0; top: 0; height: 100%; width: 10px; border-radius: 3px; background: var(--gold); }
+  .tab.mep .end::before { background: var(--green-3); } .tab.structural .end::before { background: var(--green); }
+  .tab:hover { background: var(--white); transform: translateY(-1px); }
+  .tab[aria-selected="true"] { background: var(--white); border-color: var(--green-line); color: var(--ink); box-shadow: var(--shadow-tag); }
+  .panel-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+  .fig { margin: 0; background: var(--ground); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; }
+  .fig svg { width: 100%; height: auto; direction: ltr; }
+  .intro { font-size: 1.1rem; color: var(--ink); margin-bottom: 1rem; }
+  .items { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; }
+  .items li { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.45rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; color: var(--ink-2); }
+  .items .dot { flex: none; width: 10px; height: 10px; margin-top: 0.5em; border-radius: 2px; background: var(--green); }
+  /* figure motion when its panel is shown */
+  .panel:not([hidden]) .wall { animation: fade .6s var(--ease-out) both; }
+  .panel:not([hidden]) .w2 { animation-delay: .1s; } .panel:not([hidden]) .w3 { animation-delay: .2s; } .panel:not([hidden]) .w4 { animation-delay: .3s; } .panel:not([hidden]) .w5 { animation-delay: .4s; }
+  .panel:not([hidden]) .door, .panel:not([hidden]) .plaster, .panel:not([hidden]) .dim { animation: fade .6s var(--ease-out) .6s both; }
+  .panel:not([hidden]) .p { stroke-dasharray: 300; stroke-dashoffset: 300; animation: draw 1.2s var(--ease-out) forwards; }
+  .panel:not([hidden]) .p:nth-child(2) { animation-delay: .3s; } .panel:not([hidden]) .p:nth-child(3) { animation-delay: .5s; } .panel:not([hidden]) .p:nth-child(4) { animation-delay: .6s; } .panel:not([hidden]) .p:nth-child(5) { animation-delay: .8s; }
+  .panel:not([hidden]) .fit, .panel:not([hidden]) .fx { animation: fade .5s var(--ease-out) 1.1s both; }
+  .panel:not([hidden]) .stir { stroke-dasharray: 540; stroke-dashoffset: 540; animation: draw 1.4s var(--ease-out) .2s forwards; }
+  .panel:not([hidden]) .bars circle { animation: pop .5s var(--ease-out) both; }
+  .panel:not([hidden]) .bars circle:nth-child(2) { animation-delay: .1s; } .panel:not([hidden]) .bars circle:nth-child(3) { animation-delay: .2s; } .panel:not([hidden]) .bars circle:nth-child(4) { animation-delay: .3s; } .panel:not([hidden]) .bars circle:nth-child(5) { animation-delay: .4s; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; } to { opacity: 1; transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .panel * { animation: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; } }
+  @media (max-width: 820px) { .panel-grid { grid-template-columns: 1fr; } .items { grid-template-columns: 1fr; } }
+</style>
+<script>
+  const root = document.getElementById("disc-tabs");
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+    const select = (i: number, focus = false) => {
+      tabs.forEach((t, k) => { t.setAttribute("aria-selected", String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((p, k) => { p.hidden = k !== i; });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(i));
+      t.addEventListener("keydown", (e) => {
+        const rtl = document.documentElement.dir === "rtl"; const n = tabs.length;
+        if (e.key === "ArrowRight") select((i + (rtl ? -1 : 1) + n) % n, true);
+        if (e.key === "ArrowLeft") select((i + (rtl ? 1 : -1) + n) % n, true);
+      });
+    });
+  }
+</script>

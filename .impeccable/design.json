@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T16:28:21Z",
+  "title": "Design System: QSAI Copilot public site",
+  "source": {
+    "world": "the steel yard",
+    "seed": "df1e3713f8c91795",
+    "tokens": "src/styles/global.css (:root, html[lang=ar])",
+    "fonts": "public/fonts/fonts.css (self-hosted woff2)"
+  },
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Concrete Apron",
+        "canonical": "oklch(96.4% 0.003 106)",
+        "tonalRamp": [
+          "oklch(15% 0.003 106)",
+          "oklch(27% 0.003 106)",
+          "oklch(39% 0.003 106)",
+          "oklch(51% 0.003 106)",
+          "oklch(63% 0.003 106)",
+          "oklch(75% 0.003 106)",
+          "oklch(87% 0.003 106)",
+          "oklch(95% 0.003 106)"
+        ]
+      },
+      "ground-2": {
+        "role": "neutral",
+        "displayName": "Apron Shade",
+        "canonical": "oklch(93.6% 0.004 106)",
+        "tonalRamp": [
+          "oklch(15% 0.004 106)",
+          "oklch(27% 0.004 106)",
+          "oklch(39% 0.004 106)",
+          "oklch(51% 0.004 106)",
+          "oklch(63% 0.004 106)",
+          "oklch(75% 0.004 106)",
+          "oklch(87% 0.004 106)",
+          "oklch(95% 0.004 106)"
+        ]
+      },
+      "ground-3": {
+        "role": "neutral",
+        "displayName": "Apron Dust",
+        "canonical": "oklch(90.3% 0.005 107)",
+        "tonalRamp": [
+          "oklch(15% 0.005 107)",
+          "oklch(27% 0.005 107)",
+          "oklch(39% 0.005 107)",
+          "oklch(51% 0.005 107)",
+          "oklch(63% 0.005 107)",
+          "oklch(75% 0.005 107)",
+          "oklch(87% 0.005 107)",
+          "oklch(95% 0.005 107)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Tag White",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(27% 0.000 90)",
+          "oklch(39% 0.000 90)",
+          "oklch(51% 0.000 90)",
+          "oklch(63% 0.000 90)",
+          "oklch(75% 0.000 90)",
+          "oklch(87% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(24.9% 0.032 156)",
+        "tonalRamp": [
+          "oklch(15% 0.032 156)",
+          "oklch(27% 0.032 156)",
+          "oklch(39% 0.032 156)",
+          "oklch(51% 0.032 156)",
+          "oklch(63% 0.032 156)",
+          "oklch(75% 0.032 156)",
+          "oklch(87% 0.032 156)",
+          "oklch(95% 0.032 156)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "oklch(37.1% 0.030 158)",
+        "tonalRamp": [
+          "oklch(15% 0.030 158)",
+          "oklch(27% 0.030 158)",
+          "oklch(39% 0.030 158)",
+          "oklch(51% 0.030 158)",
+          "oklch(63% 0.030 158)",
+          "oklch(75% 0.030 158)",
+          "oklch(87% 0.030 158)",
+          "oklch(95% 0.030 158)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "oklch(55.1% 0.027 159)",
+        "tonalRamp": [
+          "oklch(15% 0.027 159)",
+          "oklch(27% 0.027 159)",
+          "oklch(39% 0.027 159)",
+          "oklch(51% 0.027 159)",
+          "oklch(63% 0.027 159)",
+          "oklch(75% 0.027 159)",
+          "oklch(87% 0.027 159)",
+          "oklch(95% 0.027 159)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Seam",
+        "canonical": "oklch(88.1% 0.007 107)",
+        "tonalRamp": [
+          "oklch(15% 0.007 107)",
+          "oklch(27% 0.007 107)",
+          "oklch(39% 0.007 107)",
+          "oklch(51% 0.007 107)",
+          "oklch(63% 0.007 107)",
+          "oklch(75% 0.007 107)",
+          "oklch(87% 0.007 107)",
+          "oklch(95% 0.007 107)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Seam Strong",
+        "canonical": "oklch(79.3% 0.008 107)",
+        "tonalRamp": [
+          "oklch(15% 0.008 107)",
+          "oklch(27% 0.008 107)",
+          "oklch(39% 0.008 107)",
+          "oklch(51% 0.008 107)",
+          "oklch(63% 0.008 107)",
+          "oklch(75% 0.008 107)",
+          "oklch(87% 0.008 107)",
+          "oklch(95% 0.008 107)"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "Saudi Green",
+        "canonical": "oklch(46.5% 0.122 152)",
+        "tonalRamp": [
+          "oklch(15% 0.122 152)",
+          "oklch(27% 0.122 152)",
+          "oklch(39% 0.122 152)",
+          "oklch(51% 0.122 152)",
+          "oklch(63% 0.122 152)",
+          "oklch(75% 0.122 152)",
+          "oklch(87% 0.122 152)",
+          "oklch(95% 0.122 152)"
+        ]
+      },
+      "green-2": {
+        "role": "primary",
+        "displayName": "Pressed Green",
+        "canonical": "oklch(41.0% 0.107 153)",
+        "tonalRamp": [
+          "oklch(15% 0.107 153)",
+          "oklch(27% 0.107 153)",
+          "oklch(39% 0.107 153)",
+          "oklch(51% 0.107 153)",
+          "oklch(63% 0.107 153)",
+          "oklch(75% 0.107 153)",
+          "oklch(87% 0.107 153)",
+          "oklch(95% 0.107 153)"
+        ]
+      },
+      "green-3": {
+        "role": "primary",
+        "displayName": "Fresh Green",
+        "canonical": "oklch(55.6% 0.144 152)",
+        "tonalRamp": [
+          "oklch(15% 0.144 152)",
+          "oklch(27% 0.144 152)",
+          "oklch(39% 0.144 152)",
+          "oklch(51% 0.144 152)",
+          "oklch(63% 0.144 152)",
+          "oklch(75% 0.144 152)",
+          "oklch(87% 0.144 152)",
+          "oklch(95% 0.144 152)"
+        ]
+      },
+      "green-deep": {
+        "role": "primary",
+        "displayName": "Painted Band Green",
+        "canonical": "oklch(36.1% 0.086 153)",
+        "tonalRamp": [
+          "oklch(15% 0.086 153)",
+          "oklch(27% 0.086 153)",
+          "oklch(39% 0.086 153)",
+          "oklch(51% 0.086 153)",
+          "oklch(63% 0.086 153)",
+          "oklch(75% 0.086 153)",
+          "oklch(87% 0.086 153)",
+          "oklch(95% 0.086 153)"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Tie Gold",
+        "canonical": "oklch(72.8% 0.138 90)",
+        "tonalRamp": [
+          "oklch(15% 0.138 90)",
+          "oklch(27% 0.138 90)",
+          "oklch(39% 0.138 90)",
+          "oklch(51% 0.138 90)",
+          "oklch(63% 0.138 90)",
+          "oklch(75% 0.138 90)",
+          "oklch(87% 0.138 90)",
+          "oklch(95% 0.138 90)"
+        ]
+      },
+      "gold-2": {
+        "role": "secondary",
+        "displayName": "Light Gold",
+        "canonical": "oklch(82.5% 0.127 92)",
+        "tonalRamp": [
+          "oklch(15% 0.127 92)",
+          "oklch(27% 0.127 92)",
+          "oklch(39% 0.127 92)",
+          "oklch(51% 0.127 92)",
+          "oklch(63% 0.127 92)",
+          "oklch(75% 0.127 92)",
+          "oklch(87% 0.127 92)",
+          "oklch(95% 0.127 92)"
+        ]
+      },
+      "gold-3": {
+        "role": "secondary",
+        "displayName": "Deep Gold",
+        "canonical": "oklch(62.7% 0.120 86)",
+        "tonalRamp": [
+          "oklch(15% 0.120 86)",
+          "oklch(27% 0.120 86)",
+          "oklch(39% 0.120 86)",
+          "oklch(51% 0.120 86)",
+          "oklch(63% 0.120 86)",
+          "oklch(75% 0.120 86)",
+          "oklch(87% 0.120 86)",
+          "oklch(95% 0.120 86)"
+        ]
+      },
+      "steel": {
+        "role": "tertiary",
+        "displayName": "Steel",
+        "canonical": "oklch(44.2% 0.016 167)",
+        "tonalRamp": [
+          "oklch(15% 0.016 167)",
+          "oklch(27% 0.016 167)",
+          "oklch(39% 0.016 167)",
+          "oklch(51% 0.016 167)",
+          "oklch(63% 0.016 167)",
+          "oklch(75% 0.016 167)",
+          "oklch(87% 0.016 167)",
+          "oklch(95% 0.016 167)"
+        ]
+      },
+      "steel-2": {
+        "role": "tertiary",
+        "displayName": "Steel Dark",
+        "canonical": "oklch(32.7% 0.014 167)",
+        "tonalRamp": [
+          "oklch(15% 0.014 167)",
+          "oklch(27% 0.014 167)",
+          "oklch(39% 0.014 167)",
+          "oklch(51% 0.014 167)",
+          "oklch(63% 0.014 167)",
+          "oklch(75% 0.014 167)",
+          "oklch(87% 0.014 167)",
+          "oklch(95% 0.014 167)"
+        ]
+      },
+      "steel-hi": {
+        "role": "tertiary",
+        "displayName": "Steel Light",
+        "canonical": "oklch(65.7% 0.014 165)",
+        "tonalRamp": [
+          "oklch(15% 0.014 165)",
+          "oklch(27% 0.014 165)",
+          "oklch(39% 0.014 165)",
+          "oklch(51% 0.014 165)",
+          "oklch(63% 0.014 165)",
+          "oklch(75% 0.014 165)",
+          "oklch(87% 0.014 165)",
+          "oklch(95% 0.014 165)"
+        ]
+      },
+      "err": {
+        "role": "error",
+        "displayName": "Error",
+        "canonical": "oklch(50.0% 0.182 30)",
+        "tonalRamp": [
+          "oklch(15% 0.182 30)",
+          "oklch(27% 0.182 30)",
+          "oklch(39% 0.182 30)",
+          "oklch(51% 0.182 30)",
+          "oklch(63% 0.182 30)",
+          "oklch(75% 0.182 30)",
+          "oklch(87% 0.182 30)",
+          "oklch(95% 0.182 30)"
+        ]
+      },
+      "green-soft": {
+        "role": "primary",
+        "displayName": "Green Wash",
+        "canonical": "rgba(0, 108, 53, 0.09)",
+        "alphaOf": "green"
+      },
+      "green-line": {
+        "role": "primary",
+        "displayName": "Green Line",
+        "canonical": "rgba(0, 108, 53, 0.25)",
+        "alphaOf": "green"
+      },
+      "gold-soft": {
+        "role": "secondary",
+        "displayName": "Gold Wash",
+        "canonical": "rgba(201, 162, 39, 0.18)",
+        "alphaOf": "gold"
+      },
+      "err-soft": {
+        "role": "error",
+        "displayName": "Error Wash",
+        "canonical": "rgba(180, 35, 24, 0.08)",
+        "alphaOf": "err"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero hook only, two lines, second line in Saudi Green; uppercase via --display-case."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Every section h2; balanced wrap inside a 72ch section head."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Tag titles, form headings, bundle names; 1.05-1.15rem inside packed grids. Arabic line-height 1.5."
+      },
+      "display-ar": {
+        "displayName": "Display (Arabic)",
+        "purpose": "html[lang=ar] override of display: Alexandria, no transform, 1.22 leading, 18ch max."
+      },
+      "headline-ar": {
+        "displayName": "Headline (Arabic)",
+        "purpose": "html[lang=ar] override of headline; h3 drops to clamp(1.3rem, 1.9vw, 1.6rem)."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Hero and dark-band paragraphs at 58-62ch; Arabic line-height 1.85."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default copy at 300; 0.95rem inside tags, tables and lists; strong is 600."
+      },
+      "body-ar": {
+        "displayName": "Body (Arabic)",
+        "purpose": "Same face and size, line-height 1.9."
+      },
+      "mark": {
+        "displayName": "Mark",
+        "purpose": "Stencilled identifier on a tag, bar or column (captions, discipline names, bar-mark IDs, table heads, ext badges). Uppercase +0.04em Latin; Arabic drops case and tracking. Never a kicker above a heading."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels, nav links, chip and pill text (0.8-0.95rem)."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Hints, file codes, sheet lists, legal; ruler ticks at 0.7rem."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-tag",
+        "value": "0 1px 1px rgba(20, 38, 27, 0.05), 0 10px 28px -14px rgba(20, 38, 27, 0.28)",
+        "purpose": "Tag at rest: bundle tags, comparison frame, selected tabs, active stations, remnant tag."
+      },
+      {
+        "name": "shadow-lift",
+        "value": "0 2px 4px rgba(20, 38, 27, 0.06), 0 24px 48px -20px rgba(20, 38, 27, 0.35)",
+        "purpose": "Hover lift on packed bundle and use-case cells, with translateY(-2px)."
+      },
+      {
+        "name": "shadow-btn",
+        "value": "0 1px 2px rgba(20, 38, 27, 0.08)",
+        "purpose": "Hairline under secondary buttons at rest; primary uses alpha 0.12."
+      },
+      {
+        "name": "shadow-btn-hover",
+        "value": "0 6px 16px -8px rgba(20, 38, 27, 0.4)",
+        "purpose": "Button hover with translateY(-1px); primary uses 0 10px 20px -10px rgba(0, 108, 53, 0.6)."
+      },
+      {
+        "name": "shadow-bar",
+        "value": "0 2px 4px -2px rgba(20, 38, 27, 0.35)",
+        "purpose": "Underside of ribbed bar rules; hero stock bar uses 0 10px 18px -12px rgba(20, 38, 27, 0.5)."
+      },
+      {
+        "name": "shadow-header",
+        "value": "0 8px 24px -16px rgba(20, 38, 27, 0.35)",
+        "purpose": "Sticky header once scrolled past 8px."
+      },
+      {
+        "name": "shadow-hole",
+        "value": "inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 0 0 2px #ffffff",
+        "purpose": "The punched hole in a tag. The only inset in the system; it draws a hole, never a bevel."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every entrance, timeline step and hover transform."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Looping figure motion only (scroll cue, station scan, bob)."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity 0.9s, transform 1s, filter 0.9s var(--ease-out); from opacity 0.001 translateY(22px) blur(4px)",
+        "purpose": "The single entrance style for [data-reveal]; added class .in by IntersectionObserver (threshold 0.08, rootMargin 0 0 -8% 0)."
+      },
+      {
+        "name": "reveal-stagger",
+        "value": "calc(var(--i, 0) * 70ms)",
+        "purpose": "Per-element delay via --i."
+      },
+      {
+        "name": "hover-rise",
+        "value": "translateY(-1px) buttons / translateY(-2px) cells, 0.25-0.3s var(--ease-out)",
+        "purpose": "Hover always moves with the shadow step."
+      },
+      {
+        "name": "timeline-cut",
+        "value": "steel scaleX 700ms; per mark: segment clip 520ms, label 420ms (+120), blade 300ms (+430), step 560ms; remnant 300ms + tag 420/520ms",
+        "purpose": "Hero cutting-stock Timeline (Web Animations API, paused, fill both); plays once at 30% visibility after 350ms; range input scrubs; reduced motion seeks to end."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce): no transitions, end states shown, timelines seeked to duration, loops off",
+        "purpose": "Applied globally and per component."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "nav-collapse",
+        "value": "1024px"
+      },
+      {
+        "name": "grid-3-to-2",
+        "value": "900px-980px"
+      },
+      {
+        "name": "stack",
+        "value": "760px"
+      },
+      {
+        "name": "hero-compact",
+        "value": "640px"
+      },
+      {
+        "name": "grid-1",
+        "value": "560px-600px"
+      },
+      {
+        "name": "lang-icon-only",
+        "value": "480px"
+      }
+    ],
+    "surfaces": [
+      {
+        "name": "pour-line-grid",
+        "value": "linear-gradient(to right, rgba(20,38,27,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,38,27,.035) 1px, transparent 1px); 96px 96px; center top",
+        "purpose": "The concrete apron; on the dark band the lines are white at .04/.035."
+      },
+      {
+        "name": "ribbed-steel",
+        "value": "repeating-linear-gradient(90deg, var(--steel) 0 7px, var(--steel-hi) 7px 9px)",
+        "purpose": "Unpainted bar; 9px/2px on 10-30px bars, 5px/1px on 8-10px ends; 180deg for vertical spines."
+      },
+      {
+        "name": "gold-tie",
+        "value": "linear-gradient(90deg, var(--gold-3), var(--gold-2)); 24px x 2px; rotate(-32deg) (32deg in RTL)",
+        "purpose": "The tie leaving a tag's punched hole."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px",
+        "purpose": "Global :focus-visible."
+      },
+      {
+        "name": "selection",
+        "value": "background: var(--gold-soft); color: var(--ink)",
+        "purpose": "::selection."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Saudi Green tag-cornered button for the one action per surface (Request a demo). Hover presses to green-2 with a green-tinted shadow and a 1px rise.",
+      "html": "<button class=\"ds-btn ds-btn-primary\" type=\"button\"><span>Request a demo</span><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:48px;padding:.75em 1.35em;border-radius:6px;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;line-height:1.2;text-decoration:none;cursor:pointer;border:1px solid var(--line-strong,#bcbcb6);background:var(--white,#fff);color:var(--ink,#14261b);box-shadow:0 1px 2px rgba(20,38,27,.08);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}.ds-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(20,38,27,.4)}.ds-btn:active{transform:none}.ds-btn:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:3px}.ds-btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}.ds-btn-primary{background:var(--green,#006c35);color:#fff;border-color:var(--green-2,#005a2c);box-shadow:0 1px 2px rgba(20,38,27,.12)}.ds-btn-primary:hover{background:var(--green-2,#005a2c);box-shadow:0 10px 20px -10px rgba(0,108,53,.6);color:#fff}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "White tag button with a Seam Strong border; the default .btn. Same rise on hover.",
+      "html": "<button class=\"ds-btn\" type=\"button\">See the app</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:48px;padding:.75em 1.35em;border-radius:6px;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;line-height:1.2;text-decoration:none;cursor:pointer;border:1px solid var(--line-strong,#bcbcb6);background:var(--white,#fff);color:var(--ink,#14261b);box-shadow:0 1px 2px rgba(20,38,27,.08);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}.ds-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(20,38,27,.4)}.ds-btn:active{transform:none}.ds-btn:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:3px}.ds-btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}"
+    },
+    {
+      "name": "Gold Button",
+      "kind": "button",
+      "refersTo": "button-gold",
+      "description": "Tie Gold fill with Ink text and a Deep Gold border; used on the app page closing band.",
+      "html": "<button class=\"ds-btn ds-btn-gold\" type=\"button\">Open the app</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:48px;padding:.75em 1.35em;border-radius:6px;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;line-height:1.2;text-decoration:none;cursor:pointer;border:1px solid var(--line-strong,#bcbcb6);background:var(--white,#fff);color:var(--ink,#14261b);box-shadow:0 1px 2px rgba(20,38,27,.08);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}.ds-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(20,38,27,.4)}.ds-btn:active{transform:none}.ds-btn:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:3px}.ds-btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}.ds-btn-gold{background:var(--gold,#c9a227);color:var(--ink,#14261b);border-color:var(--gold-3,#a8821c)}.ds-btn-gold:hover{background:var(--gold-2,#e3c35c)}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent with a Seam Strong border and no shadow; on-dark variant uses white text and a 35% white border.",
+      "html": "<button class=\"ds-btn ds-btn-ghost\" type=\"button\">Send another inquiry</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:48px;padding:.75em 1.35em;border-radius:6px;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-weight:500;font-size:1rem;line-height:1.2;text-decoration:none;cursor:pointer;border:1px solid var(--line-strong,#bcbcb6);background:var(--white,#fff);color:var(--ink,#14261b);box-shadow:0 1px 2px rgba(20,38,27,.08);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s cubic-bezier(.16,1,.3,1),background .2s,border-color .2s}.ds-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(20,38,27,.4)}.ds-btn:active{transform:none}.ds-btn:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:3px}.ds-btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}.ds-btn-ghost{background:transparent;box-shadow:none}.ds-btn-ghost:hover{box-shadow:0 6px 16px -8px rgba(20,38,27,.4)}"
+    },
+    {
+      "name": "Bar Rule",
+      "kind": "custom",
+      "refersTo": "bar",
+      "description": "The signature primitive: a 6px ribbed steel rule with 36px painted ends, green at inline-start (Measured) and gold at inline-end (Calculated). .thin is 3px/22px; .plain drops the paint.",
+      "html": "<div style=\"padding:12px 0\"><div class=\"ds-bar\" aria-hidden=\"true\"></div></div>",
+      "css": ".ds-bar{--bar-h:6px;position:relative;height:var(--bar-h);border-radius:3px;background:repeating-linear-gradient(90deg,var(--steel,#4b5651) 0 7px,var(--steel-hi,#8a948f) 7px 9px);box-shadow:0 2px 4px -2px rgba(20,38,27,.35)}.ds-bar::before,.ds-bar::after{content:'';position:absolute;top:0;height:100%;width:36px;border-radius:3px}.ds-bar::before{inset-inline-start:0;background:var(--green,#006c35)}.ds-bar::after{inset-inline-end:0;background:var(--gold,#c9a227)}"
+    },
+    {
+      "name": "Bundle Tag",
+      "kind": "card",
+      "refersTo": "tag",
+      "description": "White tag with a 1px Seam border, 6px corners, the tag shadow, a 9px punched hole and a 24px gold tie at -32 degrees. Carries labels, stats and forms.",
+      "html": "<div style=\"padding:12px 0 12px 16px\"><div class=\"ds-tag\"><span class=\"ds-tag-title\">Request a demo</span><p class=\"ds-tag-body\">A 30-minute walkthrough with your own drawings.</p></div></div>",
+      "css": ".ds-tag{position:relative;background:var(--white,#fff);border:1px solid var(--line,#d8d8d3);border-radius:6px;box-shadow:0 1px 1px rgba(20,38,27,.05),0 10px 28px -14px rgba(20,38,27,.28);padding:1.35rem 1.4rem 1.3rem;color:var(--ink,#14261b);font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-weight:300}.ds-tag::before{content:'';position:absolute;top:10px;inset-inline-start:12px;width:9px;height:9px;border-radius:50%;background:var(--ground,#f3f3f1);box-shadow:inset 0 1px 2px rgba(0,0,0,.25),0 0 0 2px #fff}.ds-tag::after{content:'';position:absolute;top:14px;inset-inline-start:-14px;width:24px;height:2px;background:linear-gradient(90deg,var(--gold-3,#a8821c),var(--gold-2,#e3c35c));transform:rotate(-32deg);transform-origin:100% 50%}.ds-tag-title{display:block;font-family:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;text-transform:uppercase;letter-spacing:-.01em;font-weight:600;font-size:1.6rem;line-height:1.1}.ds-tag-body{margin:.5rem 0 0;font-size:.95rem;color:var(--ink-2,#33453a)}"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "The colour code. White pill with a 10px square swatch: green = Measured, gold = Calculated, red outline = Not quantified. The chip body never changes colour.",
+      "html": "<div style=\"display:flex;gap:.5rem;flex-wrap:wrap\"><span class=\"ds-chip ds-chip-measured\">Measured</span><span class=\"ds-chip ds-chip-calculated\">Calculated</span></div>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:.45em;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-size:.8rem;font-weight:500;line-height:1;padding:.42em .7em;border-radius:999px;border:1px solid var(--line,#d8d8d3);background:var(--white,#fff);color:var(--ink-2,#33453a);white-space:nowrap}.ds-chip::before{content:'';width:10px;height:10px;border-radius:2px;background:var(--line-strong,#bcbcb6);flex:none}.ds-chip-measured::before{background:var(--green,#006c35)}.ds-chip-calculated::before{background:var(--gold,#c9a227)}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "48px white field with a Seam Strong border and 6px corners; focus turns the border Saudi Green with a 3px Gold Wash halo; invalid uses Error with an Error Wash halo.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\" for=\"ds-email\">Work email<span class=\"ds-opt\">required</span></label><input class=\"ds-input\" id=\"ds-email\" type=\"email\" placeholder=\"name@company.com\"><p class=\"ds-hint\">We reply within one working day.</p></div>",
+      "css": ".ds-field{display:grid;gap:.4rem;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;color:var(--ink,#14261b)}.ds-label{display:flex;justify-content:space-between;gap:.5rem;font-weight:500;font-size:.95rem}.ds-opt{color:var(--muted,#65776c);font-weight:300;font-size:.82rem}.ds-input{width:100%;min-height:48px;padding:.7em .9em;border-radius:6px;border:1px solid var(--line-strong,#bcbcb6);background:var(--white,#fff);color:var(--ink,#14261b);font:inherit;font-weight:300;font-size:1.0625rem;transition:border-color .2s,box-shadow .2s}.ds-input::placeholder{color:#7e8d84}.ds-input:focus{outline:none;border-color:var(--green,#006c35);box-shadow:0 0 0 3px var(--gold-soft,rgba(201,162,39,.18))}.ds-input:invalid:not(:placeholder-shown){border-color:var(--err,#b42318);box-shadow:0 0 0 3px var(--err-soft,rgba(180,35,24,.08))}.ds-hint{margin:0;color:var(--muted,#65776c);font-size:.82rem}"
+    },
+    {
+      "name": "Radio Pill",
+      "kind": "chip",
+      "refersTo": "pill-radio",
+      "description": "Fully round choice pill; checked fills Saudi Green with white text, hover borders Green Line, focus shows the gold outline on the visible span.",
+      "html": "<div style=\"display:flex;gap:.5rem;flex-wrap:wrap\"><label class=\"ds-pill\"><input type=\"radio\" name=\"ds-int\" checked><span>Demo</span></label><label class=\"ds-pill\"><input type=\"radio\" name=\"ds-int\"><span>Pricing</span></label><label class=\"ds-pill\"><input type=\"radio\" name=\"ds-int\"><span>Pilot</span></label></div>",
+      "css": ".ds-pill{position:relative;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif}.ds-pill input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}.ds-pill span{display:inline-block;padding:.5em .9em;border-radius:999px;border:1px solid var(--line-strong,#bcbcb6);background:var(--white,#fff);font-size:.9rem;color:var(--ink-2,#33453a);transition:background .2s,border-color .2s,color .2s}.ds-pill:hover span{border-color:var(--green-line,rgba(0,108,53,.25))}.ds-pill input:checked+span{background:var(--green,#006c35);border-color:var(--green-2,#005a2c);color:#fff}.ds-pill input:focus-visible+span{outline:2px solid var(--gold,#c9a227);outline-offset:2px}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky 72px header on 86% white with a 10px backdrop blur under a 3px green-to-gold brand strip; links grow a 2px gold underline from the inline-start on hover and aria-current.",
+      "html": "<div class=\"ds-strip\" aria-hidden=\"true\"></div><header class=\"ds-header\"><span class=\"ds-brand\"><span>QSAI</span><span class=\"ds-brand-b\">Copilot</span></span><nav class=\"ds-nav\"><a href=\"#\">How it works</a><a href=\"#\">Features</a><a href=\"#\" aria-current=\"page\">Deliverables</a><a href=\"#\">Contact</a></nav><a class=\"ds-nav-cta\" href=\"#\">Request a demo</a></header>",
+      "css": ".ds-strip{height:3px;background:linear-gradient(90deg,var(--green,#006c35) 0%,var(--gold,#c9a227) 55%,var(--green-3,#0b8a46) 100%)}.ds-header{display:flex;align-items:center;gap:1.5rem;min-height:72px;padding:0 1.5rem;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line,#d8d8d3);font-family:'Readex Pro','Segoe UI',system-ui,sans-serif}.ds-brand{font-family:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.02em;text-transform:uppercase;color:var(--ink,#14261b);white-space:nowrap}.ds-brand-b{color:var(--gold-3,#a8821c);margin-inline-start:.3em;font-weight:600}.ds-nav{margin-inline-start:auto;display:flex;gap:1.2rem}.ds-nav a{position:relative;color:var(--ink-2,#33453a);text-decoration:none;font-weight:400;font-size:.95rem;padding:.4em .2em;white-space:nowrap}.ds-nav a::after{content:'';position:absolute;inset-inline:.2em;bottom:0;height:2px;background:var(--gold,#c9a227);transform:scaleX(0);transform-origin:inline-start;transition:transform .3s cubic-bezier(.16,1,.3,1)}.ds-nav a:hover,.ds-nav a[aria-current=page]{color:var(--ink,#14261b)}.ds-nav a:hover::after,.ds-nav a[aria-current=page]::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:3px;border-radius:3px}.ds-nav-cta{display:inline-flex;align-items:center;min-height:40px;padding:.5em 1em;border-radius:6px;background:var(--green,#006c35);color:#fff;border:1px solid var(--green-2,#005a2c);font-weight:500;font-size:.92rem;text-decoration:none;box-shadow:0 1px 2px rgba(20,38,27,.12);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s}.ds-nav-cta:hover{background:var(--green-2,#005a2c);transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(0,108,53,.6)}"
+    },
+    {
+      "name": "Packed Bundle",
+      "kind": "card",
+      "refersTo": "bundle-pack",
+      "description": "Deliverable cell inside a 12px clipped frame with 1px Seam gaps: ext badge, status chip, name, file code, dashed divider and a numbered sheet map. Hover lifts 2px.",
+      "html": "<ul class=\"ds-pack\"><li class=\"ds-bundle\"><div class=\"ds-b-top\"><span class=\"ds-ext\">XLSX</span><span class=\"ds-chip ds-chip-current\">Current</span></div><h3 class=\"ds-b-name\">BOQ workbook</h3><code class=\"ds-b-code\">villa-a_boq_v2.xlsx</code><div class=\"ds-map\"><span class=\"ds-map-t\">Contents</span><ol class=\"ds-sheets\"><li><i>1</i><span>Summary</span></li><li><i>2</i><span>BOQ</span></li><li><i>3</i><span>BBS</span></li><li><i>4</i><span>Warnings</span></li></ol></div></li><li class=\"ds-bundle ds-superseded\"><div class=\"ds-b-top\"><span class=\"ds-ext ds-ext-pdf\">PDF</span><span class=\"ds-chip ds-chip-superseded\">Superseded</span></div><h3 class=\"ds-b-name\">Steel report</h3><code class=\"ds-b-code\">villa-a_steel_v1.pdf</code></li></ul>",
+      "css": ".ds-pack{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line,#d8d8d3);border:1px solid var(--line,#d8d8d3);border-radius:12px;overflow:hidden;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;color:var(--ink,#14261b)}.ds-bundle{background:var(--white,#fff);padding:1.25rem 1.3rem 1.3rem;display:flex;flex-direction:column;gap:.5rem;position:relative;transition:background .25s,transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}.ds-bundle:hover{background:#fbfbf8;z-index:1;transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,38,27,.06),0 24px 48px -20px rgba(20,38,27,.35)}.ds-superseded{background:var(--ground,#f3f3f1)}.ds-superseded .ds-b-name,.ds-superseded .ds-b-code{color:var(--muted,#65776c)}.ds-b-top{display:flex;justify-content:space-between;align-items:center;gap:.5rem}.ds-ext{font-family:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.06em;padding:.25em .5em;border-radius:3px;color:#fff;background:var(--green,#006c35);line-height:1}.ds-ext-pdf{background:var(--steel-2,#2e3733)}.ds-b-name{margin:0;font-size:1.15rem;font-weight:500;line-height:1.3}.ds-b-code{font-family:inherit;font-size:.82rem;color:var(--ink-2,#33453a);background:var(--ground,#f3f3f1);padding:.2em .5em;border-radius:3px;align-self:flex-start}.ds-map{margin-top:.4rem;padding-top:.7rem;border-top:1px dashed var(--line-strong,#bcbcb6)}.ds-map-t{display:block;font-size:.8rem;color:var(--muted,#65776c);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}.ds-sheets{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.25rem .75rem}.ds-sheets li{display:flex;gap:.45rem;align-items:baseline;font-size:.82rem;color:var(--ink-2,#33453a)}.ds-sheets i{font-style:normal;flex:none;width:18px;height:18px;display:inline-grid;place-items:center;font-size:.68rem;font-weight:600;border-radius:3px;background:var(--green-soft,rgba(0,108,53,.09));color:var(--green-2,#005a2c);line-height:1;transform:translateY(2px)}.ds-chip{display:inline-flex;align-items:center;gap:.45em;font-size:.8rem;font-weight:500;line-height:1;padding:.42em .7em;border-radius:999px;border:1px solid var(--line,#d8d8d3);background:var(--white,#fff);color:var(--ink-2,#33453a)}.ds-chip::before{content:'';width:10px;height:10px;border-radius:2px;background:var(--line-strong,#bcbcb6)}.ds-chip-current::before{background:var(--green,#006c35)}.ds-chip-superseded::before{background:var(--steel-hi,#8a948f)}"
+    },
+    {
+      "name": "Dark Painted Band",
+      "kind": "custom",
+      "refersTo": "band-dark",
+      "description": "The one dark material per page: Painted Band Green with its own faint white pour-line grid; tags switch to the on-dark variant and gold becomes the accent.",
+      "html": "<section class=\"ds-band\"><h2 class=\"ds-band-h2\">Why now</h2><p class=\"ds-band-p\">Tender volumes are rising faster than QS teams can grow.</p><div class=\"ds-tag-dark\"><span class=\"ds-tag-k\">SBC first</span><span class=\"ds-tag-v\">Saudi Building Code defaults, SRC cement, ready-mix supply.</span></div></section>",
+      "css": ".ds-band{background:var(--green-deep,#0a4a27);color:#fff;background-image:linear-gradient(to right,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.035) 1px,transparent 1px);background-size:96px 96px;padding:2.5rem 2rem;font-family:'Readex Pro','Segoe UI',system-ui,sans-serif;font-weight:300}.ds-band-h2{margin:0 0 1rem;font-family:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;font-weight:700;font-size:2.6rem}.ds-band-p{margin:0 0 1.25rem;font-size:1.15rem;line-height:1.6;color:#fff;font-weight:400;max-width:58ch}.ds-tag-dark{display:grid;gap:.35rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:1.1rem 1.25rem 1.1rem 1.4rem;position:relative}.ds-tag-dark::before{content:'';position:absolute;top:10px;inset-inline-start:12px;width:9px;height:9px;border-radius:50%;background:var(--green-deep,#0a4a27);box-shadow:inset 0 1px 2px rgba(0,0,0,.4),0 0 0 2px rgba(255,255,255,.18)}.ds-tag-k{font-family:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;text-transform:uppercase;letter-spacing:.04em;font-weight:700;font-size:1.05rem;color:var(--gold-2,#e3c35c)}.ds-tag-v{color:rgba(255,255,255,.82);font-size:.95rem}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Steel Yard",
+    "overview": "The site is a rebar yard rendered as a page. The ground is a white concrete apron with faint pour lines (a 96px grid at 3.5–4.5% ink), and everything on it is either a bar, a tag, or a painted end. Horizontal ribbed steel rules carry the structure; their painted ends carry the one piece of meaning the brand owns: Saudi green for Measured, gold for Calculated, an unpainted dashed ghost for what is not yet quantified (the remnant offcut, items awaiting data). Labels, stats and the form live on white bundle tags that hang from a gold tie through a punched hole. The display face is condensed and stencil-born (Big Shoulders Display, uppercase, set almost solid at line-height 0.92); Arabic keeps the same density with Alexandria, unforced case, and taller leading. Body is a light-weight humanist shared by both scripts (Readex Pro 300).\n\nDensity is high but ordered: deliverables are packed edge to edge as tagged bundles with file codes and numbered sheet maps; comparison and feature content sits in gridded white tags separated by 1px seams rather than gaps. Depth is literal offset shadow only, two voices (tag at rest, lift on hover); nothing glows, nothing bevels. Motion runs on one clock: every entrance is the same 22px rise with a 4px blur settling under an exponential ease-out, and the hero's cutting-stock timeline is the signature interaction, scrubbable and replayed on view. The world rejects the hero-screenshot-plus-feature-grid landing and the dark \"AI glow\" page; the only dark material is a single deep-green painted band, used once per page.",
+    "keyCharacteristics": [
+      "White concrete-apron ground with a faint 96px pour-line grid, never a flat colour",
+      "Ribbed steel bar rules with painted ends as the live colour code (green = Measured, gold = Calculated, ghost = not yet quantified)",
+      "White bundle tags with a punched hole and a gold tie carry every label, stat and form",
+      "Condensed uppercase stencil display (Latin) and Alexandria display (Arabic) over a 300-weight humanist body",
+      "Depth from soft offset shadows only; one dark painted band per page; one entrance motion; one shared timeline clock"
+    ],
+    "rules": [
+      {
+        "name": "The Painted End Rule",
+        "body": "Colour means something or it is not applied. Green and gold appear as paint on the ends of steel, as status swatches, or on a control; never as decorative fills, gradients behind text, or tinted section backgrounds (the two washes are the only tints and they sit under table cells and chips).",
+        "section": "colors"
+      },
+      {
+        "name": "The One Dark Band Rule",
+        "body": "`green-deep` is used for exactly one band per page. It carries its own faint white pour-line grid and its tags switch to the on-dark variant; gold becomes the accent on it, not green.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ghost Rule",
+        "body": "Absence is drawn, not hidden. Not-quantified and superseded states use a dashed Steel Light outline or an Apron fill, so a reader sees that something was deliberately left unpainted.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Kicker Rule",
+        "body": "Headings stand alone. No eyebrow, kicker or overline sits above an `h2`; the section head is a headline and a sub, nothing else. The stencil Mark is reserved for identifiers placed on tags, bars and columns.",
+        "section": "typography"
+      },
+      {
+        "name": "The Script Parity Rule",
+        "body": "Arabic is set as its own display system (Alexandria, natural case, 1.22 leading, wider heading max-width in ch), not as a transformed copy of the Latin one. Any new display style must carry its `html[lang=\"ar\"]` override before it ships.",
+        "section": "typography"
+      },
+      {
+        "name": "The Solid Block Rule",
+        "body": "Latin display and headline lines are set at 0.92 line-height with tracking -0.01em; never loosen them to look \"airy\". Lines are allowed to touch.",
+        "section": "typography"
+      },
+      {
+        "name": "The Daylight Shadow Rule",
+        "body": "Every shadow is ink-tinted (`rgba(20, 38, 27, …)`), offset downward, and negative-spread so it never halos. Hover adds a rise of 1–2px plus the next shadow up; nothing animates a shadow without also moving.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Hole, Not Bevel Rule",
+        "body": "Inset shadows draw holes (the tag's punched hole, the remnant tag's eyelet). They never draw pressed or embossed surfaces.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep the apron's pour-line grid under everything (96px, ink at 4.5% / 3.5%), and switch it to white at 4% on the dark band.",
+      "**Do** build any new rule, divider or progress track as the ribbed bar (Steel / Steel Light repeating gradient) with painted ends at the extremes, 3px corners.",
+      "**Do** put labels, stats and forms on a bundle tag (white, 1px Seam, 6px, Tag shadow, punched hole and gold tie) rather than inventing a new card.",
+      "**Do** carry Measured / Calculated / Not quantified as green / gold / red outline on the swatch, never on the chip body or text.",
+      "**Do** set Latin display uppercase at 0.92 line-height and -0.01em, and ship the `html[lang=\"ar\"]` override (Alexandria, no transform, 1.22) with it.",
+      "**Do** use `[data-reveal]` with `--i` for entrances and a `Timeline` for any sequence; honour `prefers-reduced-motion` by showing end states.",
+      "**Do** keep hover as a 1–2px rise plus the next shadow step; focus as the 2px gold outline, 3px offset.",
+      "**Do** use logical properties for every inline-axis offset; mirror only arrows, the tie angle and select chevrons explicitly in RTL.",
+      "**Do** pack repeated items into a 12px clipped frame with 1px Seam gaps instead of spacing cards apart."
+    ],
+    "donts": [
+      "**Don't** add a kicker, eyebrow or overline above a heading; the section head is a headline and a sub only.",
+      "**Don't** use a second dark band on a page, or any dark background other than Painted Band Green.",
+      "**Don't** fill areas with green or gold, gradient text, or tinted section backgrounds; the only tints are Green Wash under \"us\" cells and chips and Gold Wash for selection and focus.",
+      "**Don't** add glows, inset bevels, blur-backed cards or drop shadows on text; the header's backdrop blur is the single blur in the system.",
+      "**Don't** use raster imagery or screenshots; every figure is inline SVG or HTML built from the bar, tag and chip primitives.",
+      "**Don't** introduce a new entrance style, a second easing for entrances, or per-component scroll clocks.",
+      "**Don't** set body or lead copy heavier than 300, or strong text heavier than 600.",
+      "**Don't** exceed 12px radius on rectangles or round a bar end beyond 3px.",
+      "**Don't** place a painted end anywhere but the extreme of a bar."
+    ]
+  }
+}

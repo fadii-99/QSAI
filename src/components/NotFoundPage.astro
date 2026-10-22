@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import { dict, localePath, type Locale } from "../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<Base locale={locale} path="/404/" title={t.meta.notFound.title} description="" noindex>
+  <section class="section nf"><div class="container">
+    <div class="bar" aria-hidden="true"></div>
+    <h1 class="h1">{t.notFound.heading}</h1>
+    <p class="lead">{t.notFound.text}</p>
+    <a class="btn primary" href={localePath(locale, "/")}>{t.notFound.home}</a>
+  </div></section>
+</Base>
+<style> .nf .bar { margin-bottom: 2rem; } .nf .lead { margin: 1rem 0 1.5rem; } </style>

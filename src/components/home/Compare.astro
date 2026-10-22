@@ -1,0 +1,52 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const c = t.compare;
+---
+<section class="section compare" id="compare">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{c.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{c.sub}</p>
+    </div>
+    <div class="wrap" data-reveal style="--i:2">
+      <table class="cmp">
+        <thead>
+          <tr><th scope="col" class="k"></th><th scope="col">{c.colA}</th><th scope="col">{c.colB}</th><th scope="col" class="us"><span class="end" aria-hidden="true"></span>{c.colC}</th></tr>
+        </thead>
+        <tbody>
+          {c.rows.map((r, i) => (
+            <tr data-reveal style={`--i:${i + 1}`}>
+              <th scope="row" class="k">{r.k}</th>
+              <td data-label={c.colA}>{r.a}</td>
+              <td data-label={c.colB}>{r.b}</td>
+              <td data-label={c.colC} class="us">{r.c}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<style>
+  .wrap { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-tag); overflow: hidden; }
+  .cmp { width: 100%; border-collapse: collapse; }
+  .cmp th, .cmp td { padding: 1rem 1.1rem; text-align: start; vertical-align: top; border-bottom: 1px solid var(--line); }
+  .cmp thead th { font-family: var(--font-display); text-transform: var(--display-case); letter-spacing: .02em; font-size: 1.25rem; font-weight: 700; color: var(--ink-2); background: var(--ground); border-bottom: 1px solid var(--line-strong); }
+  .cmp th.k { font-weight: 500; color: var(--ink); width: 22%; font-size: 0.95rem; background: var(--ground); }
+  .cmp td { color: var(--ink-2); font-size: 0.95rem; }
+  .cmp .us { background: var(--green-soft); color: var(--ink); font-weight: 400; position: relative; }
+  .cmp thead .us { color: var(--green-2); background: rgba(0,108,53,.14); }
+  .cmp thead .us .end { display: inline-block; width: 18px; height: 8px; border-radius: 3px; background: var(--green); margin-inline-end: 0.5rem; vertical-align: middle; }
+  .cmp tbody tr:last-child td, .cmp tbody tr:last-child th { border-bottom: 0; }
+  @media (max-width: 760px) {
+    .cmp thead { display: none; }
+    .cmp tr { display: grid; grid-template-columns: 1fr; border-bottom: 6px solid var(--ground); }
+    .cmp th.k { width: auto; font-family: var(--font-display); font-size: 1.15rem; text-transform: var(--display-case); font-weight: 700; border-bottom: 0; padding-bottom: 0.3rem; }
+    .cmp td { border-bottom: 1px solid var(--line); padding: 0.6rem 1.1rem; }
+    .cmp td::before { content: attr(data-label); display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 0.15rem; }
+    html[lang="ar"] .cmp td::before { text-transform: none; letter-spacing: 0; }
+  }
+</style>

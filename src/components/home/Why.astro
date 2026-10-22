@@ -1,0 +1,42 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<section class="section band-dark why" id="why-now">
+  <div class="container">
+    <div class="grid-why">
+      <div class="text">
+        <h2 class="h2" data-reveal>{t.why.heading}</h2>
+        {t.why.paras.map((p, i) => (<p class="para" data-reveal style={`--i:${i + 1}`}>{p}</p>))}
+      </div>
+      <div class="side">
+        <div class="bar plain big" aria-hidden="true" data-reveal></div>
+        <ul class="points">
+          {t.why.points.map((p, i) => (
+            <li class="tag on-dark" data-reveal style={`--i:${i + 2}`}>
+              <span class="k mark">{p.k}</span>
+              <span class="v">{p.v}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .grid-why { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .text .h2 { margin-bottom: 1.5rem; }
+  .para { font-size: clamp(1.08rem, 1.35vw, 1.3rem); line-height: 1.6; color: rgba(255,255,255,.86); max-width: 58ch; }
+  html[lang="ar"] .para { line-height: 1.9; }
+  .para:first-of-type { color: #fff; font-weight: 400; }
+  .big { --bar-h: 12px; margin-bottom: 1.5rem; background: repeating-linear-gradient(90deg, rgba(255,255,255,.25) 0 9px, rgba(255,255,255,.4) 9px 11px); box-shadow: none; }
+  .big::before, .big::after { display: block; }
+  .big::before { background: var(--gold); } .big::after { background: var(--green-3); }
+  .points { display: grid; gap: 1rem; }
+  .points .tag { padding: 1.1rem 1.25rem 1.1rem 1.4rem; display: grid; gap: 0.35rem; }
+  .points .k { color: var(--gold-2); font-size: 1.05rem; }
+  .points .v { color: rgba(255,255,255,.82); font-size: 0.95rem; }
+  @media (max-width: 860px) { .grid-why { grid-template-columns: 1fr; } }
+</style>

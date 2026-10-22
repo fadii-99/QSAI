@@ -1,0 +1,29 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<section class="section benefits" id="benefits">
+  <div class="container">
+    <h2 class="h2 head" data-reveal>{t.benefits.heading}</h2>
+    <ol class="list">
+      {t.benefits.items.map((b, i) => (
+        <li class="b" data-reveal style={`--i:${i % 3}`}>
+          <span class="bar thin" aria-hidden="true"></span>
+          <h3 class="h3">{b.title}</h3>
+          <p>{b.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+<style>
+  .head { margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 20ch; }
+  .list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 4vw, 3rem); }
+  .b { padding-top: 1rem; }
+  .b .bar { margin-bottom: 1rem; }
+  .b p { margin: 0.5rem 0 0; color: var(--ink-2); }
+  @media (max-width: 900px) { .list { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .list { grid-template-columns: 1fr; } }
+</style>

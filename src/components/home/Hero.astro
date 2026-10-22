@@ -1,0 +1,245 @@
+---
+import { dict, localePath, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+/* One 12 m stock bar and the marks the optimiser allocated to it (demonstration data). */
+const STOCK = 12;
+const marks = [
+  { id: "B1", len: 4.2 }, { id: "B1", len: 4.2 }, { id: "C2", len: 1.8 }, { id: "S3", len: 1.45 },
+];
+let cursor = 0;
+const segs = marks.map((m) => { const s = cursor; cursor += m.len; return { ...m, start: s }; });
+const remnant = +(STOCK - cursor).toFixed(2);
+const pct = (v: number) => `${(v / STOCK) * 100}%`;
+const ticks = Array.from({ length: STOCK + 1 }, (_, i) => i);
+---
+<section class="hero" id="top">
+  <div class="container">
+    <h1 class="h1" data-reveal>
+      <span class="l1">{t.hero.line1}</span>
+      <span class="l2">{t.hero.line2}</span>
+    </h1>
+    <p class="lead" data-reveal style="--i:1">{t.hero.lead}</p>
+
+    <figure class="stock" id="stock" data-reveal style="--i:2" aria-label={t.hero.barTitle}>
+      <figcaption class="stock-cap">
+        <span class="mark">{t.hero.barTitle}</span>
+        <span class="num muted small" dir="ltr">{t.hero.barStock}</span>
+      </figcaption>
+      <div class="yard" dir="ltr">
+        <div class="labels">
+          {segs.map((s, i) => (
+            <div class="lbl" style={`--x:${pct(s.start)};--w:${pct(s.len)}`} data-seg={i}>
+              <span class="lbl-id">{s.id}</span><span class="lbl-len num">{s.len.toFixed(2)} m</span>
+            </div>
+          ))}
+          <div class="lbl remnant-lbl" style={`--x:${pct(cursor)};--w:${pct(remnant)}`} data-remnant>
+            <span class="rem-tag"><span class="rem-t">{t.hero.remnant}</span><span class="rem-h">{t.hero.remnantHint}</span></span>
+          </div>
+        </div>
+        <div class="bar-wrap">
+          <div class="steel" data-steel></div>
+          {segs.map((s, i) => (
+            <div class="seg" style={`--x:${pct(s.start)};--w:${pct(s.len)}`} data-seg={i}><span class="seg-id">{s.id}</span></div>
+          ))}
+          <div class="rem" style={`--x:${pct(cursor)};--w:${pct(remnant)}`} data-remnant-seg></div>
+          {segs.map((s, i) => (<div class="blade" style={`--x:${pct(s.start + s.len)}`} data-blade={i}></div>))}
+        </div>
+        <div class="ruler" aria-hidden="true">
+          {ticks.map((n) => (<span class="tick num" style={`--x:${pct(n)}`}><i></i>{n}</span>))}
+        </div>
+      </div>
+      <div class="controls">
+        <label class="scrub" for="hero-scrub">
+          <span class="small muted">{t.hero.barHint}</span>
+          <input id="hero-scrub" type="range" min="0" max="1000" value="0" step="1" aria-label={t.hero.barHint} />
+        </label>
+        <div class="legend" aria-label={t.hero.legendTitle}>
+          <span class="chip measured">{t.hero.legend.measured}</span>
+          <span class="chip calculated">{t.hero.legend.calculated}</span>
+        </div>
+      </div>
+    </figure>
+
+    <div class="below">
+      <form class="tag inquiry" id="hero-form" novalidate data-reveal style="--i:3">
+        <div class="inq-head">
+          <span class="h3">{t.hero.formTitle}</span>
+          <span class="small muted">{t.hero.formHint}</span>
+        </div>
+        <div class="inq-row">
+          <label class="sr-only" for="hero-email">{t.hero.emailLabel}</label>
+          <input class="input" id="hero-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder={t.hero.emailPlaceholder} required />
+          <button class="btn primary" type="submit">
+            <span>{t.hero.submit}</span>
+            <svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="error small" role="alert" hidden>{t.hero.invalidEmail}</p>
+        <p class="ok small" role="status" hidden>{t.hero.submitted} <a href={localePath(locale, "/contact/")}>{t.hero.moreDetails}</a></p>
+      </form>
+      <ul class="disc" data-reveal style="--i:4">
+        {t.hero.disciplines.map((d, i) => (
+          <li class:list={["disc-item", ["arch", "mep", "str"][i]]}>
+            <span class="disc-end" aria-hidden="true"></span>
+            <span class="disc-tag mark">{d.tag}</span>
+            <span class="disc-text small">{d.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <a class="scroll-cue small" href="#how">{t.hero.scroll}<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+  </div>
+</section>
+
+<style>
+  .hero { padding-top: clamp(1.5rem, 3vw, 2rem); padding-bottom: clamp(2rem, 4vw, 3rem); position: relative; }
+  .h1 { max-width: 26ch; }
+  .h1 .l1, .h1 .l2 { display: block; }
+  .h1 .l2 { color: var(--green); }
+  html[lang="ar"] .h1 { max-width: none; }
+  .lead { margin: 0.9rem 0 0; max-width: 58ch; }
+  html[lang="ar"] .lead { max-width: 60ch; font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.75; }
+
+  /* --- the stock bar --- */
+  .stock { margin: clamp(1.4rem, 2.4vw, 1.8rem) 0 0; }
+  .stock-cap { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; margin-bottom: 0.4rem; flex-wrap: wrap; }
+  .stock-cap .mark { font-size: 0.92rem; color: var(--ink-2); }
+  .yard { position: relative; padding-top: 96px; }
+  .labels { position: relative; height: 0; }
+  .lbl { position: absolute; left: var(--x); width: var(--w); top: -48px; display: flex; flex-direction: column; align-items: flex-start; padding-inline-start: 2px; opacity: 0; }
+  .lbl-id { font-family: "Big Shoulders Display", var(--font-display); font-weight: 700; font-size: 1.25rem; line-height: 1; color: var(--ink); letter-spacing: .02em; }
+  .lbl-len { font-size: 0.8rem; color: var(--muted); line-height: 1.3; }
+  .remnant-lbl { top: -96px; align-items: flex-end; width: auto; left: auto; right: 0; }
+  .rem-tag { position: relative; display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--gold-3); border-radius: 4px; padding: 0.35rem 0.6rem 0.35rem 1.1rem; box-shadow: var(--shadow-tag); transform-origin: 100% 100%; white-space: nowrap; }
+  .rem-tag::before { content: ""; position: absolute; left: 6px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--ground); box-shadow: inset 0 1px 1px rgba(0,0,0,.3); }
+  .rem-t { font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+  .rem-h { font-size: 0.72rem; color: var(--gold-3); }
+  html[lang="ar"] .rem-tag { direction: rtl; }
+  html[lang="ar"] .yard { padding-top: 108px; }
+  html[lang="ar"] .remnant-lbl { top: -108px; }
+  html[lang="ar"] .rem-tag { padding-block: 0.25rem; }
+  .bar-wrap { position: relative; height: 30px; }
+  .steel { position: absolute; inset: 0; border-radius: 6px; transform-origin: 0 50%;
+    background: repeating-linear-gradient(90deg, var(--steel) 0 9px, var(--steel-hi) 9px 11px), var(--steel);
+    box-shadow: 0 10px 18px -12px rgba(20,38,27,.5); }
+  .seg { position: absolute; left: var(--x); width: var(--w); top: 0; height: 100%; border-radius: 4px; overflow: hidden;
+    background: linear-gradient(180deg, var(--green-3), var(--green) 55%, var(--green-2)); clip-path: inset(0 100% 0 0); }
+  .seg:nth-child(odd) { filter: saturate(1.05) brightness(1.04); }
+  .seg-id { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.55); font-family: "Big Shoulders Display", var(--font-display); font-weight: 700; font-size: 0.9rem; letter-spacing: .08em; }
+  .rem { position: absolute; left: var(--x); width: var(--w); top: 0; height: 100%; border-radius: 0 6px 6px 0; border: 2px dashed var(--gold); box-sizing: border-box; opacity: 0; }
+  .blade { position: absolute; left: var(--x); top: -8px; width: 2px; height: 46px; margin-left: -1px; background: var(--gold); box-shadow: 0 0 0 1px rgba(255,255,255,.6); transform: translateY(-14px); opacity: 0; }
+  .blade::after { content: ""; position: absolute; left: -4px; bottom: -3px; border: 5px solid transparent; border-top: 6px solid var(--gold); }
+  .ruler { position: relative; height: 28px; margin-top: 8px; }
+  .tick { position: absolute; left: var(--x); top: 0; font-size: 0.7rem; color: var(--muted); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .tick i { display: block; width: 1px; height: 8px; background: var(--line-strong); }
+  .tick:first-child { transform: translateX(0); align-items: flex-start; }
+  .tick:last-child { transform: translateX(-100%); align-items: flex-end; }
+  .controls { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: 0.25rem; flex-wrap: wrap; }
+  .scrub { display: flex; flex-direction: column; gap: 0.3rem; flex: 1 1 260px; max-width: 420px; }
+  .scrub input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; }
+  .scrub input::-webkit-slider-runnable-track { height: 3px; background: var(--line-strong); border-radius: 2px; }
+  .scrub input::-moz-range-track { height: 3px; background: var(--line-strong); border-radius: 2px; }
+  .scrub input::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; margin-top: -7.5px; border-radius: 50%; background: var(--gold); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(20,38,27,.35); }
+  .scrub input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(20,38,27,.35); }
+  .legend { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* --- below the bar --- */
+  .below { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; margin-top: clamp(1rem, 2vw, 1.25rem); }
+  .inquiry { max-width: 560px; }
+  .inq-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.9rem; flex-wrap: wrap; }
+  .inq-row { display: flex; gap: 0.6rem; }
+  .inq-row .input { flex: 1 1 auto; min-width: 0; }
+  .inq-row .btn { white-space: nowrap; flex: none; }
+  .inquiry .error { color: var(--err); margin: 0.6rem 0 0; }
+  .inquiry .ok { color: var(--green-2); margin: 0.6rem 0 0; }
+  .inquiry.sent .inq-row { opacity: 0.45; pointer-events: none; }
+  .disc { display: grid; gap: 0.6rem; padding-top: 0.2rem; }
+  .disc-item { display: grid; grid-template-columns: 34px auto 1fr; align-items: center; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+  .disc-item:last-child { border-bottom: 0; }
+  .disc-end { height: 10px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--steel) 0 5px, var(--steel-hi) 5px 6px); position: relative; }
+  .disc-end::before { content: ""; position: absolute; inset-inline-start: 0; top: 0; height: 100%; width: 12px; border-radius: 3px; }
+  .disc-item.arch .disc-end::before { background: var(--gold); }
+  .disc-item.mep .disc-end::before { background: var(--green-3); }
+  .disc-item.str .disc-end::before { background: var(--green); }
+  .disc-tag { font-size: 1.05rem; color: var(--ink); }
+  .disc-text { color: var(--muted); }
+  .scroll-cue { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: clamp(1.5rem, 3vw, 2.25rem); color: var(--muted); text-decoration: none; }
+  .scroll-cue:hover { color: var(--green); }
+  .scroll-cue .ico { width: 16px; height: 16px; animation: cue 2.2s var(--ease-in-out) infinite; }
+  @keyframes cue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @media (prefers-reduced-motion: reduce) { .scroll-cue .ico { animation: none; } }
+
+  @media (max-width: 900px) {
+    .below { grid-template-columns: 1fr; }
+    .disc-item { grid-template-columns: 28px auto 1fr; }
+  }
+  @media (max-width: 640px) {
+    .lbl-id { font-size: 1.05rem; }
+    .lbl-len { font-size: 0.7rem; }
+    .remnant-lbl .rem-h { display: none; }
+    .seg-id { display: none; }
+    .tick:nth-child(even) { display: none; }
+    .inq-row { flex-direction: column; }
+    .disc-text { grid-column: 2 / -1; }
+    .disc-item { grid-template-columns: 24px 1fr; row-gap: 0.1rem; }
+    .disc-end { grid-row: 1 / span 2; }
+  }
+</style>
+
+<script>
+  import { Timeline, reducedMotion, onVisible } from "../../scripts/motion";
+  import { submitInquiry, isEmail } from "../../scripts/submissions";
+
+  const root = document.getElementById("stock");
+  if (root) {
+    const tl = new Timeline();
+    const steel = root.querySelector("[data-steel]")!;
+    tl.add(steel, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], 0, 700);
+    const segs = root.querySelectorAll<HTMLElement>(".seg[data-seg]");
+    const lbls = root.querySelectorAll<HTMLElement>(".lbl[data-seg]");
+    const blades = root.querySelectorAll<HTMLElement>("[data-blade]");
+    let at = 650;
+    segs.forEach((seg, i) => {
+      tl.add(seg, [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }], at, 520);
+      tl.add(lbls[i], [{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }], at + 120, 420);
+      tl.add(blades[i], [{ opacity: 0, transform: "translateY(-14px)" }, { opacity: 1, transform: "translateY(0)" }], at + 430, 300, "cubic-bezier(0.16,1,0.3,1)");
+      at += 560;
+    });
+    tl.add(root.querySelector("[data-remnant-seg]"), [{ opacity: 0 }, { opacity: 1 }], at, 300);
+    tl.add(root.querySelector("[data-remnant]"), [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "translateY(0)" }], at + 120, 420);
+    tl.add(root.querySelector(".rem-tag"), [{ transform: "scale(.85)" }, { transform: "scale(1)" }], at + 120, 520, "cubic-bezier(0.16,1,0.3,1)");
+    tl.build();
+
+    const scrub = root.querySelector<HTMLInputElement>("#hero-scrub")!;
+    let raf = 0;
+    const syncScrub = () => { if (tl.playing) { scrub.value = String(Math.round((tl.currentTime / tl.duration) * 1000)); raf = requestAnimationFrame(syncScrub); } };
+    const play = () => { tl.restart(); cancelAnimationFrame(raf); raf = requestAnimationFrame(syncScrub); };
+    scrub.addEventListener("input", () => { tl.pause(); cancelAnimationFrame(raf); tl.seekProgress(Number(scrub.value) / 1000); });
+    scrub.addEventListener("change", () => { if (Number(scrub.value) >= 1000) return; tl.play(); raf = requestAnimationFrame(syncScrub); });
+    tl.onFinish(() => { scrub.value = "1000"; cancelAnimationFrame(raf); });
+
+    if (reducedMotion()) { tl.seek(tl.duration); scrub.value = "1000"; }
+    else {
+      let played = false;
+      onVisible(root, (v) => { if (v && !played) { played = true; setTimeout(play, 350); } }, 0.3);
+    }
+  }
+
+  const form = document.getElementById("hero-form") as HTMLFormElement | null;
+  if (form) {
+    const email = form.querySelector<HTMLInputElement>("#hero-email")!;
+    const err = form.querySelector<HTMLElement>(".error")!;
+    const ok = form.querySelector<HTMLElement>(".ok")!;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!isEmail(email.value)) { err.hidden = false; email.focus(); return; }
+      err.hidden = true;
+      try {
+        await submitInquiry({ locale: document.documentElement.lang as "en" | "ar", source: "hero", name: "", company: "", role: "", email: email.value.trim(), phone: "", city: "", interest: "demo", projectType: "", message: "", consent: true });
+        form.classList.add("sent"); ok.hidden = false;
+      } catch { err.hidden = false; }
+    });
+  }
+</script>

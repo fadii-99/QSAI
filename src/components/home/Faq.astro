@@ -1,0 +1,35 @@
+---
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+---
+<section class="section faq" id="faq">
+  <div class="container">
+    <div class="grid-faq">
+      <h2 class="h2" data-reveal>{t.faq.heading}</h2>
+      <div class="list">
+        {t.faq.items.map((f, i) => (
+          <details class="q" data-reveal style={`--i:${i}`} name="faq">
+            <summary><span>{f.q}</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+            <div class="a"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .grid-faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .grid-faq .h2 { position: sticky; top: calc(var(--header-h) + 24px); max-width: 14ch; }
+  .list { border-top: 1px solid var(--line-strong); }
+  .q { border-bottom: 1px solid var(--line); }
+  summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.1rem 0.25rem; font-weight: 500; font-size: 1.08rem; transition: color .2s; }
+  summary:hover { color: var(--green); }
+  summary .ico { flex: none; width: 20px; height: 20px; transition: transform .35s var(--ease-out); color: var(--gold-3); }
+  .q[open] summary .ico { transform: rotate(45deg); }
+  .a { padding: 0 0.25rem 1.2rem; color: var(--ink-2); max-width: 62ch; animation: open .4s var(--ease-out); }
+  .a p { margin: 0; }
+  @keyframes open { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 800px) { .grid-faq { grid-template-columns: 1fr; } .grid-faq .h2 { position: static; } }
+</style>

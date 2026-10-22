@@ -1,0 +1,109 @@
+---
+import Logo from "./Logo.astro";
+import { site } from "../data/site";
+import { dict, localePath, otherLocale, type Locale } from "../i18n";
+interface Props { locale: Locale; path: string; }
+const { locale, path } = Astro.props;
+const t = dict[locale];
+const home = localePath(locale, "/");
+const onHome = path === "/";
+const anchor = (id: string) => (onHome ? `#${id}` : `${home}#${id}`);
+const links = [
+  { href: anchor("how"), label: t.nav.how },
+  { href: anchor("features"), label: t.nav.features },
+  { href: anchor("deliverables"), label: t.nav.deliverables },
+  { href: anchor("who"), label: t.nav.who },
+  { href: localePath(locale, "/app/"), label: t.nav.app, page: "/app/" },
+  { href: localePath(locale, "/contact/"), label: t.nav.contact, page: "/contact/" },
+];
+const other = otherLocale(locale);
+const altHref = localePath(other, path);
+---
+<a class="skip" href="#main">{t.nav.skip}</a>
+<div class="brand-strip" aria-hidden="true"></div>
+<header class="site-header" id="site-header">
+  <div class="container bar-row">
+    <a href={home} class="home-link" aria-label={site.name}>
+      <Logo a={site.wordmark.a} b={site.wordmark.b} sub={site.tagline} tagline size={36} />
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul>
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={l.page && l.page === path ? "page" : undefined}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="actions">
+      <a class="lang" href={altHref} hreflang={other} lang={other} data-lang-switch={other} aria-label={t.nav.switchLangAria}>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
+        <span>{t.nav.switchLang}</span>
+      </a>
+      <a class="btn primary sm cta" href={localePath(locale, "/contact/")}>{t.nav.demo}</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label={t.nav.menu}>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile" id="mobile-menu" hidden>
+    <ul>
+      {links.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+      <li class="mobile-cta"><a class="btn primary" href={localePath(locale, "/contact/")}>{t.nav.demo}</a></li>
+      <li><a class="lang" href={altHref} hreflang={other} lang={other} data-lang-switch={other}>{t.nav.switchLang}</a></li>
+    </ul>
+  </div>
+</header>
+<style>
+  .brand-strip { height: 3px; background: linear-gradient(90deg, var(--green) 0%, var(--gold) 55%, var(--green-3) 100%); }
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.86); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); transition: box-shadow .3s var(--ease-out); }
+  .site-header.scrolled { box-shadow: 0 8px 24px -16px rgba(20,38,27,.35); }
+  .bar-row { display: flex; align-items: center; gap: 1.5rem; min-height: var(--header-h); }
+  .home-link { text-decoration: none; flex: none; }
+  .nav { margin-inline-start: auto; }
+  .nav ul { display: flex; gap: clamp(0.6rem, 1.4vw, 1.4rem); }
+  .nav a { color: var(--ink-2); text-decoration: none; font-weight: 400; font-size: 0.95rem; padding: 0.4em 0.2em; position: relative; white-space: nowrap; }
+  .nav a::after { content: ""; position: absolute; inset-inline: 0.2em; bottom: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: inline-start; transition: transform .3s var(--ease-out); }
+  .nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+  .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); }
+  .actions { display: flex; align-items: center; gap: 0.75rem; margin-inline-start: auto; }
+  .lang { display: inline-flex; align-items: center; gap: 0.4em; color: var(--ink-2); text-decoration: none; font-size: 0.92rem; font-weight: 500; padding: 0.45em 0.7em; border-radius: var(--radius); border: 1px solid transparent; }
+  .lang:hover { border-color: var(--line-strong); background: var(--white); color: var(--ink); }
+  .lang .ico { width: 18px; height: 18px; }
+  .burger { display: none; width: 48px; height: 48px; flex: none; border: 1px solid var(--line-strong); background: var(--white); border-radius: var(--radius); flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; padding: 0; }
+  .burger span { display: block; width: 24px; height: 2.5px; border-radius: 2px; background: var(--ink); transition: transform .3s var(--ease-out), opacity .2s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+  .mobile { display: none; border-top: 1px solid var(--line); background: var(--white); }
+  .mobile ul { display: grid; gap: 0.25rem; padding: 0.75rem var(--gutter) 1.25rem; }
+  .mobile a { display: block; padding: 0.8em 0.4em; text-decoration: none; color: var(--ink); font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+  .mobile .mobile-cta { padding-top: 0.8rem; }
+  .mobile .mobile-cta a { border: none; text-align: center; }
+  .mobile .lang { justify-content: center; border: none; }
+  @media (max-width: 1024px) {
+    .nav { display: none; }
+    .burger { display: flex; }
+    .cta { display: none; }
+    .mobile:not([hidden]) { display: block; }
+    .actions { gap: 0.5rem; }
+    .bar-row { gap: 0.75rem; }
+    .actions .lang { width: 48px; height: 48px; padding: 0; justify-content: center; border-color: var(--line-strong); background: var(--white); }
+    .actions .lang span { display: none; }
+    .actions .lang .ico { width: 24px; height: 24px; }
+  }
+</style>
+<script>
+  import { rememberLang } from "../scripts/lang";
+  const header = document.getElementById("site-header")!;
+  const burger = header.querySelector<HTMLButtonElement>(".burger")!;
+  const menu = header.querySelector<HTMLElement>("#mobile-menu")!;
+  burger.addEventListener("click", () => {
+    const open = burger.getAttribute("aria-expanded") === "true";
+    burger.setAttribute("aria-expanded", String(!open));
+    menu.hidden = open;
+  });
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { burger.setAttribute("aria-expanded", "false"); menu.hidden = true; }));
+  document.querySelectorAll<HTMLAnchorElement>("[data-lang-switch]").forEach((a) =>
+    a.addEventListener("click", () => rememberLang(a.dataset.langSwitch as "en" | "ar")));
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+</script>

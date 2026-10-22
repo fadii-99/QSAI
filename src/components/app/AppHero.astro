@@ -1,0 +1,101 @@
+---
+import { site } from "../../data/site";
+import { dict, localePath, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const m = t.app.mock;
+---
+<section class="app-hero">
+  <div class="container">
+    <h1 class="h1" data-reveal>{t.app.heroTitle}</h1>
+    <p class="lead" data-reveal style="--i:1">{t.app.heroLead}</p>
+    <div class="cta" data-reveal style="--i:2">
+      <a class="btn primary" href={site.appUrl} rel="noopener">{t.app.open}<svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      <a class="btn ghost" href={localePath(locale, "/contact/")}>{t.app.access}</a>
+    </div>
+
+    <div class="shell" data-reveal style="--i:3" aria-label={t.app.anatomyHeading}>
+      <div class="shell-strip" aria-hidden="true"></div>
+      <div class="shell-grid">
+        <aside class="side">
+          <div class="side-brand"><span class="a">QSAI</span><span class="b">Copilot</span></div>
+          <div class="side-label">{locale === "ar" ? "المشاريع" : "Projects"}</div>
+          <ul>{m.projects.map((p, i) => (<li class:list={[i === 0 && "on"]}>{p}</li>))}</ul>
+        </aside>
+        <div class="chat">
+          <div class="chat-top"><span>{m.projects[0]}</span><span class="chip measured">{locale === "ar" ? "متصل" : "Live"}</span></div>
+          <ol class="msgs" data-msgs>
+            {m.chat.map((c, i) => (
+              <li class:list={["msg", c.who]} style={`--i:${i}`}>
+                {c.who === "tool" ? <span class="tool"><i></i>{c.text}</span> : <span class="bubble">{c.text}</span>}
+                {c.who === "assistant" && i === m.chat.length - 1 && <span class="files"><span class="file">Villa12_BOQ_v2.xlsx</span><span class="file">Villa12_SteelReport_v2.pdf</span></span>}
+              </li>
+            ))}
+          </ol>
+          <div class="composer"><span>{m.composer}</span><i></i></div>
+        </div>
+        <aside class="panel">
+          <div class="p-tabs"><span class="on">{t.app.anatomy[2].k}</span><span>{t.app.anatomy[3].k}</span><span>{t.app.anatomy[4].k}</span></div>
+          <div class="p-sec"><ul>{m.docs.map((d) => (<li><b dir="ltr">{d.name}</b><span>{d.meta}</span></li>))}</ul></div>
+          <div class="p-sec"><div class="p-h">{t.app.anatomy[3].k}</div><ul>{m.memory.map((d) => (<li><b>{d.k}</b><span>{d.v}</span></li>))}</ul></div>
+          <div class="p-sec"><div class="p-h">{t.app.anatomy[4].k}</div><ul>{m.files.map((d) => (<li><b dir="ltr">{d.name}</b><span>{d.s}</span></li>))}</ul></div>
+        </aside>
+      </div>
+      <ol class="callouts" aria-label={t.app.anatomyHeading}>
+        {t.app.anatomy.map((a, i) => (<li style={`--i:${i}`}><span class="n num">{i + 1}</span><span><b>{a.k}</b> {a.v}</span></li>))}
+      </ol>
+    </div>
+  </div>
+</section>
+<style>
+  .app-hero { padding-top: clamp(2.5rem, 6vw, 5rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+  .h1 { max-width: 16ch; font-size: clamp(2.8rem, 7vw, 6.2rem); }
+  html[lang="ar"] .h1 { max-width: 22ch; font-size: clamp(2.2rem, 5vw, 4.4rem); }
+  .lead { margin-top: 1.2rem; }
+  .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .shell { margin-top: clamp(2.5rem, 5vw, 4rem); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lift); overflow: hidden; }
+  .shell-strip { height: 3px; background: linear-gradient(90deg, var(--green), var(--gold) 55%, var(--green-3)); }
+  .shell-grid { display: grid; grid-template-columns: 200px minmax(0, 1fr) 250px; min-height: 480px; font-size: 0.82rem; }
+  .side { background: linear-gradient(180deg, #0b6e3b, #075430); color: #fff; padding: 1rem; }
+  .side-brand { font-family: "Big Shoulders Display", var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: .04em; direction: ltr; text-align: start; }
+  .side-brand .b { color: var(--gold-2); margin-inline-start: 0.3em; font-weight: 600; }
+  .side-label { margin: 1.25rem 0 0.4rem; font-size: 0.68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+  html[lang="ar"] .side-label { text-transform: none; letter-spacing: 0; }
+  .side li { padding: 0.5rem 0.6rem; border-radius: 6px; color: rgba(255,255,255,.85); }
+  .side li.on { background: rgba(255,255,255,.14); color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+  .side li.on::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
+  .chat { display: flex; flex-direction: column; border-inline-end: 1px solid var(--line); }
+  .chat-top { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 1rem; border-bottom: 1px solid var(--line); font-weight: 500; }
+  .msgs { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem; flex: 1; }
+  .msg { display: flex; flex-direction: column; opacity: 0; transform: translateY(6px); }
+  .shell.in .msg { animation: msg .5s var(--ease-out) forwards; animation-delay: calc(0.5s + var(--i) * 0.45s); }
+  @keyframes msg { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .msg { opacity: 1; transform: none; animation: none !important; } }
+  .msg.user { align-items: flex-end; }
+  .msg.user .bubble { background: #dcf5e4; border: 1px solid #bfe6cd; color: #0f2f1c; border-radius: 12px 12px 2px 12px; }
+  [dir="rtl"] .msg.user .bubble { border-radius: 12px 12px 12px 2px; }
+  .msg.assistant .bubble { background: var(--white); border: 1px solid var(--line); border-radius: 12px 12px 12px 2px; box-shadow: var(--shadow-tag); }
+  [dir="rtl"] .msg.assistant .bubble { border-radius: 12px 12px 2px 12px; }
+  .bubble { max-width: 78%; padding: 0.6rem 0.8rem; line-height: 1.5; }
+  .tool { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--ground); border: 1px solid var(--line); border-radius: 999px; padding: 0.25rem 0.7rem; color: var(--ink-2); font-size: 0.76rem; direction: ltr; }
+  .tool i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+  .files { display: flex; gap: 0.4rem; margin-top: 0.4rem; flex-wrap: wrap; }
+  .file { font-size: 0.72rem; background: var(--green-soft); color: var(--green-2); padding: 0.25rem 0.5rem; border-radius: 4px; direction: ltr; }
+  .composer { margin: 0 1rem 1rem; border: 1px solid var(--line-strong); border-radius: 10px; padding: 0.7rem 0.9rem; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+  .composer i { width: 26px; height: 26px; border-radius: 6px; background: var(--green); }
+  .panel { padding: 0.75rem 1rem; background: var(--ground); display: flex; flex-direction: column; gap: 0.9rem; }
+  .p-tabs { display: flex; gap: 0.75rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; color: var(--muted); }
+  .p-tabs .on { color: var(--green); box-shadow: 0 2px 0 var(--gold); }
+  .p-h { font-size: 0.68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  html[lang="ar"] .p-h { text-transform: none; letter-spacing: 0; }
+  .p-sec li { display: grid; gap: 0.1rem; padding: 0.4rem 0; border-bottom: 1px solid var(--line); }
+  .p-sec b { font-weight: 500; font-size: 0.8rem; text-align: start; }
+  .p-sec span { color: var(--muted); font-size: 0.74rem; }
+  .callouts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; padding: 1rem 1.25rem 1.25rem; border-top: 1px solid var(--line); background: var(--white); font-size: 0.88rem; }
+  .callouts li { display: flex; gap: 0.6rem; align-items: flex-start; color: var(--ink-2); }
+  .callouts .n { flex: none; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: #fff; font-weight: 600; font-size: 0.8rem; }
+  .callouts b { display: block; color: var(--ink); font-weight: 500; }
+  @media (max-width: 980px) { .shell-grid { grid-template-columns: 160px minmax(0, 1fr); } .panel { display: none; } .callouts { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .shell-grid { grid-template-columns: 1fr; } .side { display: none; } .bubble { max-width: 92%; } .callouts { grid-template-columns: 1fr; } }
+</style>

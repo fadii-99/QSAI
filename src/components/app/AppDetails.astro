@@ -1,0 +1,84 @@
+---
+import { dict, localePath, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const a = t.app;
+---
+<section class="section band-white session">
+  <div class="container">
+    <h2 class="h2 head" data-reveal>{a.sessionHeading}</h2>
+    <div class="seq" data-reveal>
+      <div class="seq-bar" aria-hidden="true"></div>
+      <ol class="steps">
+        {a.session.map((s, i) => (
+          <li data-reveal style={`--i:${i}`}>
+            <span class="dot num" aria-hidden="true">{i + 1}</span>
+            <h3 class="h3">{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+<section class="section facts">
+  <div class="container">
+    <div class="three">
+      {[
+        { h: a.inputsHeading, items: a.inputs },
+        { h: a.standardsHeading, items: a.standards },
+        { h: a.securityHeading, items: a.security },
+      ].map((g, gi) => (
+        <div class="group" data-reveal style={`--i:${gi}`}>
+          <div class="bar thin" aria-hidden="true"></div>
+          <h2 class="h3">{g.h}</h2>
+          <dl>{g.items.map((it) => (<div><dt>{it.k}</dt><dd>{it.v}</dd></div>))}</dl>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<section class="section band-dark close">
+  <div class="container close-grid">
+    <div>
+      <h2 class="h2" data-reveal>{a.ctaHeading}</h2>
+      <p class="sub" data-reveal style="--i:1">{a.ctaText}</p>
+    </div>
+    <div class="acts" data-reveal style="--i:2">
+      <a class="btn gold" href={localePath(locale, "/contact/")}>{t.nav.demo}</a>
+      <a class="btn ghost on-dark" href={localePath(locale, "/")}>{t.nav.home}</a>
+    </div>
+  </div>
+</section>
+<style>
+  .head { margin-bottom: 2rem; }
+  .seq { position: relative; }
+  .seq-bar { height: 10px; border-radius: 5px; background: repeating-linear-gradient(90deg, var(--steel) 0 7px, var(--steel-hi) 7px 9px); position: relative; box-shadow: 0 2px 4px -2px rgba(20,38,27,.35); }
+  .seq-bar::before, .seq-bar::after { content: ""; position: absolute; top: 0; height: 100%; width: 48px; border-radius: 5px; }
+  .seq-bar::before { inset-inline-start: 0; background: var(--green); }
+  .seq-bar::after { inset-inline-end: 0; background: var(--gold); }
+  .steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; margin-top: -21px; }
+  .steps li { display: grid; gap: 0.5rem; align-content: start; padding-inline-end: 0.5rem; }
+  .dot { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--white); border: 3px solid var(--green); color: var(--green-2); font-weight: 600; font-size: 0.85rem; box-shadow: 0 2px 6px -2px rgba(20,38,27,.3); margin-inline-start: 2px; }
+  .steps .h3 { font-size: 1.05rem; margin-top: 0.4rem; }
+  html[lang="ar"] .steps .h3 { font-size: 1rem; }
+  .steps p { margin: 0; color: var(--ink-2); font-size: 0.9rem; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .group h2 { margin: 1rem 0 1rem; }
+  .group dl { margin: 0; display: grid; gap: 1rem; }
+  .group dt { font-weight: 500; }
+  .group dd { margin: 0.2rem 0 0; color: var(--ink-2); font-size: 0.95rem; }
+  .close-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 2rem; align-items: center; }
+  .acts { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  @media (max-width: 1000px) { .steps { grid-template-columns: repeat(3, 1fr); row-gap: 2rem; } .three { grid-template-columns: 1fr 1fr; } .close-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) {
+    .seq-bar { display: none; }
+    .steps { grid-template-columns: 1fr; margin-top: 0; position: relative; gap: 1.5rem; }
+    .steps::before { content: ""; position: absolute; top: 8px; bottom: 8px; inset-inline-start: 15px; width: 6px; border-radius: 3px; background: repeating-linear-gradient(180deg, var(--steel) 0 7px, var(--steel-hi) 7px 9px); }
+    .steps li { grid-template-columns: 32px 1fr; column-gap: 1rem; }
+    .steps li .dot { grid-row: 1 / span 2; margin: 0; }
+    .steps .h3 { margin-top: 0.2rem; }
+    .three { grid-template-columns: 1fr; }
+  }
+</style>

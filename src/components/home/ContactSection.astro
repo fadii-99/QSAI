@@ -1,0 +1,45 @@
+---
+import ContactForm from "../ContactForm.astro";
+import { site } from "../../data/site";
+import { dict, type Locale } from "../../i18n";
+interface Props { locale: Locale; page?: boolean }
+const { locale, page = false } = Astro.props;
+const t = dict[locale];
+const ph = site.contactPlaceholder;
+---
+<section class:list={["section", "contact", page && "page"]} id="contact">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{page ? t.contact.pageHeading : t.contact.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{page ? t.contact.pageSub : t.contact.sub}</p>
+    </div>
+    <div class="grid-c">
+      <div data-reveal style="--i:2"><ContactForm locale={locale} id={page ? "contact-page-form" : "contact-form"} /></div>
+      <aside class="office" data-reveal style="--i:3">
+        <div class="bar" aria-hidden="true"></div>
+        <h3 class="mark small">{t.contact.details}</h3>
+        <dl>
+          <div><dt>{t.contact.office.email}</dt><dd>{ph ? <span class="tbc"><span dir="ltr">{site.contact.email}</span> · {t.common.tbc}</span> : <a href={`mailto:${site.contact.email}`} dir="ltr">{site.contact.email}</a>}</dd></div>
+          <div><dt>{t.contact.office.phone}</dt><dd>{ph ? <span class="tbc"><span dir="ltr">{site.contact.phone}</span> · {t.common.tbc}</span> : <a href={site.contact.phoneHref} dir="ltr">{site.contact.phone}</a>}</dd></div>
+          <div><dt>{t.contact.office.whatsapp}</dt><dd>{ph ? <span class="tbc">{t.common.tbc}</span> : <a href={site.contact.whatsapp} rel="noopener" target="_blank" dir="ltr">{site.contact.phone}</a>}</dd></div>
+          <div><dt>{t.contact.office.hours}</dt><dd>{site.contact.hours[locale]}</dd></div>
+          <div><dt>{t.contact.office.location}</dt><dd>{site.contact.city[locale]}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+<style>
+  .grid-c { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.7fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+  .office { position: sticky; top: calc(var(--header-h) + 24px); }
+  .office h3 { margin: 1.25rem 0 1rem; color: var(--muted); letter-spacing: .12em; }
+  .office dl { display: grid; gap: 0.9rem; margin: 0; }
+  .office dt { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  html[lang="ar"] .office dt { text-transform: none; letter-spacing: 0; }
+  .office dd { margin: 0.1rem 0 0; font-weight: 400; }
+  .office a { text-decoration: none; }
+  .office a:hover { text-decoration: underline; }
+  .office .tbc { color: var(--muted); }
+  .contact.page { padding-top: clamp(2.5rem, 5vw, 4rem); }
+  @media (max-width: 860px) { .grid-c { grid-template-columns: 1fr; } .office { position: static; } }
+</style>

@@ -29,9 +29,9 @@ Every number comes from a deterministic engine, never from the language model: t
 - Workflow in the app: one chat = one project. Upload any number of drawing files → AI triage detects discipline (Architecture / MEP / Structural), scale, specifications written on sheets → the assistant reads each document, extracts members/quantities, asks only when a missing value materially changes quantities → user confirms → engine calculates → reports generated as versioned files (v1, v2 …; superseded versions stay downloadable; files flagged out of date after data changes) → download Excel/PDF.
 - Project memory: symbols, labels, confirmed assumptions, decisions with cropped drawing screenshots; reopening a project continues where it stopped.
 - Documents in scope: DXF (best), vector PDF (with scale), scanned PDF/JPG/PNG (AI read).
-- Outputs: Summary, BOQ, BBS, BCS, Materials & Waste, Unmapped Layers, Warnings, Notes & Assumptions sheets; Steel report PDF; Site BBS Excel; Specified BOQ Excel + PDF; Rate/Amount columns left empty (pricing is a later layer).
+- Outputs: Summary, BOQ, BBS, BCS, Materials & Waste, Unmapped Layers, Warnings, Notes & Assumptions sheets; Steel report PDF; Site BBS Excel; Specified BOQ Excel + PDF; priced against the firm's own uploaded rate book (per the 2026-10-22 presentation).
 - Standards: Saudi SBC profile (metres, kg/m, Ø mm) and Pakistan profile (feet, kg/ft, # bar numbers, "sutar" sizes).
-- The app is gated behind a shared access token (private pilot); the public site links to it but does not expose it.
+- Deployment: installed on the customer's own servers (on-premise, no internet dependency after install, zero outbound traffic); pilots run in an isolated sandbox under NDA.
 
 ## Capabilities and Constraints
 
@@ -51,7 +51,9 @@ Every number comes from a deterministic engine, never from the language model: t
 - Real product features and workflow: `README.md`, `server/tools.py`, `boq_engine/`.
 - Real sample outputs exist locally (Excel workbooks, steel report PDFs, consultant BBS formats) but are client documents and must not be published; the site uses synthetic, labelled demonstration data shaped like the real outputs.
 - No real customer testimonials, logos, benchmarks or case studies exist yet. Reviews on the site are explicitly dummy placeholders (labelled in the data file) to be replaced; no customer names of real companies may be implied.
-- No measured accuracy or time-saving statistics exist; the site must not state numeric claims as fact.
+- Product presentation (2026-10-22): `public/downloads/QS-AI-Copilot-Verslox.pdf` (Verslox pitch deck, 11 slides) is the source for the measured figures now on the site (20–40 min / ~40 min machine time on a 5,060 m² set, 99% agreement with a chartered QS takeoff on 6 projects, 1.5% rebar wastage on 256 m², 100% on-premise), on-premise deployment, rate upload and presets, the roadmap (IFC/Revit Q1 2027), the free 48-hour pilot, and the team/track record. Only state numeric claims that appear in that deck, always with the method shown alongside (home `#numbers`).
+- The user's standing decision (2026-10-22): the presentation PDF (written by the CEO) is the authority for claims, company details and the roadmap; no further reconciliation is needed. The site therefore lists "MEP takeoff" under Later on the roadmap (as the deck does) while the Disciplines section describes the MEP takeoff the current engine performs (from the BOQ code: runs by system and size, HVAC equipment, gas / fire / ELV systems, DBs by ways; fittings from network analysis on DXF sets).
+- Capability copy is also grounded in the BOQ application code (`../BOQ`: `server/tools.py`, `boq_engine/`): curtailment-format site BBS, SBC 304 / ACI 318 compliance flags, How to Read This Report guide, chat-based BOQ/member edits, stage-coverage check after reading, location-split Specified BOQ, grey-structure and discipline-scoped files. Login/access is deliberately not described.
 
 ## Product Principles
 

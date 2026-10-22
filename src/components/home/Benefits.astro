@@ -4,7 +4,7 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = dict[locale];
 ---
-<section class="section benefits" id="benefits">
+<section class="section compact benefits" id="benefits">
   <div class="container">
     <h2 class="h2 head" data-reveal>{t.benefits.heading}</h2>
     <ol class="list">
@@ -19,11 +19,11 @@ const t = dict[locale];
   </div>
 </section>
 <style>
-  .head { margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 20ch; }
+  .head { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); max-width: 20ch; }
   .list { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 4vw, 3rem); }
-  .b { padding-top: 1rem; }
+  .b { padding-top: 0.5rem; }
   .b .bar { margin-bottom: 1rem; }
-  .b p { margin: 0.5rem 0 0; color: var(--ink-2); }
+  .b p { margin: 0.5rem 0 0; color: var(--ink-2); max-width: 44ch; }
   @media (max-width: 900px) { .list { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .list { grid-template-columns: 1fr; } }
 </style>

@@ -1,0 +1,45 @@
+---
+import { site } from "../../data/site";
+import { dict, fmt, localePath, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const pr = t.presentation;
+const deck = site.presentation;
+const page = localePath(locale, "/presentation/");
+---
+<section class="section compact deck" id="presentation">
+  <div class="container grid-d">
+    <div class="text">
+      <h2 class="h2" data-reveal style="--i:1">{pr.heading}</h2>
+      <p class="sub" data-reveal style="--i:2">{pr.sub}</p>
+      <p class="meta small muted" data-reveal style="--i:2">{fmt(pr.format, { pages: deck.pages, size: deck.size })}{pr.langNote && ` · ${pr.langNote}`}</p>
+      <div class="acts" data-reveal style="--i:3">
+        <a class="btn primary" href={page}>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          {pr.view}
+        </a>
+        <a class="btn" href={deck.pdf} download={deck.fileName}>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          {pr.download}
+        </a>
+      </div>
+    </div>
+    <a class="cover tag no-tie" href={page} data-reveal style="--i:2" aria-label={pr.view}>
+      <img src={deck.cover} alt="" width="1280" height="720" loading="lazy" decoding="async" />
+      <span class="play" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    </a>
+  </div>
+</section>
+<style>
+  .grid-d { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .text .sub { margin-top: 0.8rem; }
+  .meta { margin: 0.4rem 0 0; }
+  .acts { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.6rem; }
+  .cover { display: block; padding: 0.6rem; position: relative; text-decoration: none; transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out); }
+  .cover img { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 4px; }
+  .cover:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  .play { position: absolute; inset-inline-end: 1.4rem; bottom: 1.4rem; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #fff; box-shadow: 0 10px 20px -10px rgba(0,108,53,.7); }
+  .play .ico { width: 24px; height: 24px; fill: currentColor; stroke: none; }
+  @media (max-width: 860px) { .grid-d { grid-template-columns: 1fr; } }
+</style>

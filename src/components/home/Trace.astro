@@ -17,7 +17,7 @@ const tr = t.trace;
         <tbody>
           {tr.rows.map((row, i) => (
             <tr class={row.type} data-type={row.type} style={`--i:${i}`}>
-              <td class="c-item"><span class="item">{row.item}</span><span class="basis-m small muted">{row.basis}</span></td>
+              <td class="c-item"><span class="item">{row.item}</span></td>
               <td class="c-qty num" dir="ltr">{row.qty}</td>
               <td class="c-unit">{row.unit}</td>
               <td class="c-type"><span class:list={["chip", row.type]}>{tr.types[row.type as keyof typeof tr.types]}</span></td>
@@ -42,14 +42,22 @@ const tr = t.trace;
   .c-qty { text-align: end; font-weight: 500; white-space: nowrap; }
   .c-unit { white-space: nowrap; color: var(--ink-2); }
   .c-basis { color: var(--ink-2); max-width: 36ch; }
-  .basis-m { display: none; }
   .item { display: block; font-weight: 400; }
   .demo-note { margin: 0.9rem 0.75rem 0; }
   .note { margin-top: 1.25rem; color: var(--ink-2); max-width: 70ch; }
+  /* Narrow: each BOQ line becomes a ledger entry. Item on top, quantity and its type on one line, the basis
+     underneath in full; a five-column table squeezed into 360px hides the one column that matters. */
   @media (max-width: 760px) {
-    .c-basis, .boq th.c-basis { display: none; }
-    .basis-m { display: block; margin-top: 0.35rem; }
-    .boq td, .boq th { padding: 0.7rem 0.5rem; }
-    .boq { font-size: 0.9rem; }
+    .boq thead { display: none; }
+    .boq, .boq tbody { display: block; }
+    .boq tr { display: grid; grid-template-columns: auto auto 1fr; column-gap: 0.5rem; row-gap: 0.35rem; padding: 0.9rem 0.6rem; border-bottom: 1px solid var(--line); }
+    .boq tr:last-child { border-bottom: 0; }
+    .boq td { display: block; padding: 0; border: 0; }
+    .c-item { grid-column: 1 / -1; font-size: 1rem; }
+    .c-qty { grid-column: 1; text-align: start; }
+    .c-unit { grid-column: 2; }
+    .c-type { grid-column: 3; justify-self: end; }
+    .c-basis { grid-column: 1 / -1; max-width: none; font-size: 0.88rem; color: var(--muted); }
+    .demo-note { margin-inline: 0.6rem; }
   }
 </style>

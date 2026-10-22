@@ -1,0 +1,36 @@
+---
+import { dict, type Locale } from "../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const tm = t.team;
+const groups = [
+  { h: tm.companyHeading, items: tm.company, names: false },
+  { h: tm.teamHeading, items: tm.people, names: true },
+  { h: tm.recordHeading, items: tm.record, names: false },
+];
+---
+<section class="section compact team band-white" id="team">
+  <div class="container">
+    <h2 class="h2 head" data-reveal>{tm.heading}</h2>
+    <div class="three">
+      {groups.map((g, gi) => (
+        <div class="group" data-reveal style={`--i:${gi}`}>
+          <div class="bar thin" aria-hidden="true"></div>
+          <h3 class="h3">{g.h}</h3>
+          <dl>{g.items.map((it) => (<div><dt lang={g.names ? "en" : undefined}>{it.k}</dt><dd>{it.v}</dd></div>))}</dl>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .head { margin-bottom: 2rem; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .group h3 { margin: 1rem 0 1rem; }
+  .group dl { margin: 0; display: grid; gap: 1rem; }
+  .group dt { font-weight: 500; }
+  .group dd { margin: 0.2rem 0 0; color: var(--ink-2); font-size: 0.95rem; }
+  @media (max-width: 1000px) { .three { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .three { grid-template-columns: 1fr; } }
+</style>

@@ -34,19 +34,25 @@ const c = t.compare;
   .wrap { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-tag); overflow: hidden; }
   .cmp { width: 100%; border-collapse: collapse; }
   .cmp th, .cmp td { padding: 1rem 1.1rem; text-align: start; vertical-align: top; border-bottom: 1px solid var(--line); }
-  .cmp thead th { font-family: var(--font-display); text-transform: var(--display-case); letter-spacing: .02em; font-size: 1.25rem; font-weight: 700; color: var(--ink-2); background: var(--ground); border-bottom: 1px solid var(--line-strong); }
+  .cmp thead th { font-family: var(--font-display); text-transform: var(--display-case); letter-spacing: 0; font-size: 1.05rem; font-weight: 600; color: var(--ink-2); background: var(--ground); border-bottom: 1px solid var(--line-strong); }
   .cmp th.k { font-weight: 500; color: var(--ink); width: 22%; font-size: 0.95rem; background: var(--ground); }
   .cmp td { color: var(--ink-2); font-size: 0.95rem; }
   .cmp .us { background: var(--green-soft); color: var(--ink); font-weight: 400; position: relative; }
   .cmp thead .us { color: var(--green-2); background: rgba(0,108,53,.14); }
   .cmp thead .us .end { display: inline-block; width: 18px; height: 8px; border-radius: 3px; background: var(--green); margin-inline-end: 0.5rem; vertical-align: middle; }
   .cmp tbody tr:last-child td, .cmp tbody tr:last-child th { border-bottom: 0; }
+  /* Narrow: the row heading, then the two old ways side by side in small type, then QSAI Copilot across
+     the full width. The comparison stays a comparison instead of 24 stacked cells. */
   @media (max-width: 760px) {
     .cmp thead { display: none; }
-    .cmp tr { display: grid; grid-template-columns: 1fr; border-bottom: 6px solid var(--ground); }
-    .cmp th.k { width: auto; font-family: var(--font-display); font-size: 1.15rem; text-transform: var(--display-case); font-weight: 700; border-bottom: 0; padding-bottom: 0.3rem; }
-    .cmp td { border-bottom: 1px solid var(--line); padding: 0.6rem 1.1rem; }
-    .cmp td::before { content: attr(data-label); display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 0.15rem; }
+    .cmp, .cmp tbody { display: block; }
+    .cmp tr { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 6px solid var(--ground); }
+    .cmp tr:last-child { border-bottom: 0; }
+    .cmp th.k { grid-column: 1 / -1; width: auto; font-family: var(--font-display); font-size: 1.1rem; text-transform: var(--display-case); font-weight: 600; border-bottom: 0; padding: 0.9rem 1.1rem 0.4rem; background: var(--white); }
+    .cmp td { border-bottom: 0; padding: 0.5rem 1.1rem 0.9rem; font-size: 0.9rem; }
+    .cmp td.us { grid-column: 1 / -1; font-size: 0.95rem; padding-block: 0.75rem 0.95rem; }
+    .cmp td::before { content: attr(data-label); display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 0.15rem; }
+    .cmp td.us::before { color: var(--green-2); }
     html[lang="ar"] .cmp td::before { text-transform: none; letter-spacing: 0; }
   }
 </style>

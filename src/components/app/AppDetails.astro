@@ -22,7 +22,7 @@ const a = t.app;
     </div>
   </div>
 </section>
-<section class="section facts">
+<section class="section compact facts">
   <div class="container">
     <div class="three">
       {[
@@ -39,7 +39,38 @@ const a = t.app;
     </div>
   </div>
 </section>
-<section class="section band-dark close">
+<section class="section band-white commercial">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{a.commercialHeading}</h2>
+      <p class="sub" data-reveal style="--i:1">{a.commercialSub}</p>
+    </div>
+    <ol class="ctl">
+      {a.commercial.map((c, i) => (
+        <li data-reveal style={`--i:${i % 2}`}>
+          <span class="bar thin" aria-hidden="true"></span>
+          <h3 class="h3">{c.t}</h3>
+          <p>{c.d}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+<section class="section compact roadmap">
+  <div class="container">
+    <h2 class="h2 head" data-reveal>{a.roadmapHeading}</h2>
+    <ol class="stages">
+      {a.roadmap.map((r, i) => (
+        <li class:list={["tag", "stage", i === 0 && "now"]} data-reveal style={`--i:${i}`}>
+          <span class:list={["chip", i === 0 ? "current" : "superseded"]}>{r.when}</span>
+          <h3 class="h3">{r.t}</h3>
+          <ul>{r.items.map((it) => <li>{it}</li>)}</ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+<section class="section compact band-dark close">
   <div class="container close-grid">
     <div>
       <h2 class="h2" data-reveal>{a.ctaHeading}</h2>
@@ -47,7 +78,7 @@ const a = t.app;
     </div>
     <div class="acts" data-reveal style="--i:2">
       <a class="btn gold" href={localePath(locale, "/contact/")}>{t.nav.demo}</a>
-      <a class="btn ghost on-dark" href={localePath(locale, "/")}>{t.nav.home}</a>
+      <a class="btn ghost on-dark" href={localePath(locale, "/presentation/")}>{t.presentation.view}</a>
     </div>
   </div>
 </section>
@@ -69,9 +100,21 @@ const a = t.app;
   .group dl { margin: 0; display: grid; gap: 1rem; }
   .group dt { font-weight: 500; }
   .group dd { margin: 0.2rem 0 0; color: var(--ink-2); font-size: 0.95rem; }
+  .ctl { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 4vw, 3rem); }
+  .ctl li { padding-top: 0.5rem; }
+  .ctl .bar { margin-bottom: 1rem; }
+  .ctl p { margin: 0.5rem 0 0; color: var(--ink-2); max-width: 56ch; }
+  .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .stage { display: grid; gap: 0.8rem; align-content: start; padding-inline-start: 1.6rem; }
+  .stage .chip { justify-self: start; }
+  .stage.now { border-color: var(--green-line); }
+  .stage ul { display: grid; gap: 0.5rem; }
+  .stage ul li { position: relative; padding-inline-start: 1.1rem; color: var(--ink-2); font-size: 0.95rem; }
+  .stage ul li::before { content: ""; position: absolute; inset-inline-start: 0; top: 0.7em; width: 8px; height: 3px; border-radius: 2px; background: var(--steel-hi); }
+  .stage.now ul li::before { background: var(--green); }
   .close-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 2rem; align-items: center; }
   .acts { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  @media (max-width: 1000px) { .steps { grid-template-columns: repeat(3, 1fr); row-gap: 2rem; } .three { grid-template-columns: 1fr 1fr; } .close-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1000px) { .steps { grid-template-columns: repeat(3, 1fr); row-gap: 2rem; } .three { grid-template-columns: 1fr 1fr; } .stages { grid-template-columns: 1fr; } .close-grid { grid-template-columns: 1fr; } }
   @media (max-width: 600px) {
     .seq-bar { display: none; }
     .steps { grid-template-columns: 1fr; margin-top: 0; position: relative; gap: 1.5rem; }
@@ -80,5 +123,6 @@ const a = t.app;
     .steps li .dot { grid-row: 1 / span 2; margin: 0; }
     .steps .h3 { margin-top: 0.2rem; }
     .three { grid-template-columns: 1fr; }
+    .ctl { grid-template-columns: 1fr; }
   }
 </style>

@@ -1,6 +1,4 @@
 ---
-import Logo from "./Logo.astro";
-import { site } from "../data/site";
 import { dict, localePath, otherLocale, type Locale } from "../i18n";
 interface Props { locale: Locale; path: string; }
 const { locale, path } = Astro.props;
@@ -14,17 +12,25 @@ const links = [
   { href: anchor("deliverables"), label: t.nav.deliverables },
   { href: anchor("who"), label: t.nav.who },
   { href: localePath(locale, "/app/"), label: t.nav.app, page: "/app/" },
+  { href: localePath(locale, "/presentation/"), label: t.nav.presentation, page: "/presentation/" },
   { href: localePath(locale, "/contact/"), label: t.nav.contact, page: "/contact/" },
 ];
 const other = otherLocale(locale);
 const altHref = localePath(other, path);
+/** Full-colour QSAI logo (1299×445, transparent). Display widths below must match the CSS. */
+const logo = "/images/brand/QSAI-logo";
+const logoSizes = "(max-width: 767px) 120px, (max-width: 1200px) 136px, 152px";
 ---
 <a class="skip" href="#main">{t.nav.skip}</a>
 <div class="brand-strip" aria-hidden="true"></div>
 <header class="site-header" id="site-header">
   <div class="container bar-row">
-    <a href={home} class="home-link" aria-label={site.name}>
-      <Logo a={site.wordmark.a} b={site.wordmark.b} sub={site.tagline} tagline size={36} />
+    <a href={home} class="home-link">
+      <picture>
+        <source type="image/webp" srcset={`${logo}-320w.webp 320w, ${logo}-640w.webp 640w, ${logo}.webp 1299w`} sizes={logoSizes} />
+        <img src={`${logo}-transparent.png`} srcset={`${logo}-320w.png 320w, ${logo}-640w.png 640w, ${logo}-transparent.png 1299w`} sizes={logoSizes}
+          width="1299" height="445" alt="QSAI — Construction AI" decoding="async" fetchpriority="high" />
+      </picture>
     </a>
     <nav class="nav" aria-label="Primary">
       <ul>
@@ -57,14 +63,16 @@ const altHref = localePath(other, path);
   .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.86); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); transition: box-shadow .3s var(--ease-out); }
   .site-header.scrolled { box-shadow: 0 8px 24px -16px rgba(20,38,27,.35); }
   .bar-row { display: flex; align-items: center; gap: 1.5rem; min-height: var(--header-h); }
-  .home-link { text-decoration: none; flex: none; }
+  .home-link { display: inline-flex; align-items: center; flex: none; line-height: 0; text-decoration: none; border-radius: var(--radius); }
+  .home-link img { display: block; width: 152px; height: auto; aspect-ratio: 1299 / 445; object-fit: contain; }
   .nav { margin-inline-start: auto; }
   .nav ul { display: flex; gap: clamp(0.6rem, 1.4vw, 1.4rem); }
   .nav a { color: var(--ink-2); text-decoration: none; font-weight: 400; font-size: 0.95rem; padding: 0.4em 0.2em; position: relative; white-space: nowrap; }
   .nav a::after { content: ""; position: absolute; inset-inline: 0.2em; bottom: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: inline-start; transition: transform .3s var(--ease-out); }
   .nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
   .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); }
-  .actions { display: flex; align-items: center; gap: 0.75rem; margin-inline-start: auto; }
+  .actions { display: flex; flex: none; align-items: center; gap: 0.75rem; margin-inline-start: auto; }
+  .cta { white-space: nowrap; }
   .lang { display: inline-flex; align-items: center; gap: 0.4em; color: var(--ink-2); text-decoration: none; font-size: 0.92rem; font-weight: 500; padding: 0.45em 0.7em; border-radius: var(--radius); border: 1px solid transparent; }
   .lang:hover { border-color: var(--line-strong); background: var(--white); color: var(--ink); }
   .lang .ico { width: 18px; height: 18px; }
@@ -79,7 +87,7 @@ const altHref = localePath(other, path);
   .mobile .mobile-cta { padding-top: 0.8rem; }
   .mobile .mobile-cta a { border: none; text-align: center; }
   .mobile .lang { justify-content: center; border: none; }
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) { /* seven nav links + actions need ~1190px unshrunk (EN) */
     .nav { display: none; }
     .burger { display: flex; }
     .cta { display: none; }
@@ -89,6 +97,10 @@ const altHref = localePath(other, path);
     .actions .lang { width: 48px; height: 48px; padding: 0; justify-content: center; border-color: var(--line-strong); background: var(--white); }
     .actions .lang span { display: none; }
     .actions .lang .ico { width: 24px; height: 24px; }
+    .home-link img { width: 136px; }
+  }
+  @media (max-width: 767px) {
+    .home-link img { width: 120px; }
   }
 </style>
 <script>

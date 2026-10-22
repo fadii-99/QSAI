@@ -28,65 +28,75 @@ colors:
   err-soft: "rgba(180, 35, 24, 0.08)"
 typography:
   display:
-    fontFamily: "Big Shoulders Display, Arial Narrow, Impact, sans-serif"
-    fontSize: "clamp(3.4rem, 8vw, 6rem)"
-    fontWeight: 800
-    lineHeight: 0.92
-    letterSpacing: "-0.01em"
-  headline:
-    fontFamily: "Big Shoulders Display, Arial Narrow, Impact, sans-serif"
-    fontSize: "clamp(2.4rem, 5vw, 4.2rem)"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(2.5rem, 5vw, 4.25rem)"
     fontWeight: 700
-    lineHeight: 0.92
-    letterSpacing: "-0.01em"
+    lineHeight: 1.12
+    letterSpacing: "-0.02em"
+  headline:
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(1.85rem, 3.2vw, 2.75rem)"
+    fontWeight: 700
+    lineHeight: 1.12
+    letterSpacing: "-0.02em"
   title:
-    fontFamily: "Big Shoulders Display, Arial Narrow, Impact, sans-serif"
-    fontSize: "clamp(1.45rem, 2.2vw, 1.9rem)"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(1.15rem, 1.5vw, 1.375rem)"
     fontWeight: 600
-    lineHeight: 1.1
+    lineHeight: 1.3
     letterSpacing: "-0.01em"
   display-ar:
-    fontFamily: "Alexandria, Readex Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2.4rem, 5.6vw, 4.8rem)"
-    fontWeight: 800
-    lineHeight: 1.22
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)"
+    fontWeight: 700
+    lineHeight: 1.4
     letterSpacing: "0"
   headline-ar:
-    fontFamily: "Alexandria, Readex Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(1.9rem, 3.8vw, 3.1rem)"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(1.7rem, 3vw, 2.5rem)"
     fontWeight: 700
-    lineHeight: 1.22
+    lineHeight: 1.4
     letterSpacing: "0"
   lead:
-    fontFamily: "Readex Pro, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(1.1rem, 1.35vw, 1.3rem)"
-    fontWeight: 300
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(1.1rem, 1.3vw, 1.25rem)"
+    fontWeight: 400
+    lineHeight: 1.6
+  sub:
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "clamp(1.05rem, 1.2vw, 1.2rem)"
+    fontWeight: 400
     lineHeight: 1.6
   body:
-    fontFamily: "Readex Pro, Segoe UI, system-ui, sans-serif"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
     fontSize: "1.0625rem"
-    fontWeight: 300
+    fontWeight: 400
     lineHeight: 1.65
   body-ar:
-    fontFamily: "Readex Pro, Segoe UI, system-ui, sans-serif"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
     fontSize: "1.0625rem"
-    fontWeight: 300
-    lineHeight: 1.9
+    fontWeight: 400
+    lineHeight: 1.85
   mark:
-    fontFamily: "Big Shoulders Display, Arial Narrow, Impact, sans-serif"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
     fontSize: "0.92rem"
-    fontWeight: 700
-    lineHeight: 1
-    letterSpacing: "0.04em"
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: "0.06em"
   label:
-    fontFamily: "Readex Pro, Segoe UI, system-ui, sans-serif"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
     fontSize: "0.95rem"
     fontWeight: 500
     lineHeight: 1.2
+  button:
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 500
+    lineHeight: 1.2
   caption:
-    fontFamily: "Readex Pro, Segoe UI, system-ui, sans-serif"
+    fontFamily: "IBM Plex Sans Arabic, Segoe UI, Tahoma, system-ui, sans-serif"
     fontSize: "0.82rem"
-    fontWeight: 300
+    fontWeight: 400
     lineHeight: 1.3
 rounded:
   pill: "999px"
@@ -94,10 +104,12 @@ rounded:
   tag: "6px"
   bundle: "12px"
 spacing:
-  gutter: "clamp(16px, 2.5vw, 40px)"
-  container: "100%"
-  section: "clamp(5rem, 9vw, 8.5rem)"
-  section-head: "clamp(2.2rem, 4vw, 3.5rem)"
+  gutter: "clamp(16px, 3vw, 48px)"
+  container: "1360px"
+  section: "clamp(4.5rem, 8vw, 7.5rem)"
+  section-sm: "clamp(3.25rem, 5.5vw, 5rem)"
+  section-xs: "clamp(2.5rem, 4vw, 3.5rem)"
+  section-head: "clamp(2rem, 3.5vw, 3rem)"
   tag-pad: "1.35rem 1.4rem 1.3rem"
   tag-pad-tight: "1rem 1.1rem"
   field-gap: "1rem"
@@ -190,7 +202,7 @@ components:
 
 **Creative North Star: "The Steel Yard"**
 
-The site is a rebar yard rendered as a page. The ground is a white concrete apron with faint pour lines (a 96px grid at 3.5–4.5% ink), and everything on it is either a bar, a tag, or a painted end. Horizontal ribbed steel rules carry the structure; their painted ends carry the one piece of meaning the brand owns: Saudi green for Measured, gold for Calculated, an unpainted dashed ghost for what is not yet quantified (the remnant offcut, items awaiting data). Labels, stats and the form live on white bundle tags that hang from a gold tie through a punched hole. The display face is condensed and stencil-born (Big Shoulders Display, uppercase, set almost solid at line-height 0.92); Arabic keeps the same density with Alexandria, unforced case, and taller leading. Body is a light-weight humanist shared by both scripts (Readex Pro 300).
+The site is a rebar yard rendered as a page. The ground is a white concrete apron with faint pour lines (a 96px grid at 3.5–4.5% ink), and everything on it is either a bar, a tag, or a painted end. Horizontal ribbed steel rules carry the structure; their painted ends carry the one piece of meaning the brand owns: Saudi green for Measured, gold for Calculated, an unpainted dashed ghost for what is not yet quantified (the remnant offcut, items awaiting data). Labels, stats and the form live on white bundle tags that hang from a gold tie through a punched hole. Type is one plain, highly legible family for both scripts (IBM Plex Sans Arabic): sentence-case 700 headings, a 400 body, Arabic with its own taller leading. The world's character lives in the bars, tags and colour code, not in costume lettering.
 
 Density is high but ordered: deliverables are packed edge to edge as tagged bundles with file codes and numbered sheet maps; comparison and feature content sits in gridded white tags separated by 1px seams rather than gaps. Depth is literal offset shadow only, two voices (tag at rest, lift on hover); nothing glows, nothing bevels. Motion runs on one clock: every entrance is the same 22px rise with a 4px blur settling under an exponential ease-out, and the hero's cutting-stock timeline is the signature interaction, scrubbable and replayed on view. The world rejects the hero-screenshot-plus-feature-grid landing and the dark "AI glow" page; the only dark material is a single deep-green painted band, used once per page.
 
@@ -198,7 +210,7 @@ Density is high but ordered: deliverables are packed edge to edge as tagged bund
 - White concrete-apron ground with a faint 96px pour-line grid, never a flat colour
 - Ribbed steel bar rules with painted ends as the live colour code (green = Measured, gold = Calculated, ghost = not yet quantified)
 - White bundle tags with a punched hole and a gold tie carry every label, stat and form
-- Condensed uppercase stencil display (Latin) and Alexandria display (Arabic) over a 300-weight humanist body
+- One legible family for both scripts (IBM Plex Sans Arabic), sentence-case headings over a 400-weight body
 - Depth from soft offset shadows only; one dark painted band per page; one entrance motion; one shared timeline clock
 
 ## Colors
@@ -241,38 +253,42 @@ A white-and-steel yard where the only saturated colour is paint on the ends of b
 
 ## Typography
 
-**Display Font:** Big Shoulders Display (with Arial Narrow, Impact fallback), weights 500–800, Latin only
-**Display Font (Arabic):** Alexandria (with Readex Pro fallback), weights 400–800
-**Body Font:** Readex Pro (with Segoe UI, system-ui fallback), weights 300–700, Arabic and Latin
+**Font:** IBM Plex Sans Arabic (SIL OFL), self-hosted in `public/fonts/` as Arabic and Latin subsets at 400, 500, 600 and 700; one family for both scripts (its Latin is IBM Plex Sans). Fallback Segoe UI, Tahoma, system-ui.
 
-**Character:** Stencil lettering on a rebar tag over a quiet engineering body. Latin display is uppercase, condensed, set almost solid (line-height 0.92, tracking -0.01em) so two lines read as one painted block. Arabic display never fakes the condensation: Alexandria at line-height 1.22, no case transform, zero tracking. Body is a light 300 weight in both scripts, with Arabic leading raised to 1.9; strong text is 600, never bold-black. Numbers set with tabular lining figures wherever they are compared.
+**Character:** Plain, open, engineering-grade lettering chosen for reading, not costume (the user's decision of 2026-10-22: many visitors in the Gulf read English as a second language, so the condensed uppercase stencil display was replaced). Headings are sentence case, 700, tracking -0.02em Latin / 0 Arabic, line-height 1.12 Latin / 1.4 Arabic. Body is 400 in both scripts (never 300), line-height 1.65 Latin / 1.85 Arabic; strong text is 600. Numbers set with tabular lining figures wherever they are compared.
 
 ### Hierarchy
-- **Display** (800, `clamp(3.4rem, 8vw, 6rem)`, 0.92): the hero hook only, two lines, the second line in Saudi Green. Arabic: 800, `clamp(2.4rem, 5.6vw, 4.8rem)`, 1.22. Max width 26ch Latin, 18ch Arabic.
-- **Headline** (700, `clamp(2.4rem, 5vw, 4.2rem)`, 0.92): every section heading, balanced wrap, inside a 72ch section head. Arabic: `clamp(1.9rem, 3.8vw, 3.1rem)`, 1.22.
-- **Title** (600, `clamp(1.45rem, 2.2vw, 1.9rem)`, 1.1): tag titles, form headings, bundle group names; frequently stepped down to 1.05–1.15rem inside packed grids. Arabic line-height 1.5.
-- **Lead** (300, `clamp(1.1rem, 1.35vw, 1.3rem)`, 1.6): the paragraph under the hero hook and the dark-band paragraphs; 58–62ch. Section subs are the same voice at `clamp(1.05rem, 1.2vw, 1.2rem)`, 64ch.
-- **Body** (300, 1.0625rem, 1.65): default copy; 0.95rem inside tags, table cells and lists. Arabic 1.9.
-- **Mark** (700, display face, 0.92–1.25rem, uppercase, +0.04em): the stencilled identifier on a tag or bar: figure captions, discipline names, bar-mark IDs (B1, C2), comparison headers, footer column heads, the ext badge. This is a label stamped on a thing, used beside the thing; it is not a kicker above a heading.
+- **Display** (700, `clamp(2.5rem, 5vw, 4.25rem)`, 1.12): the hero hook only, two lines, the second line in Saudi Green. Arabic `clamp(2.2rem, 4.4vw, 3.6rem)`, 1.4.
+- **Headline** (700, `clamp(1.85rem, 3.2vw, 2.75rem)`, 1.12): every section heading, balanced wrap. Arabic `clamp(1.7rem, 3vw, 2.5rem)`, 1.4.
+- **Title** (600, `clamp(1.15rem, 1.5vw, 1.375rem)`, 1.3): tag titles, form headings, bundle group names; 1.05–1.2rem inside packed grids. Arabic line-height 1.55.
+- **Lead** (400, `clamp(1.1rem, 1.3vw, 1.25rem)`, 1.6): the paragraph under the hero hook and dark-band paragraphs; 58–62ch. Section subs: `clamp(1.05rem, 1.2vw, 1.2rem)`, at most 54–64ch.
+- **Body** (400, 1.0625rem, 1.65): default copy; 0.95rem inside tags, table cells and lists. Arabic 1.85.
+- **Mark** (600, 0.78–0.92rem, uppercase Latin, +0.06em; Arabic natural case): identifiers placed on a tag, bar or column: figure captions, discipline names, bar-mark IDs, footer column heads, the ext badge. Never a kicker above a heading.
 - **Label** (500, 0.95rem): form labels, nav links, chip and pill text (0.8–0.92rem), remnant tag text.
-- **Caption** (300, 0.82rem): hints, file codes, sheet lists, ruler ticks (0.7rem), legal.
+- **Caption** (400, 0.82rem): hints, file codes, sheet lists, ruler ticks (0.7rem), legal.
 
 ### Named Rules
-**The No-Kicker Rule.** Headings stand alone. No eyebrow, kicker or overline sits above an `h2`; the section head is a headline and a sub, nothing else. The stencil Mark is reserved for identifiers placed on tags, bars and columns.
+**The No-Kicker Rule.** Headings stand alone. No eyebrow, kicker or overline sits above an `h2`; the section head is a headline and a sub, nothing else.
 
-**The Script Parity Rule.** Arabic is set as its own display system (Alexandria, natural case, 1.22 leading, wider heading max-width in ch), not as a transformed copy of the Latin one. Any new display style must carry its `html[lang="ar"]` override before it ships.
+**The Readability Rule.** One family, sentence case, regular-weight body. No condensed, all-caps or light (300) text for anything a visitor has to read; uppercase is limited to short Mark identifiers in Latin.
 
-**The Solid Block Rule.** Latin display and headline lines are set at 0.92 line-height with tracking -0.01em; never loosen them to look "airy". Lines are allowed to touch.
+**The Script Parity Rule.** Arabic keeps its own metrics (natural case, 1.4 heading leading, 1.85 body leading, zero tracking) through `html[lang="ar"]` overrides; any new type style ships with its Arabic override.
 
 ## Layout
 
-One fluid column spanning the full viewport width, with a gutter of `clamp(16px, 2.5vw, 40px)` (the user's standing decision: no fixed max-width; text blocks keep their own measure); the apron and its 96px pour-line grid run edge to edge behind it. Sections take `clamp(5rem, 9vw, 8.5rem)` of block padding and alternate between the apron (`ground`) and a white band (`band-white`), with one deep-green painted band near the end of each page. A section opens with a head (headline + sub, max 72ch, bottom margin `clamp(2.2rem, 4vw, 3.5rem)`) and then its figure or grid.
+One content column, fluid up to a 1360px cap (`--container`), with a gutter of `clamp(16px, 3vw, 48px)`: on laptops the column fills the screen, on wide screens it stays composed. The apron, white bands, dark bands and the reviews rail run full bleed behind or beside it. Width inside the column is chosen per section by what the content is: tables, the deliverables grid, the drawing demo, pilot steps and the workflow run the full column; text-led sections (problem, why now, FAQ, presentation) use a two-column split with a 54–62ch reading measure; packed grids share 1px seams.
 
-The hero is shallower (`clamp(2rem, 4vw, 2.75rem)` top) so the 12m stock bar sits mid-viewport at 1440×900: hook in two lines over the left two-thirds, lead at 58ch, full-width bar figure with labels 96px above it, ruler below, scrub and legend on one row, then a two-column `1.1fr / 1fr` row with the inquiry tag and the discipline list.
+**Section rhythm has three roles, not one value.** `--section` (`clamp(4.5rem, 8vw, 7.5rem)`) is for sections that carry an argument: a figure, a table, a band (how it works, reading a drawing, what it extracts, every line, deliverables, compare, numbers, why now, pilot, FAQ, contact). `--section-sm` (`.section.compact`, `clamp(3.25rem, 5.5vw, 5rem)`) is for the supporting lists that follow one (benefits, who, use cases, presentation, reviews, team, the app page's facts, roadmap and closing band). `--section-xs` (`.section.strip`) is reserved for a closing strip. Adjacent supporting sections therefore read as one movement rather than five equal blocks.
+
+**Section heads.** Below 1000px a head is a headline over a sub. At 1000px and wider it is a two-column row (`1.05fr / 0.95fr`), headline at the start, sub at the end, both hanging from the **first** baseline, so a one-line headline never sinks below a three-line sub.
+
+**The hero is one grid with two compositions.** On wide screens the hook, lead and a three-up discipline row (painted end, name, one line) stack on the left, the inquiry tag sits beside them (`minmax(320px, 440px)`, vertically centred), and the 12 m stock bar then runs the full column with its labels 96px above, the ruler below, scrub and legend on one row. Below 1000px the order becomes hook, lead, inquiry tag, stock bar, disciplines, so the action is never pushed under the figure; below 640px the remnant tag leaves the label layer and takes its own row under the ruler.
+
+**Narrow screens restructure, they do not shrink.** The BOQ trace table becomes a ledger (item, then quantity · unit · type on one line, then the basis in full). The comparison table keeps its shape as a comparison: row heading, the two old ways side by side in small type, QSAI Copilot across the full width. The numbers pairs become one row each on tablets (label and note left, figures right) and stack on phones. The "who uses it" rack loses its bar and ties below 1000px and packs the roles into a seamed frame (two columns, the odd last cell spanning both; one column below 560px). The discipline tabs stay on one scrollable, snapping row. Panels, grids and the footer collapse at the breakpoints below.
 
 Grids are tight: packed bundles and use-case lists are `repeat(3, 1fr)` with a 1px `line` gap on a `line` background inside a 12px rounded, clipped frame, so cells share seams instead of margins. Two-column text/figure splits use `minmax(0, 1.2fr) minmax(0, 0.9fr)` with `clamp(1.5rem, 4vw, 3.5rem)` gaps. The header is sticky, 72px tall (`--header-h`), with a 3px green-to-gold brand strip above it and `scroll-padding-top` of 84px.
 
-Responsive breakpoints are per component rather than global; the ones that recur are 1024px (nav collapses to a burger, header CTA hides), 900–980px (three-column grids to two), 760px (tables become stacked cards, footer to two columns, horizontal rules become vertical 6px spines beside a stacked list), 640px (hero labels shrink, segment IDs and alternate ticks hide, inquiry row stacks), 600–560px (grids to one column), 480px (language label hides). RTL is handled with logical properties (`inset-inline`, `margin-inline-start`, `text-align: start`); the only explicit mirror flips are the tag tie angle, arrow icons and the select chevron.
+Responsive breakpoints are per component rather than global; the ones that recur are 1200px (nav collapses to a burger, header CTA hides), 1000px (section heads and the hero go single-column, the who-rack packs), 900–980px (three-column grids to two), 760px (tables become ledgers or cards, footer to two columns, horizontal rules become vertical 6px spines beside a stacked list), 640px (hero labels shrink, segment IDs and alternate ticks hide, inquiry row stacks, tabs scroll), 560–600px (grids to one column), 480px (language label hides). RTL is handled with logical properties (`inset-inline`, `margin-inline-start`, `text-align: start`) and grid areas, which mirror on their own; the only explicit mirror flips are the tag tie angle, arrow icons and the select chevron.
 
 ## Elevation & Depth
 
@@ -360,7 +376,7 @@ The hero figure is one 12m stock bar rendered as a 30px ribbed steel rule with a
 - **Do** build any new rule, divider or progress track as the ribbed bar (Steel / Steel Light repeating gradient) with painted ends at the extremes, 3px corners.
 - **Do** put labels, stats and forms on a bundle tag (white, 1px Seam, 6px, Tag shadow, punched hole and gold tie) rather than inventing a new card.
 - **Do** carry Measured / Calculated / Not quantified as green / gold / red outline on the swatch, never on the chip body or text. The site never presents an "estimated" state; the product shows only quantities produced by actual processing.
-- **Do** set Latin display uppercase at 0.92 line-height and -0.01em, and ship the `html[lang="ar"]` override (Alexandria, no transform, 1.22) with it.
+- **Do** set headings in sentence case at 700, 1.12 line-height and -0.02em, and ship the `html[lang="ar"]` override (1.4 leading, zero tracking) with them.
 - **Do** use `[data-reveal]` with `--i` for entrances and a `Timeline` for any sequence; honour `prefers-reduced-motion` by showing end states.
 - **Do** keep hover as a 1–2px rise plus the next shadow step; focus as the 2px gold outline, 3px offset.
 - **Do** use logical properties for every inline-axis offset; mirror only arrows, the tie angle and select chevrons explicitly in RTL.

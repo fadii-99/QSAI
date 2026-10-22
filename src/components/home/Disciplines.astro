@@ -30,23 +30,23 @@ const tabs = t.disciplines.tabs;
                 </g>
                 <path class="door" d="M140 194a60 60 0 0 1 60-60" fill="none" stroke="#c9a227" stroke-width="2"/><line x1="200" y1="134" x2="200" y2="194" stroke="#c9a227" stroke-width="2"/>
                 <g class="dim" stroke="#006c35" stroke-width="1.5" fill="none"><path d="M40 222h240M40 216v12M280 216v12"/><path d="M24 40v160M18 40h12M18 200h12"/></g>
-                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#006c35"><text x="150" y="236" text-anchor="middle">12.00 m</text><text x="14" y="124" text-anchor="middle" transform="rotate(-90 14 124)">8.00 m</text></g>
-                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#65776c"><text x="100" y="124" text-anchor="middle">200 mm</text><text x="214" y="124" text-anchor="middle">D1 · 900×2100</text></g>
+                <g font-family="IBM Plex Sans Arabic, sans-serif" font-size="11" fill="#006c35"><text x="150" y="236" text-anchor="middle">12.00 m</text><text x="14" y="124" text-anchor="middle" transform="rotate(-90 14 124)">8.00 m</text></g>
+                <g font-family="IBM Plex Sans Arabic, sans-serif" font-size="11" fill="#65776c"><text x="100" y="124" text-anchor="middle">200 mm</text><text x="214" y="124" text-anchor="middle">D1 · 900×2100</text></g>
                 <rect class="plaster" x="52" y="52" width="216" height="136" fill="none" stroke="#c9a227" stroke-width="1" stroke-dasharray="4 4"/>
               </svg>}
               {tab.key === "mep" && <svg viewBox="0 0 320 240">
                 <g class="pipes" fill="none" stroke="#2e3733" stroke-width="5" stroke-linecap="round"><path class="p main" d="M30 120h260"/><path class="p" d="M90 120v-60h70"/><path class="p" d="M160 120v70"/><path class="p" d="M230 120v-50"/><path class="p" d="M230 120v60h40"/></g>
                 <g class="fit" fill="#c9a227" stroke="none"><circle cx="90" cy="120" r="7"/><circle cx="160" cy="120" r="7"/><circle cx="230" cy="120" r="7"/><circle cx="90" cy="60" r="6"/><circle cx="230" cy="180" r="6"/></g>
                 <g class="fx" fill="#fff" stroke="#006c35" stroke-width="2"><rect x="150" y="48" width="22" height="22" rx="3"/><rect x="149" y="186" width="22" height="22" rx="3"/><rect x="219" y="58" width="22" height="16" rx="3"/><circle cx="280" cy="180" r="10"/></g>
-                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#65776c"><text x="60" y="110">Ø50 PPR</text><text x="178" y="100">Ø25</text><text x="120" y="160">Ø32</text><text x="100" y="50">tee</text><text x="240" y="200">elbow</text></g>
+                <g font-family="IBM Plex Sans Arabic, sans-serif" font-size="11" fill="#65776c"><text x="60" y="110">Ø50 PPR</text><text x="178" y="100">Ø25</text><text x="120" y="160">Ø32</text><text x="100" y="50">tee</text><text x="240" y="200">elbow</text></g>
               </svg>}
               {tab.key === "structural" && <svg viewBox="0 0 320 240">
                 <rect x="80" y="30" width="160" height="180" rx="6" fill="#f4f3ee" stroke="#2e3733" stroke-width="2"/>
                 <rect class="stir" x="98" y="48" width="124" height="144" rx="10" fill="none" stroke="#c9a227" stroke-width="3"/>
                 <g class="bars" fill="#006c35"><circle cx="108" cy="58" r="7"/><circle cx="212" cy="58" r="7"/><circle cx="108" cy="182" r="7"/><circle cx="160" cy="182" r="7"/><circle cx="212" cy="182" r="7"/></g>
                 <g class="dim" stroke="#006c35" stroke-width="1.5" fill="none"><path d="M80 226h160M80 220v12M240 220v12"/><path d="M262 30v180M256 30h12M256 210h12"/></g>
-                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#006c35"><text x="160" y="239" text-anchor="middle">300</text><text x="276" y="124">450</text></g>
-                <g font-family="Readex Pro, sans-serif" font-size="11" fill="#65776c"><text x="20" y="62">2Ø16 T</text><text x="20" y="186">3Ø16 B</text><text x="20" y="124">Ø10@150</text></g>
+                <g font-family="IBM Plex Sans Arabic, sans-serif" font-size="11" fill="#006c35"><text x="160" y="239" text-anchor="middle">300</text><text x="276" y="124">450</text></g>
+                <g font-family="IBM Plex Sans Arabic, sans-serif" font-size="11" fill="#65776c"><text x="20" y="62">2Ø16 T</text><text x="20" y="186">3Ø16 B</text><text x="20" y="124">Ø10@150</text></g>
               </svg>}
             </figure>
             <div class="content">
@@ -70,7 +70,7 @@ const tabs = t.disciplines.tabs;
   .tab.mep .end::before { background: var(--green-3); } .tab.structural .end::before { background: var(--green); }
   .tab:hover { background: var(--white); transform: translateY(-1px); }
   .tab[aria-selected="true"] { background: var(--white); border-color: var(--green-line); color: var(--ink); box-shadow: var(--shadow-tag); }
-  .panel-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+  .panel-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
   .fig { margin: 0; background: var(--ground); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; }
   .fig svg { width: 100%; height: auto; direction: ltr; }
   .intro { font-size: 1.1rem; color: var(--ink); margin-bottom: 1rem; }
@@ -92,6 +92,14 @@ const tabs = t.disciplines.tabs;
   @keyframes pop { from { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; } to { opacity: 1; transform: scale(1); } }
   @media (prefers-reduced-motion: reduce) { .panel * { animation: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; } }
   @media (max-width: 820px) { .panel-grid { grid-template-columns: 1fr; } .items { grid-template-columns: 1fr; } }
+  /* Narrow: the three tabs stay on one scrollable row instead of wrapping into a ragged second line. */
+  @media (max-width: 640px) {
+    .tablist { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 0.75rem; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scrollbar-width: none; }
+    .tablist::-webkit-scrollbar { display: none; }
+    .tab { flex: none; scroll-snap-align: start; padding: 0.6em 0.9em; }
+    .tab .mark { font-size: 0.95rem; }
+    .fig { padding: 0.75rem; }
+  }
 </style>
 <script>
   const root = document.getElementById("disc-tabs");

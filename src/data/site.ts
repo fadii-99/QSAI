@@ -14,12 +14,13 @@ export const site = {
   origin: "https://www.qsai.example", // TODO: real domain
   /** Set to false once the real email, phone and WhatsApp numbers below are filled in; until then the
    *  site shows them as unlinked "to be confirmed" values instead of dead links. */
-  contactPlaceholder: true,
+  contactPlaceholder: false,
+  /** Contact details from the product presentation (Muhammad Saifullah, CEO, Verslox). */
   contact: {
-    email: "hello@qsai.example", // TODO
-    phone: "+966 5X XXX XXXX", // TODO
-    phoneHref: "tel:+9665XXXXXXXX", // TODO
-    whatsapp: "https://wa.me/9665XXXXXXXX", // TODO
+    email: "muhammadsaifullah.prof@gmail.com",
+    phone: "+92 310 1588772",
+    phoneHref: "tel:+923101588772",
+    whatsapp: "https://wa.me/923101588772",
     city: { en: "Riyadh, Saudi Arabia", ar: "الرياض، المملكة العربية السعودية" },
     hours: { en: "Sunday – Thursday, 9:00 – 18:00 (AST)", ar: "الأحد – الخميس، 9:00 – 18:00 (توقيت السعودية)" },
   },
@@ -27,8 +28,16 @@ export const site = {
     linkedin: "https://www.linkedin.com/company/qsai-copilot", // TODO
     x: "https://x.com/qsaicopilot", // TODO
   },
+  /** The product presentation (pitch deck) offered for online viewing and download. */
+  presentation: {
+    pdf: "/downloads/QS-AI-Copilot-Verslox.pdf",
+    cover: "/downloads/QS-AI-Copilot-Verslox-cover.webp",
+    fileName: "QS AI Copilot - Verslox.pdf",
+    size: "3.2 MB",
+    pages: 11,
+  },
   legal: {
-    company: { en: "QSAI Copilot", ar: "كيو إس إيه آي كوبايلوت" },
+    company: { en: "Verslox", ar: "فيرسلوكس" },
     year: 2026,
   },
 } as const;

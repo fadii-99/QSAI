@@ -6,7 +6,7 @@ const { locale } = Astro.props;
 const t = dict[locale];
 const hasSamples = reviews.some((r) => r.placeholder);
 ---
-<section class="section reviews band-white" id="reviews">
+<section class="section compact reviews band-white" id="reviews">
   <div class="container">
     <div class="head-row">
       <div class="section-head">
@@ -46,7 +46,7 @@ const hasSamples = reviews.some((r) => r.placeholder);
   .head-row .section-head { margin-bottom: 1.5rem; }
   .arrows { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
   .rail-wrap { overflow: hidden; }
-  .rail { display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.75rem var(--gutter) 1.5rem; scrollbar-width: none; }
+  .rail { --edge: max(var(--gutter), calc((100% - var(--container)) / 2)); display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.75rem var(--edge) 1.5rem; scroll-padding-inline: var(--edge); scrollbar-width: none; }
   .rail::-webkit-scrollbar { display: none; }
   .review { flex: 0 0 min(420px, 85vw); scroll-snap-align: start; display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem 1.5rem 1.4rem 1.7rem; }
   .r-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }

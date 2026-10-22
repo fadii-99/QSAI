@@ -50,15 +50,15 @@ const m = t.app.mock;
 </section>
 <style>
   .app-hero { padding-top: clamp(2.5rem, 6vw, 5rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
-  .h1 { max-width: 16ch; font-size: clamp(2.8rem, 7vw, 6.2rem); }
-  html[lang="ar"] .h1 { max-width: 22ch; font-size: clamp(2.2rem, 5vw, 4.4rem); }
+  .h1 { max-width: 18ch; font-size: clamp(2.6rem, 5.5vw, 4.75rem); }
+  html[lang="ar"] .h1 { max-width: 22ch; font-size: clamp(2.2rem, 4.6vw, 4rem); }
   .lead { margin-top: 1.2rem; }
   .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
   .shell { margin-top: clamp(2.5rem, 5vw, 4rem); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lift); overflow: hidden; }
   .shell-strip { height: 3px; background: linear-gradient(90deg, var(--green), var(--gold) 55%, var(--green-3)); }
   .shell-grid { display: grid; grid-template-columns: 200px minmax(0, 1fr) 250px; min-height: 480px; font-size: 0.82rem; }
   .side { background: linear-gradient(180deg, #0b6e3b, #075430); color: #fff; padding: 1rem; }
-  .side-brand { font-family: "Big Shoulders Display", var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: .04em; direction: ltr; text-align: start; }
+  .side-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: .04em; direction: ltr; text-align: start; }
   .side-brand .b { color: var(--gold-2); margin-inline-start: 0.3em; font-weight: 600; }
   .side-label { margin: 1.25rem 0 0.4rem; font-size: 0.68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); }
   html[lang="ar"] .side-label { text-transform: none; letter-spacing: 0; }

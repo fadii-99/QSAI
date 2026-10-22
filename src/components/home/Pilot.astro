@@ -1,0 +1,46 @@
+---
+import { dict, localePath, type Locale } from "../../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const p = t.pilot;
+---
+<section class="section band-dark pilot" id="pilot">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="h2" data-reveal>{p.heading}</h2>
+      <p class="sub" data-reveal style="--i:1">{p.sub}</p>
+    </div>
+    <ol class="steps">
+      {p.steps.map((s, i) => (
+        <li class="tag on-dark" data-reveal style={`--i:${i + 1}`}>
+          <span class="n num" aria-hidden="true">{i + 1}</span>
+          <h3 class="h3">{s.t}</h3>
+          <p>{s.d}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="foot" data-reveal style="--i:2">
+      <dl class="terms">
+        {p.terms.map((x) => (<div><dt>{x.k}</dt><dd>{x.v}</dd></div>))}
+      </dl>
+      <a class="btn gold" href={localePath(locale, "/contact/")}>{p.cta}</a>
+    </div>
+  </div>
+</section>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .steps .tag { display: grid; gap: 0.5rem; align-content: start; padding: 1.5rem 1.3rem 1.3rem; }
+  .n { font-family: var(--font-display); font-size: 2.4rem; font-weight: 800; line-height: 1; color: var(--gold-2); }
+  .steps .h3 { font-size: 1.25rem; }
+  html[lang="ar"] .steps .h3 { font-size: 1.15rem; }
+  .steps p { margin: 0; color: rgba(255,255,255,.8); font-size: 0.95rem; }
+  .foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.16); }
+  .foot .btn { color: var(--btn-fg); }
+  .terms { margin: 0; display: grid; grid-template-columns: minmax(0, 2.4fr) repeat(2, minmax(0, 0.8fr)); gap: 1.5rem; }
+  .terms dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gold-2); }
+  html[lang="ar"] .terms dt { text-transform: none; letter-spacing: 0; font-size: 0.85rem; }
+  .terms dd { margin: 0.25rem 0 0; color: #fff; font-weight: 400; }
+  @media (max-width: 1000px) { .steps { grid-template-columns: 1fr 1fr; } .foot { grid-template-columns: 1fr; } .foot .btn { justify-self: start; } }
+  @media (max-width: 600px) { .steps { grid-template-columns: 1fr; } .terms { grid-template-columns: 1fr 1fr; } .terms > div:first-child { grid-column: 1 / -1; } }
+</style>

@@ -38,21 +38,27 @@
   --err: #b42318;
   --err-soft: rgba(180, 35, 24, 0.08);
   --ok: #0b8a46;
-  /* type */
-  --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
-  --font-body: "Readex Pro", "Segoe UI", system-ui, sans-serif;
-  --display-case: uppercase;
-  --display-track: -0.01em;
-  --display-lh: 0.92;
-  --fs-display: clamp(3.4rem, 8vw, 6rem);
-  --fs-h2: clamp(2.4rem, 5vw, 4.2rem);
-  --fs-h3: clamp(1.45rem, 2.2vw, 1.9rem);
+  /* type: one open, highly legible family for both scripts (IBM Plex Sans Arabic carries Plex Latin) */
+  --font-display: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --display-case: none;
+  --display-track: -0.02em;
+  --display-lh: 1.12;
+  --fs-display: clamp(2.5rem, 5vw, 4.25rem);
+  --fs-h2: clamp(1.85rem, 3.2vw, 2.75rem);
+  --fs-h3: clamp(1.15rem, 1.5vw, 1.375rem);
   --fs-body: 1.0625rem;
   --lh-body: 1.65;
   /* rhythm */
-  --gutter: clamp(16px, 2.5vw, 40px);
-  --container: 100%;
-  --section: clamp(5rem, 9vw, 8.5rem);
+  --gutter: clamp(16px, 3vw, 48px);
+  /* Content column: fluid up to a wide cap, so laptops lose no side space and wide screens stay composed. */
+  --container: 1360px;
+  /* Section rhythm: three roles, not one value. `section` for the sections that carry an argument
+     (a figure, a table, a band); `section-sm` for supporting lists that follow one; `section-xs` for a
+     closing strip. Each section picks its role. */
+  --section: clamp(4.5rem, 8vw, 7.5rem);
+  --section-sm: clamp(3.25rem, 5.5vw, 5rem);
+  --section-xs: clamp(2.5rem, 4vw, 3.5rem);
   --radius: 6px;
   --radius-lg: 12px;
   --shadow-tag: 0 1px 1px rgba(20, 38, 27, 0.05), 0 10px 28px -14px rgba(20, 38, 27, 0.28);
@@ -62,14 +68,12 @@
   --header-h: 72px;
 }
 html[lang="ar"] {
-  --font-display: "Alexandria", "Readex Pro", "Segoe UI", system-ui, sans-serif;
-  --display-case: none;
   --display-track: 0;
-  --display-lh: 1.22;
-  --fs-display: clamp(2.3rem, 4.8vw, 4.1rem);
-  --fs-h2: clamp(1.9rem, 3.8vw, 3.1rem);
-  --fs-h3: clamp(1.3rem, 1.9vw, 1.6rem);
-  --lh-body: 1.9;
+  --display-lh: 1.4;
+  --fs-display: clamp(2.2rem, 4.4vw, 3.6rem);
+  --fs-h2: clamp(1.7rem, 3vw, 2.5rem);
+  --fs-h3: clamp(1.1rem, 1.5vw, 1.35rem);
+  --lh-body: 1.85;
 }
 
 /* ---------- reset-ish ---------- */
@@ -84,7 +88,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
@@ -122,24 +126,34 @@ input, textarea, select { caret-color: var(--green); accent-color: var(--green);
 }
 .h1 { font-size: var(--fs-display); font-weight: 800; }
 .h2 { font-size: var(--fs-h2); }
-.h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.1; }
-html[lang="ar"] .h3 { line-height: 1.5; }
-.lead { font-size: clamp(1.1rem, 1.35vw, 1.3rem); line-height: 1.6; color: var(--ink-2); max-width: 62ch; text-wrap: pretty; }
+.h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+html[lang="ar"] .h3 { line-height: 1.55; letter-spacing: 0; }
+.lead { font-size: clamp(1.1rem, 1.3vw, 1.25rem); line-height: 1.6; color: var(--ink-2); max-width: 62ch; text-wrap: pretty; }
 html[lang="ar"] .lead { line-height: 1.85; }
 .sub { color: var(--ink-2); max-width: 64ch; font-size: clamp(1.05rem, 1.2vw, 1.2rem); text-wrap: pretty; }
 .muted { color: var(--muted); }
 .num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1, "lnum" 1; }
-.mark { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+.mark { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
 html[lang="ar"] .mark { text-transform: none; letter-spacing: 0; }
 .small { font-size: 0.9rem; }
 .x-small { font-size: 0.8rem; }
 
 /* ---------- layout ---------- */
-.container { width: calc(100% - 2 * var(--gutter)); margin-inline: auto; }
+.container { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
 .section { padding-block: var(--section); position: relative; }
-.section-head { max-width: 72ch; margin-bottom: clamp(2.2rem, 4vw, 3.5rem); }
-.section-head .h2 { margin-bottom: 0.6rem; }
+.section.compact { padding-block: var(--section-sm); }
+.section.strip { padding-block: var(--section-xs); }
+.section-head { max-width: 72ch; margin-bottom: clamp(2rem, 3.5vw, 3rem); }
+.section-head .h2 { margin-bottom: 0.75rem; }
 .section-head .sub { margin: 0; }
+/* Wide screens: heading and its explanation share the row. They hang from the same first baseline, so a
+   one-line heading never sinks below a three-line sub. */
+@media (min-width: 1000px) {
+  .section-head { max-width: none; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); column-gap: clamp(2.5rem, 6vw, 6rem); align-items: first baseline; }
+  .section-head .h2 { margin-bottom: 0; max-width: 22ch; }
+  html[lang="ar"] .section-head .h2 { max-width: 24ch; }
+  .section-head .sub { max-width: 54ch; }
+}
 .stack > * + * { margin-top: var(--stack, 1rem); }
 .grid { display: grid; gap: var(--gap, 1.25rem); }
 .hidden { display: none !important; }
@@ -150,6 +164,7 @@ html[lang="ar"] .mark { text-transform: none; letter-spacing: 0; }
 /* ---------- the bar rule ---------- */
 .bar {
   --bar-h: 6px;
+  display: block; /* a <span class="bar"> must still have height */
   position: relative; height: var(--bar-h); border-radius: 3px;
   background: repeating-linear-gradient(90deg, var(--steel) 0 7px, var(--steel-hi) 7px 9px);
   box-shadow: 0 2px 4px -2px rgba(20, 38, 27, 0.35);
@@ -256,6 +271,7 @@ html[lang="ar"] .mark { text-transform: none; letter-spacing: 0; }
 .band-dark .h2, .band-dark .h3 { color: #fff; }
 .band-dark .sub, .band-dark .muted { color: rgba(255,255,255,.72); }
 .band-dark a { color: var(--gold-2); }
+.band-dark a.btn { color: var(--btn-fg); }
 .band-white { background: var(--white); }
 
 /* ---------- misc ---------- */

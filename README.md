@@ -19,14 +19,16 @@ Deploy `dist/` to any static host (Vercel, Netlify, nginx, GitHub Pages). No ser
 
 | Route | Arabic | Content |
 | --- | --- | --- |
-| `/` | `/ar/` | Long-form landing page: hero, why it exists, how it works, how the AI reads a drawing, what it extracts, traceable BOQ, deliverables, comparison, why now, benefits, who it is for, use cases, reviews, FAQ, contact |
-| `/app/` | `/ar/app/` | Product page for the application itself: workspace anatomy, a session step by step, inputs, standards, access |
-| `/contact/` | `/ar/contact/` | Dedicated contact page with the full inquiry form |
+| `/` | `/ar/` | Long-form landing page: hero, why it exists, how it works, how the AI reads a drawing, what it extracts, traceable BOQ, deliverables, comparison, measured numbers, why now, benefits, who it is for, use cases, free pilot, product presentation, reviews, FAQ, contact |
+| `/app/` | `/ar/app/` | Product page for the application itself: workspace anatomy, a session step by step, inputs, standards, on-premise deployment, commercial control, roadmap |
+| `/contact/` | `/ar/contact/` | Dedicated contact page with the full inquiry form, plus the team and track record |
+| `/presentation/` | `/ar/presentation/` | The product presentation (PDF): in-page slide viewer (pdf.js), download and open-in-tab |
 | `/inbox/` | `/ar/inbox/` | Not linked, `noindex`: view and export inquiries recorded in this browser |
 
 ## Where to change things
 
 - **Company details, app URL, email, phone**: `src/data/site.ts` (every `TODO` placeholder must be replaced before launch).
+- **Product presentation**: replace `public/downloads/QS-AI-Copilot-Verslox.pdf` (and its cover `…-cover.webp`), then update `presentation` in `src/data/site.ts` (size, page count) and the slide titles in `presentation.slides` in both i18n files.
 - **Reviews**: `src/data/reviews.ts`. Append an object to the array; the page renders all of them. Set `placeholder: false` for a real review and the "sample review" label disappears.
 - **All copy**: `src/i18n/en.ts` and `src/i18n/ar.ts`. The two files share one TypeScript shape, so a missing Arabic key fails `npm run check`.
 - **Colours, type, spacing**: `src/styles/global.css` (tokens on `:root`, Arabic overrides on `html[lang="ar"]`).

@@ -1,0 +1,276 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+import { dict, fmt, localePath, type Locale } from "../i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = dict[locale];
+const pr = t.presentation;
+const deck = site.presentation;
+---
+<Base locale={locale} path="/presentation/" title={t.meta.presentation.title} description={t.meta.presentation.description}>
+  <section class="section pres">
+    <div class="container">
+      <div class="head">
+        <div>
+          <h1 class="h2" data-reveal style="--i:1">{pr.pageHeading}</h1>
+          <p class="sub" data-reveal style="--i:2">{pr.pageSub}</p>
+          <p class="meta small muted" data-reveal style="--i:2">{fmt(pr.format, { pages: deck.pages, size: deck.size })}{pr.langNote && ` · ${pr.langNote}`}</p>
+        </div>
+        <div class="acts" data-reveal style="--i:3">
+          <a class="btn primary" href={deck.pdf} download={deck.fileName}>
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            {pr.download}
+          </a>
+          <a class="btn ghost" href={deck.pdf} target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+            {pr.openTab}
+          </a>
+        </div>
+      </div>
+
+      <div class="layout">
+        <figure class="viewer" id="deck-viewer" data-reveal style="--i:2"
+          data-src={deck.pdf} data-total={deck.pages} data-slide={pr.slide}
+          data-fs={pr.fullscreen} data-exit-fs={pr.exitFullscreen}>
+          <div class="stage" dir="ltr">
+            <img class="poster" src={deck.cover} alt={pr.slides[0].t} width="1280" height="720" decoding="async" />
+            <canvas class="page" hidden></canvas>
+            <p class="state loading" role="status"><span class="spin" aria-hidden="true"></span>{pr.loading}</p>
+            <p class="state error" role="alert" hidden>{pr.error}</p>
+          </div>
+          <figcaption class="controls">
+            <button class="btn sm nav-btn" type="button" data-step="-1" aria-label={pr.prev} disabled>
+              <svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            </button>
+            <span class="count num" aria-live="polite">{fmt(pr.slide, { n: 1, total: deck.pages })}</span>
+            <button class="btn sm nav-btn" type="button" data-step="1" aria-label={pr.next} disabled>
+              <svg class="ico arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="btn sm ghost fs-btn" type="button" hidden>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+              <span>{pr.fullscreen}</span>
+            </button>
+          </figcaption>
+          <noscript><p class="small">{pr.error} <a href={deck.pdf}>{pr.openTab}</a></p></noscript>
+        </figure>
+
+        <aside class="toc" data-reveal style="--i:3">
+          <div class="bar thin" aria-hidden="true"></div>
+          <h2 class="mark small">{pr.contents}</h2>
+          <ol>
+            {pr.slides.map((s, i) => (
+              <li>
+                <button type="button" class="slide-link" data-page={i + 1} aria-current={i === 0 ? "true" : undefined}>
+                  <span class="no num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                  <span class="txt"><span class="k">{s.k}</span><span class="t">{s.t}</span></span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section compact band-dark close">
+    <div class="container close-grid">
+      <div>
+        <h2 class="h2" data-reveal>{t.pilot.heading}</h2>
+        <p class="sub" data-reveal style="--i:1">{t.pilot.sub}</p>
+      </div>
+      <div class="close-acts" data-reveal style="--i:2">
+        <a class="btn gold" href={localePath(locale, "/contact/")}>{t.pilot.cta}</a>
+        <a class="btn ghost on-dark" href={localePath(locale, "/")}>{t.nav.home}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .pres { padding-top: clamp(2.5rem, 5vw, 4rem); }
+  .head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem 2rem; align-items: end; margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
+  .head .sub { margin: 0.8rem 0 0; }
+  .meta { margin: 0.4rem 0 0; }
+  .acts { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 300px); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: start; }
+
+  .viewer { margin: 0; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-tag); padding: 0.75rem; display: grid; gap: 0.75rem; }
+  .stage { position: relative; aspect-ratio: 16 / 9; background: var(--ground-2); border-radius: 4px; overflow: hidden; touch-action: pan-y; }
+  .poster, .page { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .state { position: absolute; inset-inline: 0; bottom: 0; margin: 0; padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; background: rgba(255,255,255,.92); color: var(--ink-2); }
+  .state.error { color: var(--err); }
+  .spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--green-line); border-top-color: var(--green); animation: spin 0.9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+  .controls { display: flex; align-items: center; gap: 0.75rem; }
+  .nav-btn { width: 44px; padding: 0; }
+  [dir="rtl"] .nav-btn .ico.arrow { transform: scaleX(-1); }
+  .count { min-width: 9ch; text-align: center; font-weight: 500; color: var(--ink-2); font-size: 0.95rem; }
+  .fs-btn { margin-inline-start: auto; }
+
+  .viewer:fullscreen { background: var(--steel-lo); border: 0; border-radius: 0; padding: 1rem; grid-template-rows: minmax(0, 1fr) auto; height: 100vh; }
+  .viewer:fullscreen .stage { aspect-ratio: auto; height: 100%; background: transparent; }
+  .viewer:fullscreen .count { color: #fff; }
+  .viewer:fullscreen .fs-btn { --btn-fg: #fff; --btn-bd: rgba(255,255,255,.35); }
+
+  .toc { position: sticky; top: calc(var(--header-h) + 24px); }
+  .toc h2 { margin: 1.1rem 0 0.8rem; color: var(--muted); letter-spacing: .12em; }
+  .toc ol { display: grid; gap: 0.15rem; }
+  .slide-link { width: 100%; display: grid; grid-template-columns: 2.1rem 1fr; gap: 0.4rem; align-items: start; text-align: start; background: none; border: 0; border-radius: var(--radius); padding: 0.55rem 0.6rem; cursor: pointer; color: var(--ink-2); transition: background .2s, color .2s; }
+  .slide-link:hover { background: var(--white); color: var(--ink); }
+  .slide-link[aria-current="true"] { background: var(--green-soft); color: var(--ink); }
+  .slide-link[aria-current="true"] .no { color: var(--green); }
+  .no { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.35; color: var(--gold-3); }
+  .txt { display: grid; gap: 0.1rem; }
+  .k { font-weight: 500; font-size: 0.92rem; line-height: 1.35; }
+  .t { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+  .close-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 2rem; align-items: center; }
+  .close-acts .btn.gold { color: var(--btn-fg); }
+  .close-acts { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .head { grid-template-columns: 1fr; align-items: start; }
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: static; }
+    .toc ol { grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+    .close-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .viewer { padding: 0.5rem; }
+    .toc ol { grid-template-columns: 1fr; }
+    .fs-btn span { display: none; }
+  }
+</style>
+<script>
+  import * as pdfjs from "pdfjs-dist";
+  import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+  import type { PDFDocumentProxy, RenderTask } from "pdfjs-dist";
+  import { fmt } from "../i18n";
+
+  const root = document.getElementById("deck-viewer");
+  if (root) init(root);
+
+  function init(root: HTMLElement) {
+    const stage = root.querySelector<HTMLElement>(".stage")!;
+    const poster = root.querySelector<HTMLImageElement>(".poster")!;
+    const canvas = root.querySelector<HTMLCanvasElement>(".page")!;
+    const loading = root.querySelector<HTMLElement>(".state.loading")!;
+    const error = root.querySelector<HTMLElement>(".state.error")!;
+    const count = root.querySelector<HTMLElement>(".count")!;
+    const steps = root.querySelectorAll<HTMLButtonElement>(".nav-btn");
+    const fsBtn = root.querySelector<HTMLButtonElement>(".fs-btn")!;
+    const links = document.querySelectorAll<HTMLButtonElement>(".slide-link");
+    const rtl = document.documentElement.dir === "rtl";
+
+    let doc: PDFDocumentProxy | null = null;
+    let total = Number(root.dataset.total) || 1;
+    let current = 1;
+    let task: RenderTask | null = null;
+
+    const fromHash = Number(location.hash.match(/^#slide-(\d+)$/)?.[1]);
+    if (fromHash >= 1 && fromHash <= total) current = fromHash;
+
+    const sync = () => {
+      count.textContent = fmt(root.dataset.slide!, { n: current, total });
+      steps[0].disabled = !doc || current <= 1;
+      steps[1].disabled = !doc || current >= total;
+      links.forEach((l) => l.setAttribute("aria-current", String(Number(l.dataset.page) === current)));
+    };
+
+    async function render() {
+      if (!doc) return;
+      const page = await doc.getPage(current);
+      const base = page.getViewport({ scale: 1 });
+      const box = stage.getBoundingClientRect();
+      const fit = Math.min(box.width / base.width, box.height / base.height) || 1;
+      const viewport = page.getViewport({ scale: fit * Math.min(window.devicePixelRatio || 1, 2) });
+      task?.cancel();
+      // Draw off-screen, then swap, so the previous slide stays visible until the next one is ready.
+      const off = document.createElement("canvas");
+      off.width = Math.floor(viewport.width);
+      off.height = Math.floor(viewport.height);
+      task = page.render({ canvas: off, canvasContext: off.getContext("2d")!, viewport });
+      try { await task.promise; } catch (e) { if ((e as Error)?.name === "RenderingCancelledException") return; throw e; }
+      canvas.width = off.width;
+      canvas.height = off.height;
+      canvas.getContext("2d")!.drawImage(off, 0, 0);
+      canvas.hidden = false;
+      poster.hidden = true;
+      if (current < total) doc.getPage(current + 1);
+    }
+
+    function go(n: number) {
+      if (!doc) return;
+      const next = Math.min(Math.max(n, 1), total);
+      if (next === current) return;
+      current = next;
+      sync();
+      history.replaceState(null, "", `#slide-${current}`);
+      render().catch(fail);
+    }
+
+    function fail() {
+      loading.hidden = true;
+      error.hidden = false;
+      poster.hidden = false;
+      canvas.hidden = true;
+    }
+
+    steps.forEach((b) => b.addEventListener("click", () => go(current + Number(b.dataset.step))));
+    links.forEach((l) => l.addEventListener("click", () => {
+      go(Number(l.dataset.page));
+      const r = root.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) root.scrollIntoView({ block: "start" });
+    }));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if ((e.target as HTMLElement).closest("input, textarea, select")) return;
+      const fwd = rtl ? "ArrowLeft" : "ArrowRight";
+      const back = rtl ? "ArrowRight" : "ArrowLeft";
+      const map: Record<string, number> = { [fwd]: current + 1, PageDown: current + 1, [back]: current - 1, PageUp: current - 1, Home: 1, End: total };
+      if (!(e.key in map) || !doc) return;
+      e.preventDefault();
+      go(map[e.key]);
+    });
+
+    let startX = 0;
+    stage.addEventListener("pointerdown", (e) => { startX = e.clientX; });
+    stage.addEventListener("pointerup", (e) => {
+      if (e.pointerType === "mouse") return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 50) go(current + (dx < 0 ? 1 : -1));
+    });
+
+    if (document.fullscreenEnabled) {
+      fsBtn.hidden = false;
+      const label = fsBtn.querySelector("span")!;
+      fsBtn.addEventListener("click", () => {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else root.requestFullscreen().catch(() => {});
+      });
+      document.addEventListener("fullscreenchange", () => {
+        const on = document.fullscreenElement === root;
+        label.textContent = on ? root.dataset.exitFs! : root.dataset.fs!;
+      });
+    }
+
+    let resizeTimer = 0;
+    new ResizeObserver(() => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => render().catch(fail), 150);
+    }).observe(stage);
+
+    pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+    pdfjs.getDocument({ url: root.dataset.src! }).promise
+      .then(async (d) => {
+        doc = d;
+        total = d.numPages;
+        sync();
+        await render();
+        loading.hidden = true;
+      })
+      .catch(fail);
+  }
+</script>

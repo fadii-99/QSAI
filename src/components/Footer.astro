@@ -25,6 +25,8 @@ const ph = site.contactPlaceholder;
           <li><a href={`${home}#deliverables`}>{t.nav.deliverables}</a></li>
           <li><a href={`${home}#who`}>{t.nav.who}</a></li>
           <li><a href={localePath(locale, "/app/")}>{t.nav.app}</a></li>
+          <li><a href={localePath(locale, "/presentation/")}>{t.nav.presentation}</a></li>
+          <li><a href={site.presentation.pdf} download={site.presentation.fileName}>{t.presentation.download}</a></li>
         </ul>
       </div>
       <div class="col">
@@ -56,5 +58,6 @@ const ph = site.contactPlaceholder;
   .legal { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
   .legal a { color: var(--muted); }
   .col .tbc { color: var(--muted); }
+  .col li { overflow-wrap: anywhere; }
   @media (max-width: 760px) { .cols { grid-template-columns: 1fr 1fr; } .about { grid-column: 1 / -1; } }
 </style>

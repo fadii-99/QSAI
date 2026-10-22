@@ -31,7 +31,7 @@ const r = t.read;
             <line x1="120" y1="40" x2="120" y2="360"/><line x1="340" y1="40" x2="340" y2="360"/><line x1="560" y1="40" x2="560" y2="360"/>
             <line x1="60" y1="110" x2="620" y2="110"/><line x1="60" y1="300" x2="620" y2="300"/>
           </g>
-          <g class="bubbles" font-family="Big Shoulders Display, sans-serif" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="central">
+          <g class="bubbles" font-family="IBM Plex Sans Arabic, sans-serif" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="central">
             {[["A",120],["B",340],["C",560]].map(([l,x]) => <><circle cx={x} cy="40" r="16" fill="#fff" stroke="#14261b" stroke-width="1.5"/><text x={x} y="40" fill="#14261b">{l}</text></>)}
             {[["1",110],["2",300]].map(([l,y]) => <><circle cx="60" cy={y} r="16" fill="#fff" stroke="#14261b" stroke-width="1.5"/><text x="60" y={y} fill="#14261b">{l}</text></>)}
           </g>
@@ -49,7 +49,7 @@ const r = t.read;
             <rect x="108" y="288" width="24" height="24"/><rect x="328" y="288" width="24" height="24"/><rect x="548" y="288" width="24" height="24"/>
           </g>
           <!-- callouts -->
-          <g class="callouts" font-family="Readex Pro, sans-serif" font-size="13">
+          <g class="callouts" font-family="IBM Plex Sans Arabic, sans-serif" font-size="13">
             <g class="co" data-el="B1" tabindex="0" role="button" aria-label="B1 300x450 3Ø16 B 2Ø16 T Ø10@150">
               <path d="M230 116 L250 160 L354 160" fill="none" stroke="#14261b" stroke-width="1.2"/>
               <rect x="250" y="146" width="104" height="34" rx="2" class="co-box"/>
@@ -73,7 +73,7 @@ const r = t.read;
           <!-- scan line -->
           <line class="scanline" data-scanline x1="0" y1="0" x2="0" y2="400" stroke="#c9a227" stroke-width="2"/>
           <!-- title block strip -->
-          <g font-family="Readex Pro, sans-serif" font-size="10" fill="#65776c">
+          <g font-family="IBM Plex Sans Arabic, sans-serif" font-size="10" fill="#65776c">
             <rect x="0" y="372" width="640" height="28" fill="#f4f3ee" stroke="#e3e2da"/>
             <text x="12" y="389">PROJECT: VILLA 12</text><text x="200" y="389">SHEET: S-03</text><text x="330" y="389">SCALE 1:100</text><text x="440" y="389">REV: 02</text><text x="520" y="389">DEMO DATA</text>
           </g>
@@ -151,7 +151,7 @@ const r = t.read;
   .sch tr { cursor: pointer; transition: background .2s; outline: none; }
   .sch tbody tr:hover, .sch tbody tr.hl, .sch tbody tr:focus-visible { background: var(--green-soft); }
   .sch tr.ask td { background: rgba(201,162,39,.08); }
-  .mk { font-family: "Big Shoulders Display", var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: .03em; }
+  .mk { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: .03em; }
   .ask-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line-strong); opacity: 0; transform: translateY(6px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
   .ask-box.show { opacity: 1; transform: none; }
   .bubble { display: flex; gap: 0.6rem; align-items: flex-start; background: var(--ground); border-radius: var(--radius); padding: 0.8rem 0.9rem; }
@@ -162,7 +162,8 @@ const r = t.read;
   .remembered .ico { width: 18px; height: 18px; }
   .tip { margin: 1rem 0 0; }
   .legend { display: flex; gap: 1.5rem 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .legend li { display: flex; gap: 0.6rem; align-items: center; }
+  .legend li { display: flex; gap: 0.6rem; align-items: flex-start; }
+  .legend li .chip { margin-top: 0.1rem; }
   @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 560px) { .sch { font-size: 0.82rem; } .sch td, .sch th { padding-inline: 0.3rem; } .sch .chip { font-size: 0.72rem; padding: 0.35em 0.5em; } .sch th:nth-child(4), .sch td:nth-child(4), .sch th:nth-child(5), .sch td:nth-child(5) { display: none; } }
 </style>
